@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamPrep NG</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="toast-c" id="tc"></div>
+
+<!-- ============================================================
+     LANDING PAGE
+     ============================================================ -->
+<div class="screen active" id="s-land">
+  <nav class="top-nav">
+    <div class="nav-logo"><span class="logo-exam">Exam</span><span class="logo-prep">Prep</span><span class="logo-ng">NG</span></div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm" style="color:var(--text2);background:transparent;border:1px solid var(--border);border-radius:8px;font-size:.8rem" onclick="go('s-login')">Login</button>
+      <button class="btn btn-sm" style="background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:600" onclick="go('s-reg')">Register</button>
+    </div>
+  </nav>
+
+  <div class="hero-s">
+    <div class="hero-badge"><i class="bi bi-lightning-charge-fill"></i> JAMB 2026 Prep Starts Here</div>
+    <h1 class="hero-title">Pass JAMB 2026 With Your <span class="hero-hl">Personal AI Tutor</span></h1>
+    <p style="color:var(--text2);font-size:.95rem;line-height:1.6;margin-bottom:30px">Join 10,000+ students already scoring above 250. Practice past questions, get AI explanations, track weak areas.</p>
+    <div class="d-flex justify-content-center gap-4 mb-4">
+      <div><div class="stat-val" style="font-size:1.4rem">2M+</div><div style="font-size:.7rem;color:var(--text2)">JAMB Candidates</div></div>
+      <div><div class="stat-val" style="font-size:1.4rem">10k+</div><div style="font-size:.7rem;color:var(--text2)">Past Questions</div></div>
+      <div><div class="stat-val" style="font-size:1.4rem">75%</div><div style="font-size:.7rem;color:var(--text2)">Score Improvement</div></div>
+    </div>
+    <button class="btn-p mb-3" onclick="go('s-reg')">Start Free Today</button>
+    <button class="btn-o" onclick="go('s-login')">I Have an Account</button>
+  </div>
+
+  <div class="pp">
+    <div class="sec-title">Why ExamPrep NG?</div>
+    <div class="feat-card">
+      <div style="width:48px;height:48px;background:var(--blue-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-stars" style="color:var(--blue2);font-size:1.3rem"></i></div>
+      <h5 class="fd" style="font-size:1rem;margin-bottom:6px">AI-Powered Explanations</h5>
+      <p class="text-m" style="font-size:.85rem;margin:0">Get instant AI explanations every time you answer wrong. Understand the why, not just the answer.</p>
+    </div>
+    <div class="feat-card">
+      <div style="width:48px;height:48px;background:var(--purple-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-bullseye" style="color:var(--purple);font-size:1.3rem"></i></div>
+      <h5 class="fd" style="font-size:1rem;margin-bottom:6px">Weak Area Detection</h5>
+      <p class="text-m" style="font-size:.85rem;margin:0">The app tracks every topic and tells you exactly where to focus. No more guessing what to study.</p>
+    </div>
+    <div class="feat-card">
+      <div style="width:48px;height:48px;background:var(--green-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-wifi-off" style="color:var(--green);font-size:1.3rem"></i></div>
+      <h5 class="fd" style="font-size:1rem;margin-bottom:6px">Works Offline</h5>
+      <p class="text-m" style="font-size:.85rem;margin:0">No internet? No problem. Questions cached on your phone. Save your data.</p>
+    </div>
+    <div class="feat-card">
+      <div style="width:48px;height:48px;background:var(--orange-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-bar-chart-fill" style="color:var(--orange);font-size:1.3rem"></i></div>
+      <h5 class="fd" style="font-size:1rem;margin-bottom:6px">Mock Exams</h5>
+      <p class="text-m" style="font-size:.85rem;margin:0">Simulate real JAMB with timed full mock exams and get your estimated score out of 400.</p>
+    </div>
+
+    <div class="sec-title mt-4">Pricing</div>
+    <div class="price-card mb-3">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div><div class="price-amt">₦0</div><div style="color:var(--text2);font-size:.8rem">Forever Free</div></div>
+        <span class="bdg-plan">Free</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>10 questions/day</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>3 AI explanations/day</div>
+      <div class="price-feat"><i class="bi bi-x-circle" style="color:var(--text2)"></i>Mock exams</div>
+      <button class="btn-o mt-2" onclick="go('s-reg')">Start Free</button>
+    </div>
+    <div class="price-card popular mb-3">
+      <div class="pop-badge">Most Popular</div>
+      <div class="d-flex justify-content-between align-items-start mb-3 mt-1">
+        <div><div class="price-amt">₦1,499</div><div style="color:var(--text2);font-size:.8rem">per month</div></div>
+        <span class="bdg-plan">Monthly</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited AI explanations</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Full mock exams + offline</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Weekly AI study plan</div>
+      <button class="btn-p mt-2" onclick="go('s-reg')">Start Monthly Plan</button>
+    </div>
+    <div class="price-card mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div><div class="price-amt">₦14,999</div><div style="color:var(--text2);font-size:.8rem">per year</div></div>
+        <span style="background:var(--yellow-dim);color:var(--yellow);border:1px solid var(--yellow);font-size:.7rem;border-radius:20px;padding:3px 10px">Best Value</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Everything in Monthly</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Downloadable summaries</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Save ₦2,989 vs monthly</div>
+      <button class="btn-o mt-2" onclick="go('s-reg')">Get Yearly Plan</button>
+    </div>
+
+    <div class="sec-title">Student Results</div>
+    <div class="testi-card">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:36px;height:36px;background:var(--blue-dim);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center"><i class="bi bi-person-fill" style="color:var(--blue2);font-size:.9rem"></i></div>
+          <div><div style="font-weight:600;font-size:.9rem">Emeka Okafor</div><div style="font-size:.72rem;color:var(--text2)">Lagos State</div></div>
+        </div>
+        <span class="score-bdg">187 → 271</span>
+      </div>
+      <p style="font-size:.83rem;color:var(--text2);margin:0">"The AI explanations changed everything. I finally understood Chemistry. Scored 271 on my second attempt!"</p>
+    </div>
+    <div class="testi-card">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:36px;height:36px;background:var(--blue-dim);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center"><i class="bi bi-person-fill" style="color:var(--blue2);font-size:.9rem"></i></div>
+          <div><div style="font-weight:600;font-size:.9rem">Fatima Abdullahi</div><div style="font-size:.72rem;color:var(--text2)">Kano State</div></div>
+        </div>
+        <span class="score-bdg">204 → 289</span>
+      </div>
+      <p style="font-size:.83rem;color:var(--text2);margin:0">"Weak area detection kept telling me to focus on Trig and I did. My Maths score jumped 30 marks!"</p>
+    </div>
+    <div class="testi-card">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:36px;height:36px;background:var(--blue-dim);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center"><i class="bi bi-person-fill" style="color:var(--blue2);font-size:.9rem"></i></div>
+          <div><div style="font-weight:600;font-size:.9rem">Chidi Nwosu</div><div style="font-size:.72rem;color:var(--text2)">Anambra State</div></div>
+        </div>
+        <span class="score-bdg">165 → 251</span>
+      </div>
+      <p style="font-size:.83rem;color:var(--text2);margin:0">"Used it offline during power cuts. Practiced 2000+ questions in 6 weeks. Best ₦1,499 I ever spent."</p>
+    </div>
+
+    <div class="sec-title mt-4">FAQ</div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Is it really free to start?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes, completely free. No card needed. 10 questions/day and 3 AI explanations free forever.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>How does AI explanation work?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">When you answer wrong, our AI explains in simple English why you were wrong and what the right concept is. References the JAMB/WAEC syllabus.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Does it work without internet?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes. Questions are cached on your phone when you first open with internet. Practice offline anytime.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>How do I pay?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">We use Paystack — Nigeria's most trusted payment platform. Pay with debit card, bank transfer or USSD.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Which exams are covered?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">JAMB UTME, WAEC SSCE, NECO and Post-UTME. All major subjects covered.</div></div>
+
+    <button class="btn-p mt-4 mb-4" onclick="go('s-reg')">Create Free Account</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     REGISTER SCREEN
+     ============================================================ -->
+<div class="screen" id="s-reg">
+  <nav class="top-nav">
+    <button onclick="go('s-land')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Create Account</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp">
+    <p class="text-m mb-4" style="font-size:.88rem">Join 10,000+ students preparing smarter for JAMB 2026</p>
+    <div class="mb-3"><label class="flabel">Full Name</label><input class="finput" id="reg-name" type="text" placeholder="e.g. Chukwuemeka Okafor"></div>
+    <div class="mb-3"><label class="flabel">Email Address</label><input class="finput" id="reg-email" type="email" placeholder="your@email.com"></div>
+    <div class="mb-3"><label class="flabel">Phone Number</label><input class="finput" id="reg-phone" type="tel" placeholder="08012345678"></div>
+    <div class="mb-3">
+      <label class="flabel">Password</label>
+      <div style="position:relative">
+        <input class="finput" id="reg-password" type="password" placeholder="Create a strong password">
+        <i class="bi bi-eye" onclick="tp('reg-password', this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text2);cursor:pointer"></i>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="flabel">Target Exam</label>
+      <select class="finput" id="reg-exam" onchange="updateStream()">
+        <option value="">Select exam</option>
+        <option value="JAMB">JAMB UTME</option>
+        <option value="WAEC">WAEC SSCE</option>
+        <option value="NECO">NECO</option>
+        <option value="Post-UTME">Post-UTME</option>
+        <option value="JAMB+WAEC">JAMB + WAEC</option>
+      </select>
+    </div>
+    <div class="mb-3" id="streamDiv" style="display:none">
+      <label class="flabel">Subject Stream</label>
+      <select class="finput" id="reg-stream">
+        <option value="">Select your stream</option>
+        <option value="science">Science (Biology, Chemistry, Physics, Maths)</option>
+        <option value="arts">Arts (Literature, Government, CRK/IRK, History)</option>
+        <option value="commercial">Commercial (Economics, Accounting, Commerce, Business Studies)</option>
+        <option value="general">General / Not Sure Yet</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="flabel">Exam Year</label>
+      <select class="finput" id="reg-year">
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label class="flabel">State</label>
+      <select class="finput" id="reg-state">
+        <option value="">Select state</option>
+        <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option>
+        <option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option>
+        <option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option>
+        <option>Ekiti</option><option>Enugu</option><option>FCT Abuja</option><option>Gombe</option>
+        <option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option>
+        <option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+        <option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+        <option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option>
+        <option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+        <option>Zamfara</option>
+      </select>
+    </div>
+    <div id="reg-error" style="display:none;background:var(--red-dim);border:1px solid var(--red);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:.83rem;color:var(--red)"></div>
+    <button class="btn-p mb-3" id="reg-btn" onclick="handleRegister()">Create My Account</button>
+    <p class="text-center text-m" style="font-size:.85rem">Already have an account? <a href="#" onclick="go('s-login')" style="color:var(--blue2)">Login</a></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     LOGIN SCREEN
+     ============================================================ -->
+<div class="screen" id="s-login">
+  <nav class="top-nav">
+    <button onclick="go('s-land')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Welcome Back</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp">
+    <div style="text-align:center;padding:20px 0 30px">
+      <div style="font-size:3rem;margin-bottom:12px;color:var(--blue2)"><i class="bi bi-person-circle"></i></div>
+      <h2 class="fd" style="font-size:1.5rem;margin-bottom:6px">Good to see you again</h2>
+      <p class="text-m" style="font-size:.88rem">2,000+ students studying right now</p>
+    </div>
+    <div class="mb-3"><label class="flabel">Email</label><input class="finput" id="login-email" type="email" placeholder="your@email.com"></div>
+    <div class="mb-3">
+      <label class="flabel">Password</label>
+      <div style="position:relative">
+        <input class="finput" id="login-password" type="password" placeholder="Your password">
+        <i class="bi bi-eye" onclick="tp('login-password', this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text2);cursor:pointer"></i>
+      </div>
+    </div>
+    <div class="text-end mb-4"><a href="#" onclick="go('s-forgot')" style="color:var(--blue2);font-size:.85rem">Forgot password?</a></div>
+    <div id="login-error" style="display:none;background:var(--red-dim);border:1px solid var(--red);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:.83rem;color:var(--red)"></div>
+    <button class="btn-p mb-3" id="login-btn" onclick="handleLogin()">Login to My Account</button>
+    <p class="text-center text-m" style="font-size:.85rem">New here? <a href="#" onclick="go('s-reg')" style="color:var(--blue2)">Create free account</a></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     FORGOT PASSWORD SCREEN
+     ============================================================ -->
+<div class="screen" id="s-forgot">
+  <nav class="top-nav">
+    <button onclick="go('s-login')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Reset Password</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp">
+    <div id="fs1">
+      <p class="text-m mb-4" style="font-size:.88rem">Enter your email and we'll send a reset code.</p>
+      <div class="mb-3"><label class="flabel">Email</label><input class="finput" type="email" placeholder="your@email.com"></div>
+      <button class="btn-p" onclick="document.getElementById('fs1').style.display='none';document.getElementById('fs2').style.display='block';toast('OTP sent to your email','info')">Send Reset Code</button>
+    </div>
+    <div id="fs2" style="display:none">
+      <p class="text-m mb-4" style="font-size:.88rem">Enter the 6-digit code sent to your email.</p>
+      <div class="mb-3"><label class="flabel">OTP Code</label><input class="finput" type="text" placeholder="123456" maxlength="6"></div>
+      <button class="btn-p" onclick="document.getElementById('fs2').style.display='none';document.getElementById('fs3').style.display='block'">Verify Code</button>
+    </div>
+    <div id="fs3" style="display:none">
+      <p class="text-m mb-4" style="font-size:.88rem">Create a new password.</p>
+      <div class="mb-3"><label class="flabel">New Password</label><input class="finput" type="password" placeholder="New password"></div>
+      <div class="mb-4"><label class="flabel">Confirm</label><input class="finput" type="password" placeholder="Confirm password"></div>
+      <button class="btn-p" onclick="go('s-login');toast('Password reset successful!','success')">Reset Password</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ONBOARDING SLIDER
+     ============================================================ -->
+<div class="screen" id="s-onboard">
+  <div style="padding:20px 20px 0;text-align:right"><button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:.85rem">Skip</button></div>
+  <div class="ob-slide active" id="ob1">
+    <div class="ob-illus"><i class="bi bi-book-fill" style="font-size:4rem;color:var(--blue2)"></i></div>
+    <h2 class="fd" style="font-size:1.5rem;margin-bottom:12px">10,000+ Past Questions</h2>
+    <p class="text-m" style="font-size:.9rem;line-height:1.6;padding:0 20px">Practice real JAMB, WAEC and NECO questions from 2001 to 2024. All subjects covered.</p>
+  </div>
+  <div class="ob-slide" id="ob2">
+    <div class="ob-illus"><i class="bi bi-stars" style="font-size:4rem;color:var(--purple)"></i></div>
+    <h2 class="fd" style="font-size:1.5rem;margin-bottom:12px">AI Explains Every Mistake</h2>
+    <p class="text-m" style="font-size:.9rem;line-height:1.6;padding:0 20px">Answer wrong? Our AI tells you exactly why in simple English. Learn faster than any textbook.</p>
+  </div>
+  <div class="ob-slide" id="ob3">
+    <div class="ob-illus"><i class="bi bi-graph-up-arrow" style="font-size:4rem;color:var(--green)"></i></div>
+    <h2 class="fd" style="font-size:1.5rem;margin-bottom:12px">Track Your Way to Success</h2>
+    <p class="text-m" style="font-size:.9rem;line-height:1.6;padding:0 20px">See your estimated JAMB score grow every week. Know your weak spots before exam day.</p>
+  </div>
+  <div style="padding:30px 20px">
+    <div class="dots">
+      <div class="dot active" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+    <button class="btn-p" id="ob-btn" onclick="nextOb()">Next →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD
+     ============================================================ -->
+<div class="screen" id="s-dash">
+  <nav class="top-nav">
+    <div class="nav-logo"><span class="logo-exam">Exam</span><span class="logo-prep">Prep</span><span class="logo-ng">NG</span></div>
+    <div class="d-flex gap-3 align-items-center">
+      <div style="position:relative;cursor:pointer" onclick="go('s-notif')">
+        <i class="bi bi-bell" style="font-size:1.3rem;color:var(--text2)"></i>
+        <span style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:var(--red);border-radius:50%;font-size:.6rem;display:flex;align-items:center;justify-content:center;color:#fff">3</span>
+      </div>
+      <div style="width:34px;height:34px;background:var(--blue-dim);border:1px solid var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="go('s-profile')">
+        <i class="bi bi-person" style="color:var(--blue2)"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pp pb-nav">
+    <div class="mb-4">
+      <h2 class="fd" style="font-size:1.3rem">Good morning, Student</h2>
+      <p class="text-m" style="font-size:.85rem">Ready to practice today?</p>
+    </div>
+
+    <div class="row g-2 mb-4">
+      <div class="col-6"><div class="stat-card"><div class="stat-val text-b">--</div><div class="stat-lbl">Overall Accuracy</div></div></div>
+      <div class="col-6"><div class="stat-card"><div class="stat-val">0</div><div class="stat-lbl">Questions Answered</div></div></div>
+      <div class="col-6"><div class="stat-card"><div class="stat-val text-y"><i class="bi bi-fire" style="font-size:1.2rem"></i> 0</div><div class="stat-lbl">Day Streak</div></div></div>
+      <div class="col-6"><div class="stat-card"><div class="stat-val text-g">--</div><div class="stat-lbl" id="examScoreLbl">Est. Exam Score</div></div></div>
+      <!-- AI Study Plan Card -->
+<!-- AI Study Plan Card -->
+<div class="card-ai mb-4" id="ai-plan-card" onclick="openAiPlanQuick()">
+  <div class="ai-left">
+    <div class="ai-circle-icon">
+      <i class="bi bi-stars"></i>
+    </div>
+  </div>
+
+  <div class="ai-right">
+    <div class="ai-title">Your AI Study Plan</div>
+    <div id="ai-plan-status" class="ai-status">Tap to generate</div>
+  </div>
+
+  <div class="ai-chevron">
+    <i class="bi bi-chevron-right"></i>
+  </div>
+</div>
+    </div>
+
+    <div class="sec-title">Quick Actions</div>
+    <div class="row g-2 mb-4">
+      <div class="col-3 text-center"><div class="card-d2" style="cursor:pointer" onclick="go('s-subj')"><div style="font-size:1.5rem;margin-bottom:4px"><i class="bi bi-pencil-square"></i></div><div style="font-size:.7rem;color:var(--text2)">Practice</div></div></div>
+      <div class="col-3 text-center"><div class="card-d2" style="cursor:pointer" onclick="loadMockSubjects()"><div style="font-size:1.5rem;margin-bottom:4px"><i class="bi bi-stopwatch-fill"></i></div><div style="font-size:.7rem;color:var(--text2)">Mock Exam</div></div></div>
+      <div class="col-3 text-center"><div class="card-d2" style="cursor:pointer" onclick="go('s-perf')"><div style="font-size:1.5rem;margin-bottom:4px"><i class="bi bi-bullseye"></i></div><div style="font-size:.7rem;color:var(--text2)">Weak Areas</div></div></div>
+      <div class="col-3 text-center"><div class="card-d2" style="cursor:pointer" onclick="go('s-subj')"><div style="font-size:1.5rem;margin-bottom:4px"><i class="bi bi-book-fill"></i></div><div style="font-size:.7rem;color:var(--text2)">Past Q's</div></div></div>
+    </div>
+
+
+
+    <div class="sec-title">Subjects</div>
+
+    <!-- Stream Switcher -->
+    <div class="d-flex gap-2 mb-3" style="overflow-x:auto;scrollbar-width:none">
+      <button class="stream-btn" onclick="switchStream(this,'science')" style="background:var(--blue);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:.75rem;white-space:nowrap;font-weight:600">Science</button>
+      <button class="stream-btn" onclick="switchStream(this,'arts')" style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.75rem;white-space:nowrap;font-weight:600">Arts</button>
+      <button class="stream-btn" onclick="switchStream(this,'commercial')" style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.75rem;white-space:nowrap;font-weight:600">Commercial</button>
+    </div>
+
+    <!-- Science Stream — populated by loadSubjects() -->
+    <div id="stream-science" class="row g-2 mb-4">
+      <div class="col-12 text-center py-4"><p style="color:var(--text2);font-size:.85rem">Loading subjects...</p></div>
+    </div>
+
+    <!-- Arts Stream -->
+    <div id="stream-arts" class="row g-2 mb-4" style="display:none">
+      <div class="col-12 text-center py-4"><p style="color:var(--text2);font-size:.85rem">Loading subjects...</p></div>
+    </div>
+
+    <!-- Commercial Stream -->
+    <div id="stream-commercial" class="row g-2 mb-4" style="display:none">
+      <div class="col-12 text-center py-4"><p style="color:var(--text2);font-size:.85rem">Loading subjects...</p></div>
+    </div>
+
+    <div class="sec-title">Recent Sessions</div>
+    <div id="recent-sessions">
+      <div class="card-d2 mb-2 text-center py-3"><p style="color:var(--text2);font-size:.85rem;margin:0">No sessions yet. Start practicing!</p></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="bnav-item active" onclick="go('s-dash')"><i class="bi bi-house-fill"></i>Home</div>
+    <div class="bnav-item" onclick="go('s-subj')"><i class="bi bi-pencil-square"></i>Practice</div>
+    <div class="bnav-item" onclick="go('s-perf')"><i class="bi bi-bar-chart-fill"></i>Results</div>
+    <div class="bnav-item" onclick="go('s-profile')"><i class="bi bi-person-fill"></i>Profile</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SUBJECT SELECT SCREEN
+     ============================================================ -->
+<div class="screen" id="s-subj">
+  <nav class="top-nav">
+    <button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Choose Subject</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <div class="d-flex gap-2 mb-4 overflow-auto" style="scrollbar-width:none;padding-bottom:4px">
+      <button style="background:var(--blue);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">All</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">JAMB</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">WAEC</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">NECO</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">Science</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">Arts</button>
+      <button style="background:var(--card);color:var(--text2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.78rem;white-space:nowrap;font-weight:600" onclick="setF(this)">Commercial</button>
+    </div>
+    <!-- Subjects rendered dynamically from API -->
+    <div id="subj-list" class="row g-2">
+      <div class="col-12 text-center py-4"><p style="color:var(--text2);font-size:.85rem">Loading subjects...</p></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item" onclick="go('s-dash')"><i class="bi bi-house-fill"></i>Home</div>
+    <div class="bnav-item active"><i class="bi bi-pencil-square"></i>Practice</div>
+    <div class="bnav-item" onclick="go('s-perf')"><i class="bi bi-bar-chart-fill"></i>Results</div>
+    <div class="bnav-item" onclick="go('s-profile')"><i class="bi bi-person-fill"></i>Profile</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOPIC SELECT SCREEN
+     ============================================================ -->
+<div class="screen" id="s-topic">
+  <nav class="top-nav">
+    <button onclick="go('s-subj')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem" id="topic-subj-name">Topics</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <div id="topic-list">
+      <div class="text-center py-4">
+        <div class="ai-spinner" style="margin:0 auto 12px"></div>
+        <p style="color:var(--text2);font-size:.85rem">Loading topics...</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================
+     QUIZ SCREEN
+     ============================================================ -->
+<div class="screen" id="s-quiz">
+  <nav class="top-nav">
+    <button onclick="modal('m-exit')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-x-lg"></i></button>
+    <div style="font-size:.85rem;color:var(--text2)">Practice</div>
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.8rem;color:var(--yellow)" id="qtimer">⏱ 00:45</div>
+  </nav>
+  <div class="pp">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span style="font-size:.8rem;color:var(--text2)">Question <span id="qcur">1</span> of <span id="qtotal">20</span></span>
+      <div class="d-flex gap-2">
+        <i class="bi bi-bookmark" style="color:var(--text2);cursor:pointer" onclick="toast('Question bookmarked','info')"></i>
+        <i class="bi bi-flag" style="color:var(--text2);cursor:pointer" onclick="toast('Issue reported','info')"></i>
+      </div>
+    </div>
+    <div class="q-progress mb-4"><div class="q-progress-fill" id="qprog" style="width:5%"></div></div>
+    <div class="card-d mb-4" id="qcard">
+      <div id="qsubj" style="font-size:.75rem;color:var(--blue2);margin-bottom:10px;font-weight:600">Loading...</div>
+       <img id="qimg" src="" alt="Question diagram" style="display:none;width:100%;max-height:220px;object-fit:contain;border-radius:10px;margin-top:12px;border:1px solid var(--border);background:var(--card2)">
+      <p style="font-size:.95rem;line-height:1.6" id="qtext">Please wait while questions load...</p>
+     
+    </div>
+    <div id="opts">
+      <div class="quiz-opt" id="oA"><div class="opt-letter">A</div><span id="oAt"></span></div>
+      <div class="quiz-opt" id="oB"><div class="opt-letter">B</div><span id="oBt"></span></div>
+      <div class="quiz-opt" id="oC"><div class="opt-letter">C</div><span id="oCt"></span></div>
+      <div class="quiz-opt" id="oD"><div class="opt-letter">D</div><span id="oDt"></span></div>
+    </div>
+<button class="btn-p mt-3" id="nextbtn" style="display:none">Next Question →</button>  </div>
+</div>
+
+<!-- ============================================================
+     RESULTS SCREEN
+     ============================================================ -->
+<div class="screen" id="s-res">
+  <nav class="top-nav">
+    <div style="width:24px"></div>
+    <div class="nav-logo fd" style="font-size:1rem">Quiz Results</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <div class="text-center mb-4">
+      <div style="font-size:2.5rem;margin-bottom:12px">🎉</div>
+      <div class="res-circle mb-3">
+        <div class="fd" style="font-size:2rem;font-weight:800;color:#fff" id="res-score">0%</div>
+        <div style="font-size:.75rem;color:var(--blue2)" id="res-fraction">0/0</div>
+      </div>
+      <h3 class="fd">Well done!</h3>
+      <p class="text-m" style="font-size:.85rem">Keep practicing to improve your score</p>
+    </div>
+
+    <div class="row g-2 mb-4">
+      <div class="col-4"><div class="stat-card"><div class="stat-val text-g" id="res-correct">0</div><div class="stat-lbl">Correct</div></div></div>
+      <div class="col-4"><div class="stat-card"><div class="stat-val text-r" id="res-wrong">0</div><div class="stat-lbl">Wrong</div></div></div>
+      <div class="col-4"><div class="stat-card"><div class="stat-val text-y" id="res-skipped">0</div><div class="stat-lbl">Skipped</div></div></div>
+    </div>
+
+    <div class="card-d2 mb-4 text-center">
+      <div style="font-size:.75rem;color:var(--text2)">Time Taken</div>
+      <div class="fd" style="font-size:1.3rem;font-weight:700" id="res-time">--</div>
+    </div>
+
+  <button class="btn-p mb-3" id="res-review-btn" onclick="reviewSession()">Review Wrong Answers</button>
+<button class="btn-o mb-3" id="res-weak-btn" style="display:none" onclick="loadWeakAreas(Quiz.selectedSubjectId)">Practice Weak Areas →</button>
+<button class="btn-o mb-3" onclick="modal('m-setup')">Practice Again</button>
+<button class="btn-o mb-4" onclick="toast('Result card copied! Share on WhatsApp 🎉','success')">Share Result</button>
+<button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:.85rem;width:100%;text-align:center">← Back to Dashboard</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     REVIEW SCREEN
+     ============================================================ -->
+<div class="screen" id="s-review">
+  <nav class="top-nav">
+    <button onclick="go('s-res')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Review Mistakes</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <p class="text-m mb-4" style="font-size:.85rem">Wrong answers from your last session with AI explanations.</p>
+    <!-- Populated by reviewSession() in app.js -->
+    <div id="review-list">
+      <div class="text-center py-4"><p style="color:var(--text2);font-size:.85rem">Loading review...</p></div>
+    </div>
+    <button class="btn-p mt-2" onclick="modal('m-setup')">Practice Again</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     PERFORMANCE SCREEN
+     ============================================================ -->
+<!-- ============================================================
+     PERFORMANCE SCREEN
+     ============================================================ -->
+<div class="screen" id="s-perf">
+  <nav class="top-nav">
+    <button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">My Performance</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+
+    <!-- Overall Accuracy Card -->
+    <div class="card-d mb-4 text-center">
+      <div style="font-size:.8rem;color:var(--text2);margin-bottom:6px">Overall Accuracy</div>
+      <div class="fd" id="perf-overall-accuracy" style="font-size:3rem;font-weight:800;color:var(--blue2)">--</div>
+      <div style="font-size:.8rem;color:var(--text2)" id="perf-summary-text">Start practicing to see your stats</div>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="row g-2 mb-4">
+      <div class="col-6">
+        <div class="stat-card text-center">
+          <div style="font-size:.72rem;color:var(--text2);margin-bottom:4px">Est. JAMB Score</div>
+          <div class="fd" id="perf-est-score" style="font-size:1.4rem;font-weight:800;color:var(--green)">--</div>
+          <div style="font-size:.7rem;color:var(--text2)">out of 400</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card text-center">
+          <div style="font-size:.72rem;color:var(--text2);margin-bottom:4px">Total Sessions</div>
+          <div class="fd" id="perf-total-sessions" style="font-size:1.4rem;font-weight:800">--</div>
+          <div style="font-size:.7rem;color:var(--text2)">completed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score Trend Chart -->
+    <div class="sec-title">Score Trend</div>
+    <div class="chart-ph mb-4" id="sch"></div>
+
+    <!-- Subject Breakdown -->
+    <div class="sec-title">Subject Breakdown</div>
+    <div class="card-d mb-4" id="perf-subjects">
+      <p style="color:var(--text2);font-size:.85rem;text-align:center;padding:1rem 0;margin:0">No data yet — start practicing!</p>
+    </div>
+
+    <!-- Study Streak -->
+    <div class="sec-title">Study Streak</div>
+    <div class="card-d mb-4">
+      <div class="d-flex justify-content-between mb-3">
+        <span style="font-size:.8rem;color:var(--text2)">Last 5 weeks</span>
+        <span style="font-size:.8rem;color:var(--blue2)" id="perf-streak-label">0 day streak</span>
+      </div>
+      <div class="streak-grid" id="sgrid"></div>
+    </div>
+
+    <button class="btn-p mb-3" id="weak-areas-btn" style="display:none">
+      Practice Weak Areas →
+    </button>
+    <button class="btn-o" onclick="modal('m-aiplan')">Get AI Study Plan</button>
+
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item" onclick="go('s-dash')"><i class="bi bi-house-fill"></i>Home</div>
+    <div class="bnav-item" onclick="go('s-subj')"><i class="bi bi-pencil-square"></i>Practice</div>
+    <div class="bnav-item active"><i class="bi bi-bar-chart-fill"></i>Results</div>
+    <div class="bnav-item" onclick="go('s-profile')"><i class="bi bi-person-fill"></i>Profile</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROFILE SCREEN
+     ============================================================ -->
+<div class="screen" id="s-profile">
+  <nav class="top-nav">
+    <button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">My Profile</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <div class="text-center mb-4">
+      <div style="position:relative;display:inline-block">
+        <div style="width:80px;height:80px;background:var(--blue-dim);border:2px solid var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto">👤</div>
+      </div>
+      <h3 class="fd mt-3" style="font-size:1.2rem">My Account</h3>
+      <span class="bdg-plan">Free Plan</span>
+    </div>
+    <div class="row g-2 mb-4">
+      <div class="col-4"><div class="stat-card"><div class="stat-val" id="profile-questions">--</div><div class="stat-lbl">Questions</div></div></div>
+      <div class="col-4"><div class="stat-card"><div class="stat-val text-b" id="profile-accuracy">--</div><div class="stat-lbl">Accuracy</div></div></div>
+      <div class="col-4"><div class="stat-card"><div class="stat-val text-y" id="profile-streak">--</div><div class="stat-lbl">Streak</div></div></div>
+    </div>
+    <div class="sec-title">Account Details</div>
+    <div class="card-d mb-4">
+      <div class="d-flex justify-content-between py-2" style="border-bottom:1px solid var(--border)"><span style="color:var(--text2);font-size:.85rem">Email</span><span style="font-size:.85rem">--</span></div>
+      <div class="d-flex justify-content-between py-2" style="border-bottom:1px solid var(--border)"><span style="color:var(--text2);font-size:.85rem">Phone</span><span style="font-size:.85rem">--</span></div>
+      <div class="d-flex justify-content-between py-2" style="border-bottom:1px solid var(--border)"><span style="color:var(--text2);font-size:.85rem">Target Exam</span><span style="font-size:.85rem">--</span></div>
+      <div class="d-flex justify-content-between py-2"><span style="color:var(--text2);font-size:.85rem">State</span><span style="font-size:.85rem">--</span></div>
+    </div>
+    <div class="sec-title">Settings</div>
+    <div class="card-d mb-4">
+      <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--border)">
+        <span style="font-size:.85rem">Push Notifications</span>
+        <div onclick="tsw(this)" style="width:44px;height:24px;background:var(--blue);border-radius:12px;cursor:pointer;position:relative"><div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:all .2s"></div></div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--border)">
+        <span style="font-size:.85rem">Offline Mode</span>
+        <div onclick="tsw(this)" style="width:44px;height:24px;background:var(--blue);border-radius:12px;cursor:pointer;position:relative"><div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:all .2s"></div></div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center py-2">
+        <span style="font-size:.85rem">Daily Reminder</span>
+        <div onclick="tsw(this)" style="width:44px;height:24px;background:var(--card2);border:1px solid var(--border);border-radius:12px;cursor:pointer;position:relative"><div style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--text2);border-radius:50%;transition:all .2s"></div></div>
+      </div>
+    </div>
+    <button class="btn-o mb-3" onclick="go('s-sub')">Upgrade to Premium</button>
+    <button class="btn-o mb-3" onclick="toast('Password change email sent','info')">Change Password</button>
+    <button class="btn-red" onclick="modal('m-logout')">Logout</button>
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item" onclick="go('s-dash')"><i class="bi bi-house-fill"></i>Home</div>
+    <div class="bnav-item" onclick="go('s-subj')"><i class="bi bi-pencil-square"></i>Practice</div>
+    <div class="bnav-item" onclick="go('s-perf')"><i class="bi bi-bar-chart-fill"></i>Results</div>
+    <div class="bnav-item active"><i class="bi bi-person-fill"></i>Profile</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SUBSCRIPTION SCREEN
+     ============================================================ -->
+<div class="screen" id="s-sub">
+  <nav class="top-nav">
+    <button onclick="go('s-profile')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Upgrade Plan</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp">
+    <div class="card-d2 mb-4 text-center"><span class="bdg-plan">Current: Free Plan</span><p class="text-m mt-2 mb-0" style="font-size:.82rem">10 questions/day • 3 AI explanations/day</p></div>
+    <div class="price-card mb-3">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div><div class="price-amt">₦1,499</div><div style="color:var(--text2);font-size:.8rem">per month</div></div>
+        <span class="bdg-plan">Monthly</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions & AI</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Full mock exams</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Offline mode</div>
+      <button class="btn-p mt-2" onclick="modal('m-pay')">Pay ₦1,499 — Monthly</button>
+    </div>
+    <div class="price-card popular mb-4">
+      <div class="pop-badge">Best Value — Save ₦2,989</div>
+      <div class="d-flex justify-content-between align-items-start mb-3 mt-1">
+        <div><div class="price-amt">₦14,999</div><div style="color:var(--text2);font-size:.8rem">per year</div></div>
+        <span class="bdg-plan">Yearly</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Everything in Monthly</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Downloadable summaries</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Priority AI support</div>
+      <button class="btn-p mt-2" onclick="modal('m-pay')">Pay ₦14,999 — Yearly</button>
+    </div>
+    <p class="text-center text-m" style="font-size:.78rem">🔒 Secured by Paystack</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     NOTIFICATIONS SCREEN
+     ============================================================ -->
+<div class="screen" id="s-notif">
+  <nav class="top-nav">
+    <button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Notifications</div>
+    <button onclick="toast('All marked as read','info')" style="background:none;border:none;color:var(--blue2);font-size:.8rem">Mark all read</button>
+  </nav>
+  <div class="pp">
+    <div class="card-d2 mb-2 d-flex gap-3 align-items-start" style="border-left:3px solid var(--blue)">
+      <div style="font-size:1.5rem">🔥</div>
+      <div><div style="font-size:.88rem;font-weight:500">Keep your streak alive!</div><div style="font-size:.78rem;color:var(--text2)">You haven't studied today. Start a session now!</div><div style="font-size:.72rem;color:var(--text2);margin-top:4px">2 hours ago</div></div>
+    </div>
+    <div class="card-d2 mb-2 d-flex gap-3 align-items-start" style="border-left:3px solid var(--green)">
+      <div style="font-size:1.5rem"><i class="bi bi-book-fill"></i></div>
+      <div><div style="font-size:.88rem;font-weight:500">Welcome to ExamPrep NG!</div><div style="font-size:.78rem;color:var(--text2)">Start practicing to unlock your personalised AI study plan.</div><div style="font-size:.72rem;color:var(--text2);margin-top:4px">Just now</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODALS
+     ============================================================ -->
+
+<!-- QUIZ SETUP MODAL -->
+<div class="modal-ov" id="m-setup">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <h5 class="fd mb-4">Setup Your Quiz</h5>
+    <div class="mb-3">
+      <label class="flabel">Mode</label>
+      <div class="row g-2">
+        <div class="col-6"><div class="card-d2 text-center" style="cursor:pointer;border-color:var(--blue)" data-mode="practice" onclick="selMode(this)"><div style="font-size:1.2rem;margin-bottom:4px"><i class="bi bi-pencil-square"></i></div><div style="font-size:.78rem">Practice</div></div></div>
+        <div class="col-6"><div class="card-d2 text-center" style="cursor:pointer" data-mode="mock" onclick="selMode(this)"><div style="font-size:1.2rem;margin-bottom:4px"><i class="bi bi-stopwatch-fill"></i></div><div style="font-size:.78rem">Mock Exam</div></div></div>
+        <div class="col-6"><div class="card-d2 text-center" style="cursor:pointer" data-mode="weak_areas" onclick="selMode(this)"><div style="font-size:1.2rem;margin-bottom:4px"><i class="bi bi-bullseye"></i></div><div style="font-size:.78rem">Weak Areas</div></div></div>
+        <div class="col-6"><div class="card-d2 text-center" style="cursor:pointer" data-mode="topic" onclick="selMode(this)"><div style="font-size:1.2rem;margin-bottom:4px"><i class="bi bi-book-half"></i></div><div style="font-size:.78rem">By Topic</div></div></div>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="flabel">Number of Questions</label>
+      <select class="finput" id="setup-count">
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="40">40</option>
+        <option value="60">60</option>
+      </select>
+    </div>
+    <button class="btn-p mb-2" onclick="hModal('m-setup');startQuiz(Quiz.selectedSubjectId, Quiz.selectedMode, parseInt(document.getElementById('setup-count').value))">Start Quiz</button>
+    <button class="btn-o" onclick="hModal('m-setup')">Cancel</button>
+  </div>
+</div>
+
+<!-- AI EXPLANATION MODAL -->
+<div class="modal-ov" id="m-aiexp">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <div class="ai-icon"><i class="bi bi-stars" style="color:#fff"></i></div>
+      <h5 class="fd mb-0">AI Explanation</h5>
+    </div>
+    <div class="ai-bubble mb-4">
+      <p id="m-aiexp-text" style="font-size:.88rem;line-height:1.7;margin:0"></p>
+    </div>
+    <button class="btn-p" onclick="hModal('m-aiexp');nxtQ()">Got it! Next Question →</button>
+  </div>
+</div>
+
+<!-- EXIT QUIZ MODAL -->
+<div class="modal-ov" id="m-exit">
+  <div class="modal-sheet text-center">
+    <div class="modal-handle"></div>
+    <div style="font-size:2.5rem;margin-bottom:12px">⚠️</div>
+    <h5 class="fd">Exit Quiz?</h5>
+    <p class="text-m" style="font-size:.88rem">Your progress will be lost.</p>
+    <button class="btn-p mt-3 mb-2" onclick="hModal('m-exit')">Continue Quiz</button>
+    <button class="btn-red" onclick="hModal('m-exit');go('s-dash')">Yes, Exit Quiz</button>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-ov" id="m-pay">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="text-center mb-4">
+      <h5 class="fd">Complete Payment</h5>
+      <p class="text-m" style="font-size:.85rem">Monthly Plan — ₦1,499</p>
+    </div>
+    <div class="mb-3"><label class="flabel">Email</label><input class="finput" type="email" placeholder="your@email.com"></div>
+    <div class="mb-4">
+      <div style="background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:.78rem;color:var(--text2);margin-bottom:4px">Amount</div>
+        <div class="fd" style="font-size:1.8rem;font-weight:800">₦1,499</div>
+      </div>
+    </div>
+    <button class="btn-p mb-2" onclick="hModal('m-pay');modal('m-paysuc');confetti()">Pay Now</button>
+    <button class="btn-o" onclick="hModal('m-pay')">Cancel</button>
+    <p class="text-center text-m mt-2" style="font-size:.72rem">🔒 Secured and encrypted by Paystack</p>
+  </div>
+</div>
+
+<!-- PAYMENT SUCCESS MODAL -->
+<div class="modal-ov" id="m-paysuc">
+  <div class="modal-sheet text-center">
+    <div class="modal-handle"></div>
+    <div style="font-size:3rem;margin-bottom:16px"><i class="bi bi-patch-check-fill" style="color:var(--green)"></i></div>
+    <h4 class="fd mb-2">You're Premium Now!</h4>
+    <p class="text-m mb-4" style="font-size:.88rem">Unlimited questions, AI explanations, mock exams and offline mode unlocked.</p>
+    <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:12px;padding:14px;margin-bottom:20px">
+      <div style="font-size:.78rem;color:var(--green);font-weight:600">Monthly Plan Active</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-top:4px">Valid for 30 days</div>
+    </div>
+    <button class="btn-p" onclick="hModal('m-paysuc');go('s-dash');toast('Premium activated! 🎉','success')">Start Practicing →</button>
+  </div>
+</div>
+
+<!-- AI STUDY PLAN MODAL -->
+<div class="modal-ov" id="m-aiplan">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <div class="ai-icon"><i class="bi bi-stars" style="color:#fff"></i></div>
+      <h5 class="fd mb-0">Your AI Study Plan</h5>
+    </div>
+    <div class="ai-bubble mb-4">
+      <p style="font-size:.85rem;line-height:1.7;margin:0">Practice more questions to unlock your personalised AI study plan. The AI needs at least 20 answered questions to generate accurate recommendations for you.</p>
+    </div>
+    <button class="btn-p mb-2" onclick="hModal('m-aiplan');go('s-subj')">Start Practicing Now</button>
+    <button class="btn-o" onclick="hModal('m-aiplan')">Close</button>
+  </div>
+</div>
+
+<!-- LOGOUT MODAL -->
+<div class="modal-ov" id="m-logout">
+  <div class="modal-sheet text-center">
+    <div class="modal-handle"></div>
+    <div style="font-size:2rem;margin-bottom:12px"><i class="bi bi-box-arrow-right" style="color:var(--text2)"></i></div>
+    <h5 class="fd mb-2">Logout?</h5>
+    <p class="text-m mb-4" style="font-size:.88rem">You'll need to login again to continue studying.</p>
+    <button class="btn-red mb-2" onclick="handleLogout()">Yes, Logout</button>
+    <button class="btn-o" onclick="hModal('m-logout')">Cancel</button>
+  </div>
+</div>
+
+
+<!-- MOCK EXAM SETUP SCREEN -->
+<div class="screen" id="s-mock">
+  <nav class="top-nav">
+    <button onclick="go('s-dash')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem">Mock Exam</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp">
+    <div class="card-d mb-4" style="background:var(--blue-dim);border-color:var(--blue)">
+      <div class="d-flex gap-3 align-items-start">
+        <div style="font-size:1.8rem">📋</div>
+        <div>
+          <div class="fd" style="font-size:.95rem;margin-bottom:4px">How Mock Exam Works</div>
+          <div style="font-size:.82rem;color:var(--text2);line-height:1.6">
+            60 questions · 1 hour · No AI explanations<br>
+            Results added to your performance stats<br>
+            You'll see correct answers but no explanations
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Pick a Subject</div>
+    <div id="mock-subject-list" class="row g-2 mb-4">
+      <div class="col-12 text-center py-4">
+        <p style="color:var(--text2);font-size:.85rem">Loading subjects...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES SCREEN -->
+<div class="screen" id="s-notes">
+  <nav class="top-nav">
+    <button onclick="go('s-topic')" style="background:none;border:none;color:var(--text2);font-size:1.3rem"><i class="bi bi-arrow-left"></i></button>
+    <div class="nav-logo fd" style="font-size:1rem" id="notes-title">Lesson Notes</div>
+    <div style="width:24px"></div>
+  </nav>
+  <div class="pp pb-nav">
+    <div id="notes-content">
+      <div class="text-center py-4">
+        <div class="ai-spinner" style="margin:0 auto 12px"></div>
+        <p style="color:var(--text2);font-size:.85rem">Loading notes...</p>
+      </div>
+    </div>
+    <div id="notes-actions" style="display:none"></div>
+  </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/mock.js"></script>
+<script src="js/topics.js"></script>
+<script src="js/subjects.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/performance.js"></script>
+<script src="js/init.js"></script></body>
+</html>
