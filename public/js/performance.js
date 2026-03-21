@@ -395,18 +395,20 @@ async function openAiPlanQuick() {
 
 // Reusable fetcher for the modal (same behavior as before, but last-7-days rules)
 async function fetchAndShowStudyPlan() {
-  const bubble = document.querySelector('#m-aiplan .ai-bubble p');
-  if (!bubble) return;
+  const content   = document.getElementById('aiplan-content');
+  const actionBtn = document.getElementById('aiplan-action-btn');
+  if (!content) return;
 
   // Loading state
-  bubble.innerHTML = `
-    <div style="text-align:center;padding:1rem 0">
-      <div class="ai-spinner" style="margin:0 auto"></div>
-      <p style="color:var(--text2);font-size:.85rem;margin-top:12px">
-        Preparing your study plan...
-      </p>
-    </div>
-  `;
+  content.innerHTML = `
+    <div class="ai-bubble">
+      <div style="text-align:center;padding:1rem 0">
+        <div class="ai-spinner" style="margin:0 auto"></div>
+        <p style="color:var(--text2);font-size:.85rem;margin-top:12px">
+          Preparing your study plan...
+        </p>
+      </div>
+    </div>`;
 
   try {
     const res  = await fetch(`${API.BASE_URL}/performance/study-plan`, {
@@ -415,51 +417,86 @@ async function fetchAndShowStudyPlan() {
     const data = await res.json();
 
     if (!data.success) {
-      if (data.reason === 'not_enough_recent_data') {
-        bubble.innerHTML =
-          'Not enough practice in the last 7 days. Do more sessions this week to unlock your personalised plan.';
-      } else {
-        bubble.innerHTML = 'Could not generate your study plan. Please try again later.';
+      content.innerHTML = `
+        <div class="ai-bubble text-center">
+          <div style="font-size:2rem;margin-bottom:12px">📚</div>
+          <p style="font-size:.88rem;color:var(--text2);margin:0">
+            ${data.reason === 'not_enough_recent_data'
+              ? 'Not enough practice in the last 7 days.<br><br>Complete at least <strong style="color:#fff">3 sessions this week</strong> to unlock your personalised study plan.'
+              : 'Could not generate your study plan. Please try again later.'
+            }
+          </p>
+        </div>`;
+      if (actionBtn) {
+        actionBtn.textContent = 'Start Practicing Now';
+        actionBtn.onclick     = () => { hModal('m-aiplan'); go('s-subj'); };
       }
       return;
     }
 
-   // cached or fresh
-let footer = '';
+    // Format the plan — split by lines and style each one
+    const lines     = (data.plan || '').split('\n').filter(l => l.trim() !== '');
+    const formatted = lines.map(line => {
+      // Day headers e.g. "Day 1:" or "**Day 1**"
+      if (/^(day\s*\d+|week\s*\d+|\*\*day|\*\*week)/i.test(line.trim())) {
+        const clean = line.replace(/\*\*/g, '').trim();
+        return `<div style="font-weight:700;font-size:.92rem;color:var(--blue2);margin:14px 0 6px;padding-top:10px;border-top:1px solid var(--border)">${clean}</div>`;
+      }
+      // Bullet points
+      if (/^[-•*]\s/.test(line.trim())) {
+        const clean = line.replace(/^[-•*]\s/, '').replace(/\*\*/g, '');
+        return `<div class="notes-bullet" style="margin-bottom:6px">• ${clean}</div>`;
+      }
+      // Subject/topic lines with percentage e.g. "Chemistry — Organic Chemistry (32%)"
+      if (line.includes('%') || line.includes('→') || line.includes('—')) {
+        const clean = line.replace(/\*\*/g, '').trim();
+        return `<div style="font-size:.85rem;color:var(--text);margin-bottom:6px;padding:8px 10px;background:var(--card2);border-radius:8px;border-left:3px solid var(--blue)">${clean}</div>`;
+      }
+      // Regular line
+      const clean = line.replace(/\*\*/g, '').trim();
+      return `<div style="font-size:.85rem;color:var(--text2);margin-bottom:6px;line-height:1.6">${clean}</div>`;
+    }).join('');
 
-if (data.cached) {
-  const daysLeft  = Math.round(Number(data.days_left ?? 0));
-  const daysSince = Math.round(Number(data.days_since ?? 0));
+    // Footer
+    const daysLeft  = Math.round(Number(data.days_left  ?? 0));
+    const daysSince = Math.round(Number(data.days_since ?? 0));
+    let footerText  = '';
 
-  if (daysSince === 0) {
-    // plan made today
-    footer = `<br><br><small style="color:var(--text2)">Generated today • Refresh in 7d</small>`;
-  }
-  else if (daysLeft > 1) {
-    // fresh with more than 1 day left
-    footer = `<br><br><small style="color:var(--text2)">Will refresh in ${daysLeft}d</small>`;
-  }
-  else if (daysLeft === 1) {
-    // expires tomorrow
-    footer = `<br><br><small style="color:var(--text2)">Will refresh tomorrow</small>`;
-  }
-  else {
-    // fallback
-    footer = `<br><br><small style="color:var(--text2)">Refresh soon</small>`;
-  }
+    if (!data.cached) {
+      footerText = 'Generated now · Refreshes in 7 days';
+    } else if (daysSince === 0) {
+      footerText = 'Generated today · Refreshes in 7 days';
+    } else if (daysLeft > 1) {
+      footerText = `Refreshes in ${daysLeft} day${daysLeft !== 1 ? 's' : ''}`;
+    } else if (daysLeft === 1) {
+      footerText = 'Refreshes tomorrow';
+    } else {
+      footerText = 'Refresh soon';
+    }
 
-} else {
-  // newly generated
-  footer = `<br><br><small style="color:var(--text2)">Generated now • Refresh in 7d</small>`;
-}
+    content.innerHTML = `
+      <div class="ai-bubble" style="max-height:55vh;overflow-y:auto">
+        ${formatted}
+        <div style="margin-top:16px;padding-top:10px;border-top:1px solid var(--border);font-size:.72rem;color:var(--text2);text-align:center">
+          <i class="bi bi-stars" style="color:var(--blue2)"></i> ${footerText}
+        </div>
+      </div>`;
 
-    bubble.innerHTML = (data.plan || '').replace(/\n/g, '<br>') + footer;
+    // Change button to practice weak areas
+    if (actionBtn) {
+      actionBtn.textContent = 'Start Practicing Now →';
+      actionBtn.onclick     = () => { hModal('m-aiplan'); go('s-subj'); };
+    }
 
-    // Update the dashboard card status after a fresh generation
-    initAiPlanCard();
+    initAiPlanCard?.();
 
   } catch (err) {
-    bubble.innerHTML = 'Failed to load study plan. Check your connection.';
+    content.innerHTML = `
+      <div class="ai-bubble text-center">
+        <p style="color:var(--red);font-size:.85rem;margin:0">
+          Failed to load study plan. Check your connection.
+        </p>
+      </div>`;
   }
 }
 
