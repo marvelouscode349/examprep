@@ -713,7 +713,7 @@ select.finput option {
 
 /* HERO */
 .hero-s {
-    padding: 56px 20px 40px;
+    padding: 40px 20px 30px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -752,9 +752,12 @@ select.finput option {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 2rem;
     font-weight: 800;
-    line-height: 1.18;
+    line-height: 1.12;
     margin-bottom: 16px;
     letter-spacing: -0.03em
+    font-size: 2rem;
+ 
+  padding: 0 10px;
 }
 
 .hero-hl {
@@ -1121,7 +1124,31 @@ select.finput option {
 
 /* UTILITIES */
 .pp {
-    padding: 20px 16px
+    
+  padding: 0 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+
+}
+
+body {
+  max-width: 480px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.screen {
+  max-width: 480px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.top-nav {
+  max-width: 480px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pb-nav {

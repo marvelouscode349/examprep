@@ -2,7 +2,7 @@
    api.js — API config, headers, session management
    ============================================================ */
 const API = {
-BASE_URL: 'http://examprep.mine.bz/api',
+BASE_URL: 'https://examprep.mine.bz/api',
   saveSession(token, user) {
     localStorage.setItem('ep_token', token);
     localStorage.setItem('ep_user', JSON.stringify(user));
