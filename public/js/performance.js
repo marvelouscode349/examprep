@@ -415,24 +415,36 @@ async function fetchAndShowStudyPlan() {
       headers: API.headers()
     });
     const data = await res.json();
+if (!data.success) {
+  let icon    = '📚';
+  let message = '';
 
-    if (!data.success) {
-      content.innerHTML = `
-        <div class="ai-bubble text-center">
-          <div style="font-size:2rem;margin-bottom:12px">📚</div>
-          <p style="font-size:.88rem;color:var(--text2);margin:0">
-            ${data.reason === 'not_enough_recent_data'
-              ? 'Not enough practice in the last 7 days.<br><br>Complete at least <strong style="color:#fff">3 sessions this week</strong> to unlock your personalised study plan.'
-              : 'Could not generate your study plan. Please try again later.'
-            }
-          </p>
-        </div>`;
-      if (actionBtn) {
-        actionBtn.textContent = 'Start Practicing Now';
-        actionBtn.onclick     = () => { hModal('m-aiplan'); go('s-subj'); };
-      }
-      return;
-    }
+  if (data.reason === 'not_enough_data') {
+    const remaining = 20 - (data.answered ?? 0);
+    icon    = '🎯';
+    message = `You've answered <strong style="color:#fff">${data.answered ?? 0} questions</strong> so far.<br><br>
+               Answer <strong style="color:var(--blue2)">${remaining} more question${remaining !== 1 ? 's' : ''}</strong> to unlock your personalised AI study plan.`;
+  } else if (data.reason === 'not_enough_recent_data') {
+    icon    = '📅';
+    message = `Not enough practice in the last 7 days.<br><br>
+               Complete at least <strong style="color:#fff">3 sessions this week</strong> to unlock your personalised study plan.`;
+  } else {
+    icon    = '⚠️';
+    message = data.message || 'Could not generate your study plan. Please try again later.';
+  }
+
+  content.innerHTML = `
+    <div class="ai-bubble text-center">
+      <div style="font-size:2.5rem;margin-bottom:12px">${icon}</div>
+      <p style="font-size:.88rem;color:var(--text2);margin:0;line-height:1.7">${message}</p>
+    </div>`;
+
+  if (actionBtn) {
+    actionBtn.textContent = 'Start Practicing Now';
+    actionBtn.onclick     = () => { hModal('m-aiplan'); go('s-subj'); };
+  }
+  return;
+}
 
     // Format the plan — split by lines and style each one
     const lines     = (data.plan || '').split('\n').filter(l => l.trim() !== '');
