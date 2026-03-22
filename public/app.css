@@ -74,10 +74,15 @@
     padding: 0;
 }
 
-html, body {
+html {
+    overflow-x: hidden;
+}
+
+body {
     max-width: 480px;
     margin: 0 auto;
     overflow-x: hidden;
+    position: relative;
 }
 
 body {
@@ -1135,9 +1140,8 @@ select.finput option {
 /* UTILITIES */
 .pp {
     padding: 20px 20px 0;
-    max-width: 480px;
-    margin: 0 auto;
     width: 100%;
+     box-sizing: border-box;
 }
 
 .pb-nav {
@@ -1171,6 +1175,7 @@ select.finput option {
     display: flex;
     align-items: center;
     gap: 10px
+
 }
 
 .discount-strip i {
@@ -1185,4 +1190,27 @@ select.finput option {
 
 .stream-btn:hover {
     transform: translateY(-1px) !important
+}
+
+/* ============================================================
+   OVERFLOW FIX
+   ============================================================ */
+.row {
+    --bs-gutter-x: 1rem;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.container, .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+* {
+    max-width: 100%;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
 }
