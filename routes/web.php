@@ -19,6 +19,9 @@ Route::prefix('admin')->middleware([
     Route::post('/marketers',                        [AdminController::class, 'createMarketer'])->name('admin.marketers.create');
     Route::post('/marketers/{marketer}/toggle',      [AdminController::class, 'toggleMarketer'])->name('admin.marketers.toggle');
     Route::post('/marketers/{marketer}/pay',         [AdminController::class, 'payMarketer'])->name('admin.marketers.pay');
+    Route::get('/questions',                     [AdminController::class, 'questions'])->name('admin.questions');
+Route::post('/questions/delete',             [AdminController::class, 'deleteSubjectQuestions'])->name('admin.questions.delete');
+Route::post('/questions/import-csv',         [AdminController::class, 'importCsv'])->name('admin.questions.import');
 });
 
 // Admin login — outside middleware group

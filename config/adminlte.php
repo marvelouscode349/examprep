@@ -326,6 +326,11 @@ return [
         'url'  => 'admin/marketers',
         'icon' => 'fas fa-handshake',
     ],
+    [
+    'text' => 'Questions',
+    'url'  => 'admin/questions',
+    'icon' => 'fas fa-question-circle',
+],
 ],
 
     /*

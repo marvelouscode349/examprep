@@ -259,4 +259,208 @@ public function logout()
     session()->forget(['is_admin', 'admin_name']);
     return redirect()->route('admin.login');
 }
+
+// ============================================================
+// QUESTIONS MANAGEMENT
+// ============================================================
+public function questions()
+{
+    $breakdown = \App\Models\Subject::where('is_active', true)
+        ->withCount([
+            'questions as jamb_count' => fn($q) => $q->where('exam_type', 'JAMB'),
+            'questions as waec_count' => fn($q) => $q->where('exam_type', 'WAEC'),
+            'questions as total_count',
+        ])
+        ->orderBy('name')
+        ->get();
+
+    return view('admin.questions', compact('breakdown'));
+}
+
+public function deleteSubjectQuestions(Request $request)
+{
+    $request->validate([
+        'subject_id' => 'required|exists:subjects,id',
+        'exam_type'  => 'required|in:JAMB,WAEC,ALL',
+    ]);
+
+    $query = \App\Models\Question::where('subject_id', $request->subject_id);
+
+    if ($request->exam_type !== 'ALL') {
+        $query->where('exam_type', $request->exam_type);
+    }
+
+    $count = $query->count();
+    $query->delete();
+
+    return back()->with('success', "Deleted {$count} questions successfully.");
+}
+
+public function importCsv(Request $request)
+{
+    $request->validate([
+        'csv_file'   => 'required|file|mimes:csv,txt|max:20480',
+        'subject_id' => 'required|exists:subjects,id',
+        'exam_type'  => 'required|in:JAMB,WAEC',
+    ]);
+
+    $file      = $request->file('csv_file');
+    $subjectId = $request->subject_id;
+    $examType  = $request->exam_type;
+
+    $handle = fopen($file->getPathname(), 'r');
+    if (!$handle) {
+        return back()->with('error', 'Could not read file.');
+    }
+
+    $saved   = 0;
+    $skipped = 0;
+    $failed  = 0;
+
+    // Skip header row
+    fgetcsv($handle);
+
+    while (($row = fgetcsv($handle)) !== false) {
+        if (count($row) < 6) { $failed++; continue; }
+
+        // Clean all fields
+        $questionRaw   = $row[0] ?? '';
+        $questionText  = $this->cleanQuestionText($questionRaw);
+        $optionA       = $this->cleanOption($row[1] ?? '');
+        $optionB       = $this->cleanOption($row[2] ?? '');
+        $optionC       = $this->cleanOption($row[3] ?? '');
+        $optionD       = $this->cleanOption($row[4] ?? '');
+        $correctAnswer = $this->normalizeAnswer($row[5] ?? '');
+        $year          = $this->extractYear($questionRaw);
+
+        // Skip if question or options are empty
+        if (empty($questionText) || empty($optionA) || !$correctAnswer) {
+            $failed++;
+            continue;
+        }
+
+        // Skip very short questions — likely noise
+        if (strlen($questionText) < 10) {
+            $failed++;
+            continue;
+        }
+
+        // Duplicate check
+        $exists = \Illuminate\Support\Facades\DB::table('questions')
+            ->where('subject_id', $subjectId)
+            ->where('question_text', $questionText)
+            ->where('exam_type', $examType)
+            ->exists();
+
+        if ($exists) { $skipped++; continue; }
+
+        try {
+            \Illuminate\Support\Facades\DB::table('questions')->insert([
+                'subject_id'     => $subjectId,
+                'topic_id'       => null,
+                'exam_type'      => $examType,
+                'year'           => $year,
+                'question_text'  => $questionText,
+                'option_a'       => $optionA,
+                'option_b'       => $optionB,
+                'option_c'       => $optionC,
+                'option_d'       => $optionD,
+                'correct_answer' => $correctAnswer,
+                'explanation'    => null,
+                'difficulty'     => 'medium',
+                'image_url'      => null,
+                'created_at'     => now(),
+                'updated_at'     => now(),
+            ]);
+            $saved++;
+        } catch (\Exception $e) {
+            $failed++;
+        }
+    }
+
+    fclose($handle);
+
+    return back()->with('success',
+        "Import complete — Saved: {$saved} | Skipped (duplicates): {$skipped} | Failed: {$failed}"
+    );
+}
+
+private function cleanQuestionText(string $raw): string
+{
+    // Decode HTML entities first
+    $text = html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    // Remove ONLY the myschool badge links at the top
+    // These are <a href="..."><div class="...badge...">Subject Name</div></a>
+    $text = preg_replace('/<a\s[^>]*>.*?<\/a>/is', '', $text);
+
+    // Remove standalone <br> tags left after removing badges
+    $text = preg_replace('/^(\s*<br\s*\/?>\s*)+/i', '', $text);
+
+    // Remove leading/trailing whitespace but keep inner HTML intact
+    $text = trim($text);
+
+    return $text;
+}
+
+private function cleanOption(string $raw): string
+{
+    // Decode HTML entities
+    $text = html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    // Remove HTML tags
+    $text = strip_tags($text);
+
+    // Remove leading letter like "A." "B." "a." etc
+    $text = preg_replace('/^\s*[A-Da-d][\.\)]\s*/u', '', trim($text));
+
+    // Collapse whitespace
+    $text = preg_replace('/\s+/', ' ', $text);
+
+    return trim($text);
+}
+
+private function normalizeAnswer(string $raw): ?string
+{
+    $raw = trim($raw);
+
+    // "Correct Answer: Option C" — myschool format
+    if (preg_match('/Option\s+([A-Da-d])/i', $raw, $m)) {
+        return strtoupper($m[1]);
+    }
+
+    // "option_a", "option_b" etc
+    if (preg_match('/option_([a-d])/i', $raw, $m)) {
+        return strtoupper($m[1]);
+    }
+
+    // Plain "A", "B", "C", "D"
+    if (preg_match('/^[A-Da-d]$/', trim($raw))) {
+        return strtoupper(trim($raw));
+    }
+
+    // Last resort — find any single letter
+    if (preg_match('/\b([A-Da-d])\b/i', $raw, $m)) {
+        return strtoupper($m[1]);
+    }
+
+    return null;
+}
+
+private function extractYear(string $raw): ?int
+{
+    // Extract from URL param: exam_year=2000
+    if (preg_match('/exam_year=(\d{4})/', $raw, $m)) {
+        return (int) $m[1];
+    }
+
+    // Extract from text like "JAMB 2019"
+    if (preg_match('/\b(19|20)\d{2}\b/', $raw, $m)) {
+        return (int) $m[0];
+    }
+
+    return null;
+}
+
+
 }
