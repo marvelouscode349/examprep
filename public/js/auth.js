@@ -60,12 +60,10 @@ async function handleRegister() {
 
     const data = await res.json();
 
-    if (data.success) {
-      API.saveSession(data.token, data.user);
-      updateProfileUI(data.user);
-      toast('Account created! Welcome', 'success');
-      go('s-onboard');
-    } else {
+   if (data.success) {
+  toast('Account created! Please login to continue.', 'success');
+  go('s-login');
+} else {
       showRegError(data.errors
         ? Object.values(data.errors)[0][0]
         : data.message || 'Registration failed. Try again.');

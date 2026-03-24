@@ -40,11 +40,9 @@ class AuthController extends Controller
             'referral_code' => $validated['referral_code'] ?? null,
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'success' => true,
-            'token'   => $token,
           'user' => [
     'id'                  => $user->id,
     'name'                => $user->name,
