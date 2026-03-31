@@ -391,16 +391,15 @@ private function cleanQuestionText(string $raw): string
     $text = html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
     // Remove ONLY the myschool badge links at the top
-    // These are <a href="..."><div class="...badge...">Subject Name</div></a>
     $text = preg_replace('/<a\s[^>]*>.*?<\/a>/is', '', $text);
 
     // Remove standalone <br> tags left after removing badges
     $text = preg_replace('/^(\s*<br\s*\/?>\s*)+/i', '', $text);
 
-    // Remove leading/trailing whitespace but keep inner HTML intact
-    $text = trim($text);
+    // Convert MathJax/LaTeX notation to HTML
+    $text = $this->convertMathToHtml($text);
 
-    return $text;
+    return trim($text);
 }
 
 private function cleanOption(string $raw): string
@@ -414,14 +413,66 @@ private function cleanOption(string $raw): string
     // Remove leading plain letter like "A." "B." in case no strong tag
     $text = preg_replace('/^\s*[A-Da-d][\.\)]\s*/u', '', trim($text));
 
-    // Keep all other HTML — sub, sup, em, strong for formulas
-    // Only remove truly useless tags — spans with no meaning
+    // Remove span tags but keep content
     $text = preg_replace('/<span[^>]*>(.*?)<\/span>/is', '$1', $text);
 
-    // Collapse whitespace but preserve HTML tags
+    // Convert MathJax/LaTeX notation to HTML
+    $text = $this->convertMathToHtml($text);
+
+    // Collapse whitespace
     $text = preg_replace('/\s+/', ' ', $text);
 
     return trim($text);
+}
+
+private function convertMathToHtml(string $text): string
+{
+    // Pattern 1: \(_3\) or \(^3\) — inline subscript/superscript shorthand
+    // \(_3\) → <sub>3</sub>
+    $text = preg_replace('/\\\\\(\s*_([^)]+)\s*\\\\\)/', '<sub>$1</sub>', $text);
+
+    // Pattern 2: \(^3\) → <sup>3</sup>
+    $text = preg_replace('/\\\\\(\s*\^([^)]+)\s*\\\\\)/', '<sup>$1</sup>', $text);
+
+    // Pattern 3: Full MathJax inline \( ... \) — convert common patterns inside
+    // e.g. \(Zn + H_2 SO_4 → ZnSO_4 + H_2\)
+    $text = preg_replace_callback('/\\\\\((.+?)\\\\\)/s', function($matches) {
+        $math = $matches[1];
+
+        // Convert _x to <sub>x</sub>
+        $math = preg_replace('/_\{([^}]+)\}/', '<sub>$1</sub>', $math);
+        $math = preg_replace('/_([A-Za-z0-9])/', '<sub>$1</sub>', $math);
+
+        // Convert ^x to <sup>x</sup>
+        $math = preg_replace('/\^\{([^}]+)\}/', '<sup>$1</sup>', $math);
+        $math = preg_replace('/\^([A-Za-z0-9])/', '<sup>$1</sup>', $math);
+
+        // Convert → to actual arrow
+        $math = str_replace('\rightarrow', '→', $math);
+        $math = str_replace('\to', '→', $math);
+
+        return $math;
+    }, $text);
+
+    // Pattern 4: \[ ... \] — block math, treat same as inline
+    $text = preg_replace_callback('/\\\\\[(.+?)\\\\\]/s', function($matches) {
+        $math = $matches[1];
+        $math = preg_replace('/_\{([^}]+)\}/', '<sub>$1</sub>', $math);
+        $math = preg_replace('/_([A-Za-z0-9])/', '<sub>$1</sub>', $math);
+        $math = preg_replace('/\^\{([^}]+)\}/', '<sup>$1</sup>', $math);
+        $math = preg_replace('/\^([A-Za-z0-9])/', '<sup>$1</sup>', $math);
+        $math = str_replace('\rightarrow', '→', $math);
+        $math = str_replace('\to', '→', $math);
+        return $math;
+    }, $text);
+
+    // Pattern 5: standalone _2 or ^2 outside math blocks (common in scraped text)
+    // Only convert when surrounded by word chars e.g. H_2O → H<sub>2</sub>O
+    // Be careful not to affect CSS class names
+    $text = preg_replace('/([A-Za-z])_(\d+)/', '$1<sub>$2</sub>', $text);
+    $text = preg_replace('/([A-Za-z])\^(\d+)/', '$1<sup>$2</sup>', $text);
+
+    return $text;
 }
 
 private function normalizeAnswer(string $raw): ?string
