@@ -408,13 +408,17 @@ private function cleanOption(string $raw): string
     // Decode HTML entities
     $text = html_entity_decode($raw, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-    // Remove HTML tags
-    $text = strip_tags($text);
+    // Remove ONLY the bold letter wrapper e.g. <strong>A.</strong>
+    $text = preg_replace('/<strong>\s*[A-Da-d][\.\)]\s*<\/strong>/i', '', $text);
 
-    // Remove leading letter like "A." "B." "a." etc
+    // Remove leading plain letter like "A." "B." in case no strong tag
     $text = preg_replace('/^\s*[A-Da-d][\.\)]\s*/u', '', trim($text));
 
-    // Collapse whitespace
+    // Keep all other HTML — sub, sup, em, strong for formulas
+    // Only remove truly useless tags — spans with no meaning
+    $text = preg_replace('/<span[^>]*>(.*?)<\/span>/is', '$1', $text);
+
+    // Collapse whitespace but preserve HTML tags
     $text = preg_replace('/\s+/', ' ', $text);
 
     return trim($text);
