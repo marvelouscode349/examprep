@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\QuizController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\PaystackController;
 use App\Http\Controllers\Api\PerformanceController;
 use App\Http\Controllers\Api\TopicController;
 
@@ -44,7 +45,31 @@ Route::get('/topics/{topicId}/notes',       [TopicController::class, 'notes']);
 Route::get('/performance/study-plan', [PerformanceController::class, 'studyPlan']);
 
 // generate or return cached
-    Route::get('/performance/study-plan/status', [PerformanceController::class, 'studyPlanStatus']); // dashboard card
+    Route::get('/performance/study-plan/status', [PerformanceController::class, 'studyPlanStatus']);
+    
+    // dashboard card
+
+    //Payments
+
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    // Validate discount code
+    Route::post('/subscription/validate-code', [PaystackController::class, 'validateCode']);
+
+    // Initialize payment
+    Route::post('/subscription/initialize', [PaystackController::class, 'initialize']);
+
+    // Verify payment
+    Route::post('/subscription/verify', [PaystackController::class, 'verify']);
+
+    // Subscription status
+    Route::get('/subscription/status', [PaystackController::class, 'status']);
+
+});
+
+// Webhook (NO AUTH)
+Route::post('/webhook/paystack', [PaystackController::class, 'webhook']);
 
 });
 

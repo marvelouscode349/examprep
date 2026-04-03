@@ -66,6 +66,11 @@ class User extends Authenticatable
             && $this->subscription_expires_at->isFuture();
     }
 
+    public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
+
     /**
      * Check if user is on the free plan.
      */

@@ -53,11 +53,11 @@ async function startQuiz(subjectId, mode = 'practice', total = 20, topicId = nul
     const body = { subject_id: subjectId, mode, exam_type: 'JAMB', total_questions: total };
     if (topicId) body.topic_id = topicId;
 
-    const res = await fetch(`${API.BASE_URL}/quiz/start`, {
+    const res = await API.fetch(`${API.BASE_URL}/quiz/start`, {
       method:  'POST',
-      headers: API.headers(),
       body:    JSON.stringify(body)
     });
+    if (!res) return;
 
     const data = await res.json();
 
@@ -233,9 +233,8 @@ fetchExplanation(questionId);
    ============================================================ */
 async function fetchExplanation(questionId) {
   try {
-    const res  = await fetch(`${API.BASE_URL}/quiz/explanation/${questionId}/stream`, {
-      headers: API.headers()
-    });
+    const res  = await API.fetch(`${API.BASE_URL}/quiz/explanation/${questionId}/stream`);
+if (!res) return;
 
     const data = await res.json();
 
@@ -364,11 +363,11 @@ async function finishQuiz() {
   document.body.appendChild(overlay);
 
   try {
-    const res = await fetch(`${API.BASE_URL}/quiz/session/${sessionId}/finish`, {
+    const res = await API.fetch(`${API.BASE_URL}/quiz/session/${sessionId}/finish`, {
       method:  'POST',
-      headers: API.headers(),
       body:    JSON.stringify({ time_taken: timeTaken })
     });
+    if (!res) return;
 
     const data = await res.json();
 
@@ -464,7 +463,9 @@ async function reviewSession() {
   container.innerHTML = '<p style="color:var(--text2)">Loading review...</p>';
 
   try {
-    const res  = await fetch(`${API.BASE_URL}/quiz/session/${sid}/review`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/quiz/session/${sid}/review`);
+    if (!res) return;
+    
     const data = await res.json();
 
     if (!data.success || data.wrong_answers.length === 0) {

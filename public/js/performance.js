@@ -4,7 +4,9 @@
 
 async function loadPerformance() {
   try {
-    const res  = await fetch(`${API.BASE_URL}/performance`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/performance`);
+    if (!res) return;
+
     const data = await res.json();
     if (!data.success) return;
 
@@ -170,7 +172,9 @@ async function toggleTopicBreakdown(subjectId, rowEl) {
   if (container.dataset.loaded) return;
 
   try {
-    const res  = await fetch(`${API.BASE_URL}/subjects/${subjectId}/topics`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/subjects/${subjectId}/topics`);
+    if (!res) return;
+
     const data = await res.json();
 
     if (!data.success || data.topics.length === 0) {
@@ -300,9 +304,8 @@ async function loadStudyPlan() {
   `;
 
   try {
-    const res = await fetch(`${API.BASE_URL}/performance/study-plan`, {
-      headers: API.headers()
-    });
+    const res = await API.fetch(`${API.BASE_URL}/performance/study-plan`);
+    if (!res) return;
 
     const data = await res.json();
 
@@ -338,9 +341,9 @@ async function initAiPlanCard() {
   if (!statusEl) return;
 
   try {
-    const res = await fetch(`${API.BASE_URL}/performance/study-plan/status`, {
-      headers: API.headers()
-    });
+    const res = await API.fetch(`${API.BASE_URL}/performance/study-plan/status`);
+    if (!res) return;
+
     const data = await res.json();
 
     if (!data.success) return;
@@ -411,9 +414,9 @@ async function fetchAndShowStudyPlan() {
     </div>`;
 
   try {
-    const res  = await fetch(`${API.BASE_URL}/performance/study-plan`, {
-      headers: API.headers()
-    });
+    const res  = await API.fetch(`${API.BASE_URL}/performance/study-plan`);
+    if (!res) return;
+    
     const data = await res.json();
 if (!data.success) {
   let icon    = '📚';

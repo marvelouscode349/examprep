@@ -35,7 +35,9 @@ async function loadTopics(subjectId, subjectName) {
     </div>`;
 
   try {
-    const res  = await fetch(`${API.BASE_URL}/subjects/${subjectId}/topics`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/subjects/${subjectId}/topics`);
+    if (!res) return;
+
     const data = await res.json();
 
     if (!data.success || data.topics.length === 0) {
@@ -146,7 +148,9 @@ async function openTopic(topicId, subjectId, topicName) {
   go('s-notes');
 
   try {
-    const res  = await fetch(`${API.BASE_URL}/topics/${topicId}/notes`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/topics/${topicId}/notes`);
+    if (!res) return;
+    
     const data = await res.json();
 
     if (!data.success && data.message === 'premium_required') {

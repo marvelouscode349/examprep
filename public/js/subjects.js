@@ -4,7 +4,8 @@
 
 async function loadSubjects() {
   try {
-    const res  = await fetch(`${API.BASE_URL}/user/subjects`, { headers: API.headers() });
+    const res  = await API.fetch(`${API.BASE_URL}/user/subjects`);
+    if (!res) return;
     const data = await res.json();
     if (!data.success) return;
 

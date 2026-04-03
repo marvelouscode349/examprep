@@ -95,6 +95,16 @@
       <div class="price-feat"><i class="bi bi-x-circle" style="color:var(--text2)"></i>Mock exams</div>
       <button class="btn-o mt-2" onclick="go('s-reg')">Start Free</button>
     </div>
+    <div class="price-card mb-3">
+  <div class="d-flex justify-content-between align-items-start mb-3">
+    <div><div class="price-amt">₦400</div><div style="color:var(--text2);font-size:.8rem">Fri – Sun only</div></div>
+    <span style="background:var(--green-dim);color:var(--green);border:1px solid var(--green);font-size:.7rem;border-radius:20px;padding:3px 10px">Weekend</span>
+  </div>
+  <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions & AI</div>
+  <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Full mock exams</div>
+  <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Perfect for intense weekly preparations</div>
+  <button class="btn-o mt-2" onclick="go('s-reg')">Get weekly Access</button>
+</div>
     <div class="price-card popular mb-3">
       <div class="pop-badge">Most Popular</div>
       <div class="d-flex justify-content-between align-items-start mb-3 mt-1">
@@ -678,9 +688,32 @@
       <span class="bdg-plan">Current: Free Plan</span>
       <p class="text-m mt-2 mb-0" style="font-size:.82rem">10 questions/day • 3 AI explanations/day</p>
     </div>
-    <div class="price-card mb-3">
+
+    <!-- Weekend Plan -->
+    <div class="price-card mb-3" style="border-color:rgba(16,217,160,0.4)">
       <div class="d-flex justify-content-between align-items-start mb-3">
-        <div><div class="price-amt">₦1,499</div><div style="color:var(--text2);font-size:.8rem">per month</div></div>
+        <div>
+          <div class="price-amt">₦400</div>
+          <div style="color:var(--text2);font-size:.8rem">Friday – Sunday</div>
+        </div>
+        <span style="background:var(--green-dim);color:var(--green);border:1px solid var(--green);font-size:.7rem;border-radius:20px;padding:3px 10px;font-weight:600">Weekend</span>
+      </div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions & AI</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Full mock exams</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Perfect for last minute JAMB prep</div>
+      <button class="btn-o mt-2" style="border-color:var(--green);color:var(--green)" onclick="openPayModal('weekend')">
+        Pay ₦400 — Weekend
+      </button>
+    </div>
+
+    <!-- Monthly Plan -->
+    <div class="price-card popular mb-3">
+      <div class="pop-badge">Most Popular</div>
+      <div class="d-flex justify-content-between align-items-start mb-3 mt-1">
+        <div>
+          <div class="price-amt">₦1,499</div>
+          <div style="color:var(--text2);font-size:.8rem">per month</div>
+        </div>
         <span class="bdg-plan">Monthly</span>
       </div>
       <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions & AI</div>
@@ -689,18 +722,23 @@
       <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Topic notes & weak area detection</div>
       <button class="btn-p mt-2" onclick="openPayModal('monthly')">Pay ₦1,499 — Monthly</button>
     </div>
-    <div class="price-card popular mb-4">
-      <div class="pop-badge">Best Value — Save ₦2,989</div>
-      <div class="d-flex justify-content-between align-items-start mb-3 mt-1">
-        <div><div class="price-amt">₦14,999</div><div style="color:var(--text2);font-size:.8rem">per year</div></div>
-        <span class="bdg-plan">Yearly</span>
+
+    <!-- Yearly Plan -->
+    <div class="price-card mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <div class="price-amt">₦14,999</div>
+          <div style="color:var(--text2);font-size:.8rem">per year</div>
+        </div>
+        <span style="background:var(--yellow-dim);color:var(--yellow);border:1px solid var(--yellow);font-size:.7rem;border-radius:20px;padding:3px 10px;font-weight:600">Best Value</span>
       </div>
       <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Everything in Monthly</div>
-      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Downloadable summaries</div>
+      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Save ₦2,989 vs monthly</div>
       <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Priority AI support</div>
-      <button class="btn-p mt-2" onclick="openPayModal('yearly')">Pay ₦14,999 — Yearly</button>
+      <button class="btn-o mt-2" onclick="openPayModal('yearly')">Pay ₦14,999 — Yearly</button>
     </div>
-    <p class="text-center text-m" style="font-size:.78rem">🔒 Secured by Paystack</p>
+
+    <p class="text-center text-m" style="font-size:.78rem">🔒 Secured by Paystack · Pay by card, transfer or USSD</p>
   </div>
 </div>
 
@@ -829,17 +867,23 @@
 </div>
 
 <!-- PAYMENT -->
+<!-- PAYMENT MODAL -->
 <div class="modal-ov" id="m-pay">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="text-center mb-3">
       <h5 class="fd">Complete Payment</h5>
     </div>
+
+    <!-- Plan summary -->
     <div class="card-d2 mb-3 text-center">
       <div style="font-size:.75rem;color:var(--text2)">Plan</div>
-      <div class="fd" id="pay-plan-name" style="font-size:1.1rem;font-weight:700">Monthly</div>
+      <div class="fd" id="pay-plan-name" style="font-size:1.1rem;font-weight:700">Monthly Plan</div>
       <div class="fd" id="pay-amount-display" style="font-size:1.8rem;font-weight:800">₦1,499</div>
+      <div style="font-size:.75rem;color:var(--text2)" id="pay-plan-duration">Valid for 30 days</div>
     </div>
+
+    <!-- Discount code -->
     <div class="mb-3">
       <button type="button" onclick="toggleDiscountField(this)"
               style="background:none;border:none;color:var(--blue2);font-size:.83rem;padding:0;cursor:pointer">
@@ -857,6 +901,8 @@
         <div id="pay-discount-msg" style="font-size:.8rem;margin-top:6px;display:none"></div>
       </div>
     </div>
+
+    <!-- Price breakdown -->
     <div id="pay-breakdown" style="display:none;background:var(--card2);border-radius:12px;padding:12px;margin-bottom:16px">
       <div class="d-flex justify-content-between mb-1">
         <span style="font-size:.83rem;color:var(--text2)">Original price</span>
@@ -871,9 +917,27 @@
         <span style="font-size:.88rem;font-weight:700;color:var(--blue2)" id="pay-final-price">₦1,499</span>
       </div>
     </div>
+
     <button class="btn-p mb-2" id="pay-btn" onclick="initializePayment()">Pay Now</button>
     <button class="btn-o" onclick="hModal('m-pay')">Cancel</button>
-    <p class="text-center text-m mt-2" style="font-size:.72rem">🔒 Secured by Paystack</p>
+    <p class="text-center text-m mt-2" style="font-size:.72rem">🔒 Secured by Paystack · Card, Transfer, USSD</p>
+  </div>
+</div>
+
+<!-- PAYMENT SUCCESS MODAL -->
+<div class="modal-ov" id="m-paysuc">
+  <div class="modal-sheet text-center">
+    <div class="modal-handle"></div>
+    <div style="font-size:3rem;margin-bottom:16px"><i class="bi bi-patch-check-fill" style="color:var(--green)"></i></div>
+    <h4 class="fd mb-2">You're Premium Now! 🎉</h4>
+    <p class="text-m mb-4" style="font-size:.88rem">Unlimited questions, AI explanations and mock exams unlocked.</p>
+    <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:12px;padding:14px;margin-bottom:20px">
+      <div style="font-size:.78rem;color:var(--green);font-weight:600" id="paysuc-plan-name">Monthly Plan Active</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-top:4px" id="paysuc-expiry">Valid for 30 days</div>
+    </div>
+    <button class="btn-p" onclick="hModal('m-paysuc');go('s-dash');toast('Premium activated! Start practicing 🚀','success')">
+      Start Practicing →
+    </button>
   </div>
 </div>
 
@@ -931,5 +995,6 @@
 <script src="js/performance.js"></script>
 <script src="js/payment.js"></script>
 <script src="js/init.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 </body>
 </html>

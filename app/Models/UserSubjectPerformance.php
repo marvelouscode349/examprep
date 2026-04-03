@@ -8,7 +8,7 @@ class UserSubjectPerformance extends Model
 
 {
 
-protected $table = 'user_subject_performance';
+// protected $table = 'user_subject_performance';
     protected $fillable = [
         'user_id',
         'subject_id',
