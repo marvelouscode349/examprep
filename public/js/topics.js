@@ -150,7 +150,8 @@ async function openTopic(topicId, subjectId, topicName) {
   try {
     const res  = await API.fetch(`${API.BASE_URL}/topics/${topicId}/notes`);
     if (!res) return;
-    
+    if (handlePremiumBlock(res)) return;
+
     const data = await res.json();
 
     if (!data.success && data.message === 'premium_required') {

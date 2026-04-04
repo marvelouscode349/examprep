@@ -306,6 +306,8 @@ async function loadStudyPlan() {
   try {
     const res = await API.fetch(`${API.BASE_URL}/performance/study-plan`);
     if (!res) return;
+    if (handlePremiumBlock(res)) return;
+
 
     const data = await res.json();
 

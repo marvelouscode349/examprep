@@ -67,9 +67,17 @@ function handlePremiumBlock(res) {
             if (data.code === "UPGRADE_REQUIRED") {
                 document.getElementById("premium-msg").innerText = data.message;
                 modal("m-premium");
+
+                // ✅ QUIZ CLEANUP
+                setTimeout(() => {
+                    Quiz.reset();
+                    go('s-dash');
+                }, 10);
             }
         });
+
         return true;
     }
+
     return false;
 }

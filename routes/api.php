@@ -24,7 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // FREE ROUTES
     Route::get('/user/subjects', [SubjectController::class, 'index']);
     Route::get('/subjects/{subjectId}/topics', [TopicController::class, 'index']);
-    Route::get('/topics/{topicId}/notes',      [TopicController::class, 'notes']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
     
     // Payments (FREE)
@@ -40,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/quiz/submit',                [QuizController::class, 'submit']);
         Route::post('/quiz/session/{id}/finish',   [QuizController::class, 'finish']);
         Route::get('/quiz/session/{id}/review',    [QuizController::class, 'review']);
+        //NOTES
+        Route::get('/topics/{topicId}/notes',      [TopicController::class, 'notes']);
 
         // AI explanations
         Route::get('/quiz/explanation/{questionId}',        [QuizController::class, 'getExplanation']);
