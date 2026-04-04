@@ -23,6 +23,7 @@ return new class extends Migration
         $table->string('referral_code')->nullable();
         $table->timestamp('starts_at');
         $table->timestamp('expires_at');
+        
         $table->timestamps();
     });
 }

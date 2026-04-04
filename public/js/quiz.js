@@ -58,7 +58,7 @@ async function startQuiz(subjectId, mode = 'practice', total = 20, topicId = nul
       body:    JSON.stringify(body)
     });
     if (!res) return;
-
+if (handlePremiumBlock(res)) return;
     const data = await res.json();
 
     if (!data.success || !data.questions || data.questions.length === 0) {

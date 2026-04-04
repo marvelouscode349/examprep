@@ -60,3 +60,16 @@ const API = {
     return res;
   }
 };
+
+function handlePremiumBlock(res) {
+    if (res.status === 403) {
+        res.json().then(data => {
+            if (data.code === "UPGRADE_REQUIRED") {
+                document.getElementById("premium-msg").innerText = data.message;
+                modal("m-premium");
+            }
+        });
+        return true;
+    }
+    return false;
+}
