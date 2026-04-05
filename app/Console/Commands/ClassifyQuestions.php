@@ -15,17 +15,25 @@ class ClassifyQuestions extends Command
     protected $description = 'Batch classify questions into topics using AI';
 
     // Map command arg to subject_id
-    protected array $subjectMap = [
-        'mathematics' => 1,
-        'english'     => 2,
-        'chemistry'   => 3,
-        'biology'     => 4,
-        'physics'     => 5,
-        'government'  => 8,
-        'geography'   => 11,
-        'economics'   => 13,
-        'commerce'    => 15,
-    ];
+  // Map command arg to subject_id
+protected array $subjectMap = [
+    'mathematics' => 1,
+    'english'     => 2,
+    'chemistry'   => 3,
+    'biology'     => 4,
+    'physics'     => 5,
+    'government'  => 8,
+    'geography'   => 11,
+    'economics'   => 13,
+    'commerce'    => 15,
+
+    // ✅ NEW SUBJECTS
+    'accounting'  => 14,
+    'crk'         => 9,
+    'englishlit'  => 7,
+    'history'     => 10,
+    'insurance'   => 22,
+];
 
     public function handle(): void
     {
