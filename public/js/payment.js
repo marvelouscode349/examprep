@@ -3,7 +3,7 @@
    Plans: weekly ₦400 | monthly ₦1,499 | yearly ₦14,999
    ============================================================ */
 
-const PAYSTACK_PUBLIC_KEY = 'pk_test_691299f344d353323f421198fb4c0609880ff5cb'; // replace with your key
+const PAYSTACK_PUBLIC_KEY = 'pk_live_1507a6cf29e6b1062b58717a93833dc98cdeb06f'; // replace with your key
 
 let currentPlan           = 'monthly';
 let appliedDiscountCode   = null;
