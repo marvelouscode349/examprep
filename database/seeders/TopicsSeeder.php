@@ -6,989 +6,1072 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class topicsSeeder extends Seeder
+class TopicsLitHistAccSeeder extends Seeder
 {
     public function run(): void
     {
         $now = Carbon::now();
 
+        /**
+         * Choose behavior:
+         * true  => delete existing topics for these subjects then insert fresh
+         * false => upsert (safe re-run, no delete)
+         */
+        $replaceMode = true;
+
+        // Helper to normalize arrays
+        $j = fn($arr) => json_encode($arr ?? [], JSON_UNESCAPED_UNICODE);
+
         $syllabus = [
 
             // ================================================================
-            // ENGLISH LANGUAGE (subject_id: 2)
+            // LITERATURE IN ENGLISH (subject_id: 7)
             // ================================================================
-            2 => [
+            7 => [
                 [
-                    'name'      => 'Comprehension and Summary',
-                    'order'     => 1,
+                    'name'  => 'Drama',
+                    'order' => 1,
                     'subtopics' => [
-                        'Description, narration, exposition, argumentation and persuasion',
-                        'Comprehension of passages: whole and parts',
-                        'Comprehension of words, phrases, clauses, figures of speech and idioms',
-                        'Coherence and logical reasoning: deductions and inferences',
-                        'Synthesis of ideas from passages',
-                        'Cloze test passages',
-                        'Reading text: The Lekki Headmaster by Kabir Alabi Garba',
+                        'Types: Tragedy, Comedy, Tragicomedy, Melodrama, Farce, Opera, etc.',
+                        'Dramatic Techniques: Characterization, Dialogue, Flashback, Mime, Costume, Music/Dance, Décor/Scenery, Acts/Scenes, Soliloquy/Aside, Figures of Speech, etc.',
+                        'Interpretation of Prescribed Texts: Theme, Plot, Socio-political context, Setting',
                     ],
                     'objectives' => [
-                        'Identify main points and topic sentences in passages',
-                        'Determine implied meaning',
-                        'Identify grammatical functions of words, phrases and clauses',
-                        'Identify figurative and idiomatic expressions in context',
-                        'Deduce the writer\'s intentions including mood, attitude and opinion',
+                        'Identify the various types of drama',
+                        'Analyse the contents of the various types of drama',
+                        'Compare and contrast the features of different dramatic types',
+                        'Demonstrate adequate knowledge of dramatic techniques used in each prescribed text',
+                        'Differentiate between styles of selected playwrights',
+                        'Determine the theme of any prescribed text',
+                        'Identify the plot of the play',
+                        'Apply the lessons of the play to everyday living',
+                        'Identify the spatial and temporal setting of the play',
                     ],
                 ],
                 [
-                    'name'      => 'Lexis and Structure',
-                    'order'     => 2,
+                    'name'  => 'Prose',
+                    'order' => 2,
                     'subtopics' => [
-                        'Synonyms and antonyms',
-                        'Homonyms',
-                        'Clause and sentence patterns',
-                        'Word classes and their functions',
-                        'Mood, tense, aspect, number, agreement and concord',
-                        'Degree: positive, comparative and superlative',
-                        'Question tags',
-                        'Punctuation and spelling',
-                        'Ordinary usage, figurative usage and idiomatic usage',
+                        'Types: Fiction (Novel, Novella/Novelette, Short story); Non-fiction (Biography, Autobiography, Memoir); Faction (combination of fact and fiction)',
+                        'Narrative Techniques/Devices: Point of view (Omniscient/Third Person, First Person); Characterisation (Round, Flat, Foil, Hero, Antihero, etc.); Language',
+                        'Textual Analysis: Theme, Plot, Setting (Temporal/Spatial), Socio-political context',
                     ],
                     'objectives' => [
-                        'Identify words and expressions in ordinary, figurative and idiomatic contexts',
-                        'Determine similar and opposite meanings of words',
-                        'Differentiate between correct and incorrect punctuation and spelling',
-                        'Identify various grammatical patterns in use',
-                        'Interpret information conveyed in sentences',
+                        'Differentiate between types of prose',
+                        'Identify the category that each prescribed text belongs to',
+                        'Analyse the components of each type of prose',
+                        'Identify the narrative techniques used in each prescribed text',
+                        'Determine an author’s narrative style',
+                        'Distinguish between one type of character from another',
+                        'Determine the thematic pre-occupation of the author of the prescribed text',
+                        'Indicate the plot of the novel',
+                        'Identify the temporal and spatial setting of the novel',
+                        'Relate the prescribed text to real-life situations',
                     ],
                 ],
                 [
-                    'name'      => 'Oral Forms',
-                    'order'     => 3,
+                    'name'  => 'Poetry',
+                    'order' => 3,
                     'subtopics' => [
-                        'Vowels: monothongs and diphthongs',
-                        'Consonants including clusters',
-                        'Rhymes including homophones',
-                        'Word stress: monosyllabic and polysyllabic',
-                        'Intonation and emphatic stress',
+                        'Types: Sonnet, Ode, Lyrics, Elegy, Ballad, Panegyric, Epic, Blank Verse, etc.',
+                        'Poetic devices: Structure, Imagery, Sound (Rhyme/Rhythm, Repetition, Pun, Onomatopoeia, etc.), Diction, Persona',
+                        'Appreciation: Thematic preoccupation, Socio-political relevance, Style',
                     ],
                     'objectives' => [
-                        'Make distinctions between vowel types',
-                        'Differentiate between consonant types',
-                        'Identify correct accentuation in individual words and connected speech',
+                        'Identify different types of poetry',
+                        'Compare and contrast the features of different poetic types',
+                        'Determine the devices used by various poets',
+                        'Show how poetic devices are used for aesthetic effect in each poem',
+                        'Deduce the poet’s preoccupation from the poem',
+                        'Appraise poetry as an art with moral values',
+                        'Apply the lessons from the poem to real-life situations',
+                    ],
+                ],
+                [
+                    'name'  => 'General Literary Principles',
+                    'order' => 4,
+                    'subtopics' => [
+                        'Literary terms: foreshadowing, suspense, theatre, monologue, dialogue, soliloquy, symbolism, protagonist, antagonist, figures of speech, satire, stream of consciousness, etc.',
+                        'Literary principles: Direct imitation in play; Versification in drama and poetry; Narration of people’s experiences; Achievement of aesthetic value, etc.',
+                        'Relationship between literary terms and principles',
+                    ],
+                    'objectives' => [
+                        'Identify literary terms in drama, prose, and poetry',
+                        'Identify the general principles of Literature',
+                        'Differentiate between literary terms and principles',
+                        'Use literary terms appropriately',
+                    ],
+                ],
+                [
+                    'name'  => 'Literary Appreciation',
+                    'order' => 5,
+                    'subtopics' => [
+                        'Unseen passages/extracts from Drama, Prose, and Poetry',
+                    ],
+                    'objectives' => [
+                        'Determine literary devices used in a given passage/extract',
+                        'Provide a meaningful interpretation of the given passage/extract',
+                        'Relate the extract to true life experiences',
                     ],
                 ],
             ],
 
             // ================================================================
-            // ECONOMICS (subject_id: 13)
+            // HISTORY (subject_id: 10)
+            // NOTE: Includes topics across all sections/parts you pasted.
             // ================================================================
-            13 => [
+            10 => [
+                // SECTION A: Nigeria Area up to 1800
                 [
-                    'name'      => 'Basic Concepts in Economics',
-                    'order'     => 1,
+                    'name'  => 'Land and Peoples of the Nigeria Area (Up to 1800)',
+                    'order' => 1,
                     'subtopics' => [
-                        'Wants, scarcity, choice, scale of preference, opportunity cost',
-                        'Rationality, production, distribution, consumption',
-                        'Economic problems: what, how and for whom to produce',
-                        'Efficiency of resource use',
-                        'Production Possibility Frontier (PPF)',
+                        'Geographical zones and the people',
+                        'The people’s relationship with the environment',
+                        'Relations and integration among peoples of different zones',
                     ],
                     'objectives' => [
-                        'Compare various concepts in economics and their applications',
-                        'Interpret graphs and schedules in relation to economic concepts',
-                        'Identify economic problems and proffer solutions',
-                        'Apply PPF to solution of economic problems',
+                        'Identify the geographical zones and the people within them',
+                        'Establish the relationship between the people and the environment',
+                        'Comprehend the relationships among the various peoples of the Nigeria area',
                     ],
                 ],
                 [
-                    'name'      => 'Economic Systems',
-                    'order'     => 2,
+                    'name'  => 'Early Centres of Civilization',
+                    'order' => 2,
                     'subtopics' => [
-                        'Types: free enterprise, centrally planned and mixed economies',
-                        'Solutions to economic problems under different systems',
-                        'Contemporary issues: deregulation, banking sector consolidation, cash policy reform',
+                        'Nok, Daima, Ife, Benin, Igbo Ukwu and Iwo Eleru',
+                        'Monuments and shelter systems (Kuyambana, Durbi-ta-Kusheyi, city walls and palaces)',
                     ],
                     'objectives' => [
-                        'Compare the various economic systems',
-                        'Apply knowledge of economic systems to contemporary issues in Nigeria',
-                        'Proffer solutions to economic problems in different systems',
+                        'Examine the significance of various centres',
+                        'Establish the historical significance of monuments such as caves and rocky formations',
                     ],
                 ],
                 [
-                    'name'      => 'Methods and Tools of Economic Analysis',
-                    'order'     => 3,
+                    'name'  => 'Origin and Formation of States in the Nigeria Area',
+                    'order' => 3,
                     'subtopics' => [
-                        'Inductive and deductive methods',
-                        'Positive and normative reasoning',
-                        'Tables, charts and graphs',
-                        'Measures of central tendency: mean, median and mode',
-                        'Measures of dispersion: variance, standard deviation, range',
+                        'Central Sudan: Kanuri and Hausa states',
+                        'Niger-Benue Valley: Nupe, Jukun, Igala, Idoma, Tiv and Ebira',
+                        'Eastern Forest Belt: Igbo and Ibibio',
+                        'Western Forest Belt: Yoruba and Edo',
+                        'Coastal and Niger-Delta: Efik, Ijo, Itsekiri and Urhobo',
+                        'Factors influencing origin and migration',
+                        'Social and political organizations',
+                        'Inter-state relations, religion, war and peace',
                     ],
                     'objectives' => [
-                        'Distinguish between various forms of reasoning',
-                        'Use tools to interpret and analyse economic data',
-                        'Assess merits and demerits of analytical tools',
+                        'Relate groups of people occupying the various zones to their traditions of origin',
+                        'Determine inter-state relations',
+                        'Account for social and political organizations',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Demand',
-                    'order'     => 4,
+                    'name'  => 'Economic Activities and Growth of States',
+                    'order' => 4,
                     'subtopics' => [
-                        'Meaning and determinants of demand',
-                        'Demand schedules and curves',
-                        'Change in quantity demanded vs change in demand',
-                        'Types of demand: composite, derived, competitive and joint',
-                        'Price, income and cross elasticity of demand',
-                        'Importance of elasticity to consumers, producers and government',
+                        'Agriculture: hunting, farming, fishing, animal husbandry and horticulture',
+                        'Industries: pottery, salt-making, iron-smelting, blacksmithing, leather-working, wood-carving, cloth-making, dyeing and food processing',
+                        'Trade and trade routes: local, regional, long distance (including trans-Sahara trade)',
+                        'Expansion of states',
                     ],
                     'objectives' => [
-                        'Identify factors determining demand',
-                        'Interpret demand curves from demand schedules',
-                        'Differentiate between change in quantity demanded and change in demand',
-                        'Compute elasticities and interpret coefficients',
+                        'Identify various economic activities of the people',
+                        'Differentiate economic activities and specialties of the people',
+                        'Relate trade and other economic activities to growth of states',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Consumer Behaviour',
-                    'order'     => 5,
+                    'name'  => 'External Influences (Up to 1800)',
+                    'order' => 5,
                     'subtopics' => [
-                        'Utility: cardinal, ordinal, total, average and marginal utilities',
-                        'Indifference curve and budget line',
-                        'Diminishing marginal utility and law of demand',
-                        'Consumer equilibrium using indifference curve and marginal analyses',
-                        'Income and substitution effects',
-                        'Consumer surplus and applications',
+                        'North Africans/Arabs: introduction, spread and impact of Islam; trans-Saharan trade',
+                        'Europeans: early European trade with coastal states; trans-Atlantic slave trade (origin, organization and impact)',
                     ],
                     'objectives' => [
-                        'Appraise various utility concepts',
-                        'Apply law of demand using marginal utility analysis',
-                        'Use indifference curve to determine consumer equilibrium',
-                        'Apply consumer surplus to real-life situations',
+                        'Assess impact of contact with North Africa on people and states south of the Sahara',
+                        'Examine impact of early European contact with coastal people',
+                        'Trace origin, organization and impact of trans-Atlantic slave trade',
+                    ],
+                ],
+
+                // SECTION B: Nigeria Area 1800 - 1900
+                [
+                    'name'  => 'The Sokoto Caliphate and Sokoto Jihad (1800–1900)',
+                    'order' => 6,
+                    'subtopics' => [
+                        'Causes and process of the jihad',
+                        'Establishment and administration of the caliphate and relations with neighbours',
+                        'Achievements and impact of the caliphate',
+                        'Collapse of the caliphate',
+                    ],
+                    'objectives' => [
+                        'Examine causes and processes of the Jihad',
+                        'Determine factors that led to rise of the caliphate',
+                        'Examine administrative set-up and relations with neighbours',
+                        'Examine impact of the caliphate',
+                        'Trace internal and external factors that led to collapse of the caliphate',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Supply',
-                    'order'     => 6,
+                    'name'  => 'Kanem-Borno (1800–1900)',
+                    'order' => 7,
                     'subtopics' => [
-                        'Meaning and determinants of supply',
-                        'Supply schedules and supply curves',
-                        'Change in quantity supplied vs change in supply',
-                        'Types of supply: joint, competitive and composite',
-                        'Elasticity of supply: determinants, measurements and applications',
+                        'Collapse of the Saifawa dynasty',
+                        'Borno under the Shehus',
+                        'Borno under Rabeh',
                     ],
                     'objectives' => [
-                        'Identify factors determining supply',
-                        'Interpret supply curves from supply schedules',
-                        'Compute and interpret elasticity of supply coefficients',
+                        'Determine factors that led to collapse of the Saifawa dynasty',
+                        'Examine Borno under the administration of the Shehus',
+                        'Assess the role of Rabeh in Borno’s history',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Price Determination',
-                    'order'     => 7,
+                    'name'  => 'Yorubaland (1800–1900)',
+                    'order' => 8,
                     'subtopics' => [
-                        'Concepts of market and price',
-                        'Functions of the price system',
-                        'Equilibrium price and quantity in product and factor markets',
-                        'Price legislation: minimum and maximum prices and their effects',
-                        'Effects of changes in supply and demand on equilibrium',
+                        'Fall of the Old Oyo Empire',
+                        'Yoruba wars and their impact',
+                        'Peace treaty of 1886 and its aftermath',
                     ],
                     'objectives' => [
-                        'Explain concepts of market and price',
-                        'Evaluate effects of government interference with price system',
-                        'Interpret effects of changes in supply and demand on equilibrium',
+                        'Examine causes of the fall of Old Oyo',
+                        'Examine causes and effects of Yoruba wars',
+                        'Assess impact of the 1886 peace treaty',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Production',
-                    'order'     => 8,
+                    'name'  => 'Benin (1800–1900)',
+                    'order' => 9,
                     'subtopics' => [
-                        'Meaning and types of production',
-                        'Total product, average product, marginal product and law of variable proportion',
-                        'Division of labour and specialization',
-                        'Internal and external economies of scale',
-                        'Production functions and returns to scale',
-                        'Producer\'s equilibrium: isoquant-isocost analysis',
-                        'Factors affecting productivity',
+                        'Internal political development',
+                        'Relations with neighbours',
+                        'Relations with Europeans',
                     ],
                     'objectives' => [
-                        'Relate TP, AP and MP with law of variable proportion',
-                        'Compare internal and external economies of scale',
-                        'Compare different types of returns to scale',
-                        'Determine firm\'s equilibrium using isoquant-isocost analysis',
+                        'Examine internal political development',
+                        'Examine relations with neighbours',
+                        'Assess relationship with Europeans',
                     ],
                 ],
                 [
-                    'name'      => 'Theory of Costs and Revenue',
-                    'order'     => 9,
+                    'name'  => 'Nupe (1800–1900)',
+                    'order' => 10,
                     'subtopics' => [
-                        'Cost concepts: fixed, variable, total, average and marginal cost',
-                        'Revenue concepts: total, average and marginal revenue',
-                        'Accountants\' vs economists\' notions of cost',
-                        'Short-run and long-run costs',
-                        'Marginal cost and the supply curve of a firm',
+                        'Internal political development',
+                        'Relations with neighbours',
                     ],
                     'objectives' => [
-                        'Explain various cost and revenue concepts',
-                        'Differentiate between accountants\' and economists\' notions of costs',
-                        'Interpret short-run and long-run cost curves',
-                        'Establish relationship between marginal cost and supply curve',
+                        'Examine Nupe internal political development',
+                        'Assess relations with neighbours',
                     ],
                 ],
                 [
-                    'name'      => 'Market Structures',
-                    'order'     => 10,
+                    'name'  => 'Igbo (1800–1900)',
+                    'order' => 11,
                     'subtopics' => [
-                        'Perfect competition: assumptions, characteristics, short-run and long-run equilibrium',
-                        'Pure monopoly, discriminatory monopoly and monopolistic competition',
-                        'Short-run and long-run equilibrium of imperfect markets',
-                        'Break-even and shut-down analysis',
+                        'Internal political development',
+                        'Relations with neighbours',
                     ],
                     'objectives' => [
-                        'Analyse assumptions and characteristics of perfectly competitive market',
-                        'Analyse characteristics of imperfect markets',
-                        'Establish conditions for break-even and shut-down of firms',
+                        'Examine Igbo internal political development',
+                        'Assess relations with neighbours',
                     ],
                 ],
                 [
-                    'name'      => 'National Income',
-                    'order'     => 11,
+                    'name'  => 'Efik (1800–1900)',
+                    'order' => 12,
                     'subtopics' => [
-                        'Concepts of GNP, GDP, NI, NNP',
-                        'National income measurements and problems',
-                        'Uses and limitations of national income estimates',
-                        'Circular flow of income: two and three-sector models',
-                        'Consumption, investment and savings',
-                        'The multiplier and its effects',
-                        'Elementary theory of income determination and equilibrium national income',
+                        'Internal political development',
+                        'Relations with neighbours',
                     ],
                     'objectives' => [
-                        'Compare different ways of measuring national income',
-                        'Interpret circular flow of income',
-                        'Calculate various multipliers and evaluate their effects',
-                        'Explain concepts of consumption, investment and savings',
+                        'Examine Efik internal political development',
+                        'Assess relations with neighbours',
                     ],
                 ],
                 [
-                    'name'      => 'Money and Inflation',
-                    'order'     => 12,
+                    'name'  => 'European Penetration and Impact (1800–1900)',
+                    'order' => 13,
                     'subtopics' => [
-                        'Types, characteristics and functions of money',
-                        'Demand and supply of money',
-                        'Quantity theory of money: Fisher equation',
-                        'Value of money and price level',
-                        'Inflation: types, measurements, effects and control',
-                        'Deflation: measurements, effects and control',
-                        'Consumer price index calculation and interpretation',
+                        'European exploration of the interior',
+                        'Suppression of the trans-Atlantic slave trade',
+                        'Development of commodity trade and rise of consular authority',
+                        'Christian missionary activities',
+                        'Activities of trading companies',
+                        'Impact of European activities on coast and hinterland',
                     ],
                     'objectives' => [
-                        'Explain types, characteristics and functions of money',
-                        'Examine relationship between value of money and price level',
-                        'Examine causes and effects of inflation',
-                        'Calculate and interpret consumer price index',
-                        'Examine ways of controlling inflation and deflation',
+                        'Examine motive for exploration of the interior',
+                        'Give reasons for suppression of the trans-Atlantic slave trade',
+                        'Trace development of commodity trade',
+                        'Examine missionary and European activities in the area',
+                        'Assess activities of European trading companies',
+                        'Account for the rise of consular authority',
                     ],
                 ],
                 [
-                    'name'      => 'Financial Institutions',
-                    'order'     => 13,
+                    'name'  => 'British Conquest of the Nigeria Area (1800–1900)',
+                    'order' => 14,
                     'subtopics' => [
-                        'Types and functions: central bank, mortgage banks, merchant banks, insurance companies',
-                        'Role of financial institutions in economic development',
-                        'Money and capital markets',
-                        'Financial sector regulations',
-                        'Deposit money banks and creation of money',
-                        'Monetary policy and its instruments',
-                        'Challenges facing financial institutions in Nigeria',
+                        'Motives for the conquest',
+                        'Methods of the conquest and its result',
+                        'Resistance to and aftermath of the conquest',
                     ],
                     'objectives' => [
-                        'Identify types and functions of financial institutions',
-                        'Distinguish between money and capital markets',
-                        'Explain money creation process',
-                        'Examine monetary policy instruments and their effects',
+                        'Determine reasons for the conquest and methods used',
+                        'Examine various resistance to the conquest',
+                        'Evaluate results and aftermath of the conquest',
+                    ],
+                ],
+
+                // SECTION C: Nigeria 1900 - 1960
+                [
+                    'name'  => 'Establishment of Colonial Rule up to 1914',
+                    'order' => 15,
+                    'subtopics' => [
+                        'Administration of the protectorates',
+                    ],
+                    'objectives' => [
+                        'Examine the administrative set-up of the protectorates',
                     ],
                 ],
                 [
-                    'name'      => 'Public Finance',
-                    'order'     => 14,
+                    'name'  => 'Amalgamation of 1914',
+                    'order' => 16,
                     'subtopics' => [
-                        'Meaning and objectives of public finance',
-                        'Fiscal policy and its instruments',
-                        'Sources of government revenue: taxes, royalties, rents, grants',
-                        'Principles and incidence of taxation',
-                        'Effects of public expenditure',
-                        'Government budget and public debts',
-                        'Revenue allocation and resource control in Nigeria',
+                        'Reasons',
+                        'Effects',
                     ],
                     'objectives' => [
-                        'Identify objectives of public finance',
-                        'Analyse principles and incidence of taxation',
-                        'Examine types and effects of budgets',
-                        'Highlight criteria for revenue allocation in Nigeria',
+                        'Examine reasons for the 1914 Amalgamation and its effects',
                     ],
                 ],
                 [
-                    'name'      => 'Economic Growth, Development and Agriculture',
-                    'order'     => 15,
+                    'name'  => 'Colonial Administration After Amalgamation',
+                    'order' => 17,
                     'subtopics' => [
-                        'Meaning and scope of economic growth and development',
-                        'Indicators, factors and problems of growth and development in Nigeria',
-                        'Development planning in Nigeria',
-                        'Types and features of agriculture',
-                        'Role of agriculture in economic development',
-                        'Problems and policies of agriculture in Nigeria',
-                        'Instability in agricultural incomes: causes, effects and solutions',
+                        'Central administration: Legislative and Executive Councils',
+                        'Indirect Rule: reasons, working and effects',
+                        'Local administrative institutions: Native Authorities, Native Courts, Native Treasuries',
+                        'Resistance to colonial rule: Ekumeku Movement (1898–1911), Satiru uprising (1906), Egba Anti-tax agitation (1918), Aba Women Movement (1929)',
                     ],
                     'objectives' => [
-                        'Distinguish between economic growth and development',
-                        'Assess problems of development in Nigeria',
-                        'Examine role of agriculture in economic development',
-                        'Appraise agricultural policies in Nigeria',
+                        'Relate composition of the central administrative set-up to its consequences',
+                        'Identify reasons for introduction and workings of indirect rule system',
+                        'Assess effects of indirect rule',
+                        'Examine local administrative units',
+                        'Account for anti-colonial movements and their significance',
                     ],
                 ],
                 [
-                    'name'      => 'Industry, Natural Resources and Business Organizations',
-                    'order'     => 16,
+                    'name'  => 'The Colonial Economy',
+                    'order' => 18,
                     'subtopics' => [
-                        'Location and localization of industry in Nigeria',
-                        'Industrialization strategies and economic development',
-                        'Development of major natural resources: petroleum, gold, diamond, timber',
-                        'Contributions of oil and non-oil sectors to Nigerian economy',
-                        'Upstream and downstream activities, NNPC and OPEC',
-                        'Private enterprises: sole proprietorship, partnership, limited liability companies',
-                        'Public enterprises, privatization and commercialization',
+                        'Currency, taxation and forced labour',
+                        'Infrastructure (transportation, post and telecommunication)',
+                        'Agriculture',
+                        'Mining',
+                        'Industry',
+                        'Commerce',
+                        'Banking',
                     ],
                     'objectives' => [
-                        'Differentiate between location and localization of industry',
-                        'Assess contributions of oil and non-oil sectors',
-                        'Distinguish between upstream and downstream activities in oil sector',
-                        'Compare types of private and public business organizations',
-                        'Differentiate between privatization and commercialization',
+                        'Examine nature of the economy as it affects taxation, currency, infrastructure, agriculture, mining, industry, commerce and banking',
                     ],
                 ],
                 [
-                    'name'      => 'Population, International Trade and Organizations',
-                    'order'     => 17,
+                    'name'  => 'Social Development under Colonial Rule',
+                    'order' => 19,
                     'subtopics' => [
-                        'Meaning, theories and census of population',
-                        'Over-population, under-population and optimum population',
-                        'Population structure, distribution and policy',
-                        'Basis for international trade: absolute and comparative costs',
-                        'Balance of trade and balance of payments',
-                        'Exchange rate: meaning, types and determination',
-                        'International organizations: ECOWAS, AU, IMF, World Bank, WTO',
-                        'Factors of production: types, features, rewards and theories',
-                        'Unemployment: types, causes and solutions in Nigeria',
+                        'Western education',
+                        'Urbanization/social integration',
+                        'Improvement unions',
+                        'Health institutions',
                     ],
                     'objectives' => [
-                        'Analyse population theories and examine relevance to Nigeria',
-                        'Examine basis for international trade',
-                        'Distinguish between balance of trade and balance of payments',
-                        'Identify types of exchange rates',
-                        'Evaluate relevance of international organizations to Nigerian economy',
-                        'Examine types and causes of unemployment in Nigeria',
+                        'Identify areas of social development under colonial rule',
+                        'Examine impact of urbanization on the people',
+                        'Examine level of social integration among the people',
+                    ],
+                ],
+                [
+                    'name'  => 'Nationalism, Constitutional Developments and Independence',
+                    'order' => 20,
+                    'subtopics' => [
+                        'Rise of nationalist movements',
+                        '1922 Clifford Constitution and rise of Nigeria’s first political party',
+                        'World War II and agitation for independence',
+                        'Richards Constitution of 1946',
+                        'Macpherson Constitution of 1951',
+                        'Party politics: regionalism, federalism and minorities agitations',
+                        'Lyttleton Constitution of 1954',
+                        'Constitutional conferences (Lagos 1957, London 1958)',
+                        'General elections of 1959 and independence in 1960',
+                    ],
+                    'objectives' => [
+                        'Trace emergence of nationalist movement',
+                        'Assess roles of different constitutions in constitutional development',
+                        'Examine effect of World War II on agitation for independence and constitutional developments',
+                        'Trace development of party politics and its impact on regionalism and minority question',
+                        'Examine impact of constitutional conferences',
+                        'Determine factors that aided attainment of independence',
+                    ],
+                ],
+
+                // SECTION D: Nigeria since Independence
+                [
+                    'name'  => 'Politics of the First Republic and Military Intervention',
+                    'order' => 21,
+                    'subtopics' => [
+                        'Struggle for control of the centre',
+                        'Issue of revenue allocation',
+                        'Minority question',
+                        '1962/63 census controversies',
+                        'Action Group crisis and General Elections of 1964/65',
+                        'Coup d’etat of January 1966 and Ironsi Regime',
+                    ],
+                    'objectives' => [
+                        'Give reasons behind struggle for control of the centre',
+                        'Account for controversies in revenue allocation',
+                        'Account for controversies generated by minority question and creation of states',
+                        'Account for controversies generated by 1962/63 census',
+                        'Examine problems created by Action Group crisis and General Elections of 1964/65',
+                        'Assess significance of military intervention and the Ironsi Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'The Civil War',
+                    'order' => 22,
+                    'subtopics' => [
+                        'Causes (remote and immediate)',
+                        'Course',
+                        'Effects',
+                    ],
+                    'objectives' => [
+                        'Examine remote and immediate causes of the war',
+                        'Examine the course',
+                        'Assess the effects of the war',
+                    ],
+                ],
+                [
+                    'name'  => 'The Gowon Regime',
+                    'order' => 23,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Assess the challenges and achievements of the Gowon Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'Murtala/Obasanjo Regime',
+                    'order' => 24,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Assess the challenges and achievements of the Murtala/Obasanjo Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'The Second Republic',
+                    'order' => 25,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Evaluate the challenges and achievements of the Second Republic',
+                    ],
+                ],
+                [
+                    'name'  => 'The Buhari Regime',
+                    'order' => 26,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Assess the challenges and achievements of the Buhari Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'The Babangida Regime',
+                    'order' => 27,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Assess the challenges and achievements of the Babangida Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'The Interim National Government (ING)',
+                    'order' => 28,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Examine the role and challenges of the Interim National Government',
+                    ],
+                ],
+                [
+                    'name'  => 'The Abacha Regime',
+                    'order' => 29,
+                    'subtopics' => [],
+                    'objectives' => [
+                        'Assess the challenges and achievements of the Abacha Regime',
+                    ],
+                ],
+                [
+                    'name'  => 'Nigeria in International Organizations',
+                    'order' => 30,
+                    'subtopics' => [
+                        'Economic Community of West African States (ECOWAS)',
+                        'African Union (AU)',
+                        'Commonwealth of Nations',
+                        'Organization of Petroleum Exporting Countries (OPEC)',
+                        'United Nations Organization',
+                        'Role of Nigeria in conflict resolution',
+                    ],
+                    'objectives' => [
+                        'Examine role of Nigeria in ECOWAS',
+                        'Assess role of Nigeria in the AU',
+                        'Evaluate role of Nigeria in the Commonwealth of Nations',
+                        'Assess role of Nigeria in OPEC',
+                        'Examine role of Nigeria in the UN',
+                        'Examine role of Nigeria in conflict resolutions in Congo, Chad, Liberia, Sierra Leone, Guinea and Sudan',
+                    ],
+                ],
+
+                // PART II: Africa and the Wider World since 1800
+                [
+                    'name'  => 'Islamic Reform Movements and State Building in West Africa',
+                    'order' => 31,
+                    'subtopics' => [
+                        'Relationship between Sokoto and other Jihads',
+                        'Jihads of Seku Ahmadu and Al-Hajj Umar',
+                        'Activities of Samori Toure',
+                    ],
+                    'objectives' => [
+                        'Establish relationship between Sokoto Jihad and other Jihads in West Africa',
+                        'Compare achievements of the Jihads of Seku Ahmadu and Al-Hajj Umar',
+                        'Examine activities of Samori Toure of the Madinka Empire',
+                    ],
+                ],
+                [
+                    'name'  => 'Sierra Leone, Liberia and Christian Missionary Activities in West Africa',
+                    'order' => 32,
+                    'subtopics' => [
+                        'Foundation of Sierra Leone and Liberia and spread of Christianity',
+                        'Activities and impact of Christian missionaries',
+                    ],
+                    'objectives' => [
+                        'Determine factors that led to founding of Sierra Leone and Liberia',
+                        'Examine importance of Sierra Leone and Liberia in the spread and impact of Christianity in West Africa',
+                        'Assess impact of Christian missionary activities in West Africa',
+                    ],
+                ],
+                [
+                    'name'  => 'Egypt under Mohammed Ali and Khedive Ismail',
+                    'order' => 33,
+                    'subtopics' => [
+                        'Rise of Mohammad Ali and his reforms',
+                        'Mohammad Ali’s relations with the Europeans',
+                        'Ismail’s fiscal policies',
+                        'British occupation of Egypt',
+                    ],
+                    'objectives' => [
+                        'Determine factors that aided Mohammad Ali’s rise and reforms',
+                        'Establish relationship between Mohammad Ali’s empire and Europeans',
+                        'Account for fiscal policies of Ismail',
+                        'Examine reasons for British occupation of Egypt',
+                    ],
+                ],
+                [
+                    'name'  => 'Mahdi and Mahdiyya Movement in Sudan',
+                    'order' => 34,
+                    'subtopics' => [
+                        'Causes',
+                        'Course',
+                        'Consequences',
+                    ],
+                    'objectives' => [
+                        'Examine causes, course and consequences of the Mahdiyya Movement in Sudan',
+                    ],
+                ],
+                [
+                    'name'  => 'Omani Empire',
+                    'order' => 35,
+                    'subtopics' => [
+                        'Rise of the Omani Empire',
+                        'Commercial and political relations with the coast and hinterland',
+                        'Relations with Europeans',
+                    ],
+                    'objectives' => [
+                        'Determine factors that led to rise of the Omani Empire',
+                        'Assess establishment of commercial and political relations between the Omani Empire, coast and hinterland',
+                        'Examine relationship between the Omani Empire and Europeans',
+                    ],
+                ],
+                [
+                    'name'  => 'Ethiopia in the 19th Century',
+                    'order' => 36,
+                    'subtopics' => [
+                        'Rise of Theodore II and attempt at unification of Ethiopia',
+                        'Menelik II and Ethiopian independence',
+                    ],
+                    'objectives' => [
+                        'Examine factors that led to rise of Theodore II',
+                        'Analyse strategies adopted to achieve Ethiopian unification',
+                        'Assess role of Menelik II in maintenance of Ethiopian independence',
+                    ],
+                ],
+                [
+                    'name'  => 'The Mfecane',
+                    'order' => 37,
+                    'subtopics' => [
+                        'Rise of the Zulu Nation',
+                        'Causes, course and consequences of the Mfecane',
+                    ],
+                    'objectives' => [
+                        'Trace events in Nguniland before the Mfecane',
+                        'Determine factors that led to rapid rise of Shaka',
+                        'Examine causes, course and consequences of the Mfecane',
+                    ],
+                ],
+                [
+                    'name'  => 'The Great Trek',
+                    'order' => 38,
+                    'subtopics' => [
+                        'Frontier wars',
+                        'British intervention in Boer-African relations',
+                        'Great Trek and its consequences',
+                    ],
+                    'objectives' => [
+                        'Determine factors that led to the frontier wars',
+                        'Account for British intervention in Boer-African relations',
+                        'Describe nature of the Great Trek',
+                        'Examine consequences of the Great Trek',
+                    ],
+                ],
+                [
+                    'name'  => 'New Imperialism and European Occupation of Africa',
+                    'order' => 39,
+                    'subtopics' => [
+                        'New Imperialism in Africa',
+                        'European scramble for Africa',
+                        'Berlin Conference',
+                        'Occupation and resistance by Africans',
+                    ],
+                    'objectives' => [
+                        'Assess causes of the New Imperialism',
+                        'Examine causes of the scramble',
+                        'Account for significance of the Berlin Conference',
+                        'Examine African resistance to occupation',
+                    ],
+                ],
+                [
+                    'name'  => 'Patterns of Colonial Rule in Africa',
+                    'order' => 40,
+                    'subtopics' => [
+                        'The British',
+                        'The French',
+                        'The Portuguese',
+                        'The Belgians',
+                    ],
+                    'objectives' => [
+                        'Examine and compare patterns of colonial rule by various European powers',
+                    ],
+                ],
+                [
+                    'name'  => 'Politics of Decolonization',
+                    'order' => 41,
+                    'subtopics' => [
+                        'Colonial policies and African discontent',
+                        'Impact of the two World Wars',
+                        'Nationalist activities and emergence of political parties and associations',
+                        'Strategies for attaining independence',
+                    ],
+                    'objectives' => [
+                        'Examine policies employed by colonial masters and magnitude of African discontent',
+                        'Assess impact of First and Second World Wars on African nationalism',
+                        'Determine strategies used in attainment of independence',
+                    ],
+                ],
+                [
+                    'name'  => 'Apartheid in South Africa',
+                    'order' => 42,
+                    'subtopics' => [
+                        'Origin of apartheid',
+                        'Rise of Afrikaner nationalism',
+                        'Enactment of apartheid laws',
+                        'Internal reaction and suppression of African nationalist movements',
+                        'External reaction: Frontline States, Commonwealth, OAU and UN',
+                        'Dismantling of apartheid',
+                        'Post-apartheid development',
+                    ],
+                    'objectives' => [
+                        'Trace origin of apartheid in South Africa',
+                        'Give reasons for rise of Afrikaner nationalism',
+                        'Evaluate apartheid laws',
+                        'Relate internal reactions to apartheid to African struggle for majority rule',
+                        'Relate contributions of African states and international organizations to fight against apartheid',
+                        'Identify steps taken towards dismantling apartheid',
+                        'Assess post-apartheid development in South Africa',
+                    ],
+                ],
+                [
+                    'name'  => 'Problems of Nation-building in Africa',
+                    'order' => 43,
+                    'subtopics' => [
+                        'Political and economic challenges and constraints',
+                        'Physical and environmental challenges',
+                        'Ethnic and religious pluralism',
+                        'Military intervention and political instability',
+                        'Neo-colonialism and under-development',
+                        'Boundary disputes and threat to African unity',
+                        'Civil wars and refugee problem',
+                    ],
+                    'objectives' => [
+                        'Examine political and economic problems faced in Africa',
+                        'Assess effects of natural disasters on Africa',
+                        'Determine role of ethnic and religious problems in Africa',
+                        'Examine role of the military in African politics',
+                        'Examine role of neo-colonialism in Africa',
+                        'Assess problems of boundary disputes',
+                        'Establish relationship between civil wars and refugee problems in Africa',
                     ],
                 ],
             ],
 
             // ================================================================
-            // GOVERNMENT (subject_id: 8)
+            // ACCOUNTING (subject_id: 14)
             // ================================================================
-            8 => [
-                [
-                    'name'      => 'Basic Concepts in Government',
-                    'order'     => 1,
-                    'subtopics' => [
-                        'Power, authority, legitimacy and sovereignty',
-                        'Society, state, nation and nation-state',
-                        'Political socialization, political participation and political culture',
-                    ],
-                    'objectives' => [
-                        'Identify fundamental concepts in governance',
-                        'Analyse various political processes',
-                    ],
-                ],
-                [
-                    'name'      => 'Forms and Systems of Government',
-                    'order'     => 2,
-                    'subtopics' => [
-                        'Monarchy, aristocracy, oligarchy, autocracy: definitions, features, merits and demerits',
-                        'Republicanism and democracy',
-                        'Presidential, parliamentary and monarchical systems',
-                        'Unitary, federal and confederal structures',
-                    ],
-                    'objectives' => [
-                        'Distinguish between different forms of government',
-                        'Distinguish between different systems of governance',
-                        'Compare various political structures of governance',
-                    ],
-                ],
-                [
-                    'name'      => 'Arms of Government',
-                    'order'     => 3,
-                    'subtopics' => [
-                        'Legislature: types, structure, functions and powers',
-                        'Executive: types, functions and powers',
-                        'Judiciary: functions, powers and components',
-                        'Relationships among the three arms',
-                        'Processes of legislation: acts, edicts, bye-laws, delegated legislation, decrees',
-                    ],
-                    'objectives' => [
-                        'Identify duties and obligations of various arms of government',
-                        'Relate each arm to its functions',
-                        'Appreciate how arms interrelate',
-                        'Analyse processes involved in making of laws',
-                    ],
-                ],
-                [
-                    'name'      => 'Political Ideologies, Constitution and Democracy',
-                    'order'     => 4,
-                    'subtopics' => [
-                        'Communalism, feudalism, capitalism, socialism, communism, totalitarianism, fascism, Nazism',
-                        'Constitution: meaning, sources, functions and types',
-                        'Written, unwritten, rigid and flexible constitutions',
-                        'Ethics and accountability, separation of power, checks and balances',
-                        'Rule of law, constitutionalism and representative government',
-                    ],
-                    'objectives' => [
-                        'Differentiate between major political ideologies',
-                        'Define and identify sources and functions of constitutions',
-                        'Identify principles of democratic government',
-                    ],
-                ],
-                [
-                    'name'      => 'Citizenship, Electoral Process and Political Parties',
-                    'order'     => 5,
-                    'subtopics' => [
-                        'Citizenship: meaning, types, rights, dual citizenship, renunciation',
-                        'Duties and obligations of citizens and the state',
-                        'Suffrage: evolution and types',
-                        'Election: types and ingredients of free and fair election',
-                        'Electoral systems: types, advantages and disadvantages',
-                        'Electoral commission: functions and problems',
-                        'Political parties: definition, organization and functions',
-                        'Party systems: types and characteristics',
-                        'Pressure groups: types, functions and differences from political parties',
-                        'Public opinion: meaning, formation, measurement, functions and limitations',
-                    ],
-                    'objectives' => [
-                        'Differentiate between methods of acquiring citizenship',
-                        'Identify types of electoral systems and analyse electoral processes',
-                        'Assess role of political parties',
-                        'Evaluate functions of pressure groups',
-                        'Compare methods of assessing public opinion',
-                    ],
-                ],
-                [
-                    'name'      => 'Civil Service and Pre-Colonial Nigeria',
-                    'order'     => 6,
-                    'subtopics' => [
-                        'Civil service: definition, characteristics, functions, structure, control and problems',
-                        'Pre-colonial polities: Hausa, Emirate, Tiv, Igbo, Yoruba',
-                        'Structural organization and functions of pre-colonial political institutions',
-                    ],
-                    'objectives' => [
-                        'Analyse significance of civil service in governance',
-                        'Appreciate effectiveness of pre-colonial political systems',
-                        'Compare pre-colonial systems of governance',
-                    ],
-                ],
-                [
-                    'name'      => 'Colonial Rule and Nationalism',
-                    'order'     => 7,
-                    'subtopics' => [
-                        'British process of acquisition: trade, missionary activities, company rule, crown colony',
-                        'British colonial policy: direct and indirect rule',
-                        'French colonial policy: assimilation and association',
-                        'Impact of British colonial rule: economic, political, socio-cultural',
-                        'Nationalist leaders: Macaulay, Azikiwe, Awolowo, Ahmadu Bello, Tafawa Balewa',
-                        'Emergence of nationalist parties and external factors',
-                    ],
-                    'objectives' => [
-                        'Trace processes of imperialist penetration',
-                        'Assess impact of British and French colonial policies',
-                        'Evaluate process of decolonization',
-                        'Assess roles of nationalist leaders and parties',
-                    ],
-                ],
-                [
-                    'name'      => 'Constitutional Development in Nigeria',
-                    'order'     => 8,
-                    'subtopics' => [
-                        'Clifford Constitution 1922',
-                        'Richards Constitution 1946',
-                        'Macpherson Constitution 1951',
-                        'Lyttleton Constitution 1954',
-                        'Independence Constitution 1960',
-                        'Post-independence constitutions: 1963, 1979, 1989, 1999',
-                    ],
-                    'objectives' => [
-                        'Compare various constitutional developments',
-                        'Assess workings of various constitutions',
-                    ],
-                ],
-                [
-                    'name'      => 'Nigerian Federalism and Government Institutions',
-                    'order'     => 9,
-                    'subtopics' => [
-                        'Legislature, executive and judiciary in post-independence Nigeria',
-                        'Public commissions: Civil Service Commission, Electoral Commissions, National Boundary Commission',
-                        'Rationale for federal system and tiers of government',
-                        'Creation of states: 1963, 1967, 1976, 1987, 1991, 1996',
-                        'Problems of Nigerian federalism: census, revenue allocation, conflicts',
-                        'Federal character as corrective measure',
-                    ],
-                    'objectives' => [
-                        'Evaluate operations of arms of government and their agencies',
-                        'Examine workings of Nigerian federalism',
-                        'Identify and evaluate corrective measures for problems of Nigerian federalism',
-                    ],
-                ],
-                [
-                    'name'      => 'Political Parties in Post-Independence Nigeria',
-                    'order'     => 10,
-                    'subtopics' => [
-                        'First Republic political parties',
-                        'Second Republic political parties',
-                        'Third Republic political parties',
-                        'Fourth Republic: evolution, membership and structure',
-                    ],
-                    'objectives' => [
-                        'Contrast political processes in the republics',
-                        'Evaluate ideologies, structure and composition of political parties',
-                    ],
-                ],
-                [
-                    'name'      => 'Public Corporations, Local Government and Military Rule',
-                    'order'     => 11,
-                    'subtopics' => [
-                        'Public corporations and parastatals: definition, types, purpose, finance and control',
-                        'Privatization and commercialization: objectives, features, merits and demerits',
-                        'Local government: pre-1976, 1976 and 1989 reforms, structure and functions',
-                        'Traditional rulers and local government problems',
-                        'Military intervention: factors, structure, impact and disengagement',
-                    ],
-                    'objectives' => [
-                        'Examine operations of public corporations and parastatals',
-                        'Trace evolution and structure of local government',
-                        'Evaluate reasons for and achievements of military rule',
-                    ],
-                ],
-                [
-                    'name'      => 'Nigeria\'s Foreign Policy and International Organizations',
-                    'order'     => 12,
-                    'subtopics' => [
-                        'Foreign policy: definition, purpose, determining factors, formulation and implementation',
-                        'Nigeria\'s relations with major powers, developing countries and Non-Alignment Policy',
-                        'Africa as centre piece of Nigeria\'s foreign policy and NEPAD',
-                        'Nigeria in UN, Commonwealth, OAU, AU, ECOWAS, OPEC',
-                        'ECOWAS, OAU/AU, Commonwealth, OPEC: origin, objectives, structure, achievements, problems',
-                    ],
-                    'objectives' => [
-                        'Define foreign policy and identify its determinants',
-                        'Identify major objectives of Nigeria\'s foreign policy',
-                        'Evaluate role of Nigeria in continental affairs',
-                        'Analyse dynamics of Nigeria\'s involvement in international organizations',
-                    ],
-                ],
-            ],
-
-            // ================================================================
-            // GEOGRAPHY (subject_id: 11)
-            // ================================================================
-            11 => [
-                [
-                    'name'      => 'Maps, Scale and Map Reading',
-                    'order'     => 1,
-                    'subtopics' => [
-                        'Types, uses and definition of maps',
-                        'Scale and measurement: distances, areas, reduction and enlargement',
-                        'Directions, bearings and gradients',
-                        'Cross profiles and intervisibility',
-                        'Recognition of physical and human features on topographical maps',
-                    ],
-                    'objectives' => [
-                        'Define and identify different types and uses of maps',
-                        'Apply different types of scale to distances and area measurement',
-                        'Illustrate relief of an area through profile drawing',
-                        'Interpret physical and human features from topographical maps',
-                    ],
-                ],
-                [
-                    'name'      => 'Statistical Data, Surveying and GIS',
-                    'order'     => 2,
-                    'subtopics' => [
-                        'Interpretation of statistical data, maps and diagrams',
-                        'Chain and prismatic surveying: open and close traverse',
-                        'Procedure, problems, advantages and disadvantages of surveying',
-                        'GIS: components, techniques, data, sources and applications',
-                        'GIS uses: defence, agriculture, rural development',
-                    ],
-                    'objectives' => [
-                        'Compute and interpret quantitative information from statistical data',
-                        'Analyse principles and procedure of surveying techniques',
-                        'Understand GIS, its components and areas of use',
-                    ],
-                ],
-                [
-                    'name'      => 'The Earth as a Planet',
-                    'order'     => 3,
-                    'subtopics' => [
-                        'The earth in the solar system, rotation and revolution',
-                        'Shape and size of the earth',
-                        'Latitudes and distances',
-                        'Longitudes and time',
-                    ],
-                    'objectives' => [
-                        'Identify relative positions of planets in the solar system',
-                        'Relate effects of rotation and revolution of the earth',
-                        'Differentiate between latitudes and longitudes',
-                        'Relate latitude to distance and longitude to time',
-                    ],
-                ],
-                [
-                    'name'      => 'The Earth\'s Crust and Landforms',
-                    'order'     => 4,
-                    'subtopics' => [
-                        'Internal and external structure of the earth',
-                        'Relationships among atmosphere, biosphere, hydrosphere and lithosphere',
-                        'Rocks: types, characteristics, modes of formation and uses',
-                        'Tectonic forces: tensional and compressional',
-                        'Mountains, plateaux, plains, coastal landforms, karst and desert landforms',
-                    ],
-                    'objectives' => [
-                        'Compare internal and external components of the earth',
-                        'Differentiate between major rock types and their characteristics',
-                        'Differentiate between tensional and compressional forces',
-                        'Identify and describe major landforms',
-                    ],
-                ],
-                [
-                    'name'      => 'Volcanism, Earthquakes and Denudation',
-                    'order'     => 5,
-                    'subtopics' => [
-                        'Landforms of volcanic activities and igneous rocks',
-                        'Origin and types of volcanoes',
-                        'Major volcanic eruptions and earthquakes in the world',
-                        'Weathering, erosion, mass movement and deposition',
-                        'Agents of denudation and associated landforms',
-                    ],
-                    'objectives' => [
-                        'Explain processes of volcanic eruptions and earthquakes',
-                        'Describe landforms associated with volcanic and earthquake activities',
-                        'Identify agents of denudation and associate landforms with each process',
-                    ],
-                ],
-                [
-                    'name'      => 'Water Bodies',
-                    'order'     => 6,
-                    'subtopics' => [
-                        'Oceans and seas: world distribution, salinity and uses',
-                        'Ocean currents: types, distribution, causes and effects',
-                        'Lakes: types, distribution and uses',
-                        'Rivers: action of running water and landforms of river course stages',
-                    ],
-                    'objectives' => [
-                        'Locate and examine characteristics of oceans and seas',
-                        'Classify and account for distribution of ocean currents',
-                        'Evaluate causes and effects of ocean currents',
-                        'Identify landforms of different stages of a river course',
-                    ],
-                ],
-                [
-                    'name'      => 'Weather, Climate and Vegetation',
-                    'order'     => 7,
-                    'subtopics' => [
-                        'Concept, elements and factors controlling weather and climate',
-                        'Climate classification: Greek and Koppen',
-                        'Major climate types, characteristics and distribution',
-                        'Weather measuring instruments',
-                        'Climate change: basic science, causes, effects and remedies',
-                        'Factors controlling growth of plants',
-                        'Major types of vegetation, characteristics and distribution',
-                        'Impact of human activities on vegetation',
-                    ],
-                    'objectives' => [
-                        'Differentiate between weather and climate',
-                        'Isolate factors controlling weather and climate',
-                        'Identify major climate types according to Koppen',
-                        'Define climate change and understand its causes and effects',
-                        'Identify types of vegetation and their distribution',
-                    ],
-                ],
-                [
-                    'name'      => 'Soils and Environmental Issues',
-                    'order'     => 8,
-                    'subtopics' => [
-                        'Soil definition, properties, formation factors and profiles',
-                        'Major tropical soil types, characteristics, distribution and uses',
-                        'Impact of human activities on soils',
-                        'Types of environmental resources: renewable and non-renewable',
-                        'Land ecosystem and environmental balance',
-                        'Natural hazards: droughts, earthquakes, volcanic eruptions, flooding',
-                        'Man-induced hazards: soil erosion, deforestation, pollution, desertification',
-                        'Environmental conservation methods and importance',
-                    ],
-                    'objectives' => [
-                        'Classify soils and their properties',
-                        'Compare major tropical soil types',
-                        'Differentiate between renewable and non-renewable resources',
-                        'Identify natural and man-induced hazards and their prevention',
-                        'Discuss methods of environmental conservation',
-                    ],
-                ],
-                [
-                    'name'      => 'Population and Settlement',
-                    'order'     => 9,
-                    'subtopics' => [
-                        'World population distribution with reference to Amazon Basin, NE USA, India, Japan, West Coast of Southern Africa',
-                        'Birth and death rates, age/sex structure',
-                        'Factors and patterns of population distribution',
-                        'Factors and problems of population growth',
-                        'Rural and urban settlements: types, patterns, classification and functions',
-                        'Problems of urban centres',
-                        'Interrelationship between rural and urban settlements',
-                    ],
-                    'objectives' => [
-                        'Identify characteristics of population',
-                        'Determine factors and patterns of population distribution',
-                        'Differentiate between types of settlements',
-                        'Classify patterns and functions of rural and urban settlements',
-                    ],
-                ],
-                [
-                    'name'      => 'Economic Activities and World Trade',
-                    'order'     => 10,
-                    'subtopics' => [
-                        'Types of economic activities: primary, secondary, tertiary and quaternary',
-                        'Agriculture: types, systems, factors and problems',
-                        'Manufacturing industries: types, locational factors and problems in tropical Africa',
-                        'Transportation and communication in tropical Africa',
-                        'World trade: factors, patterns, major commodities, routes and destinations',
-                        'Tourism: definition, importance, problems and solutions',
-                    ],
-                    'objectives' => [
-                        'Identify and differentiate between types of economic activities',
-                        'Assess agriculture as an economic activity',
-                        'Identify factors of industrial location',
-                        'Relate factors to patterns of world trade',
-                        'Analyse tourism as an economic activity',
-                    ],
-                ],
-                [
-                    'name'      => 'Regional Geography of Nigeria and ECOWAS',
-                    'order'     => 11,
-                    'subtopics' => [
-                        'Nigeria: location, size, political divisions and peoples',
-                        'Physical setting: geology, relief, climate, drainage, vegetation and soils',
-                        'Nigerian population: size, distribution and migration',
-                        'Natural resources: minerals, soils, water, vegetation',
-                        'Agricultural systems and manufacturing industries in Nigeria',
-                        'Transportation, communication and trade in Nigeria',
-                        'Tourism in Nigeria',
-                        'ECOWAS: meaning, objectives, member states, advantages and problems',
-                    ],
-                    'objectives' => [
-                        'Describe location, size and political divisions of Nigeria',
-                        'Relate physical settings to human activities in Nigeria',
-                        'Identify types and distribution of natural resources in Nigeria',
-                        'Compare farming systems in Nigeria',
-                        'State meaning, objectives and evaluate prospects of ECOWAS',
-                    ],
-                ],
-            ],
-
-            // ================================================================
-            // COMMERCE (subject_id: 15)
-            // ================================================================
-            15 => [
-                [
-                    'name'      => 'Introduction to Commerce and Occupation',
-                    'order'     => 1,
-                    'subtopics' => [
-                        'Meaning, scope, characteristics and functions of commerce',
-                        'Meaning and importance of occupation',
-                        'Types of occupation: industrial, commercial and services',
-                        'Factors determining choice of occupation',
-                    ],
-                    'objectives' => [
-                        'Differentiate between commerce and other related subjects',
-                        'Describe characteristics and functions of commerce',
-                        'Compare different types of occupation',
-                    ],
-                ],
-                [
-                    'name'      => 'Production and Factors of Production',
-                    'order'     => 2,
-                    'subtopics' => [
-                        'Factors of production: land, labour, capital and entrepreneur',
-                        'Division of labour and specialization',
-                        'Types of production: primary, secondary and tertiary',
-                    ],
-                    'objectives' => [
-                        'Identify factors of production and their rewards',
-                        'Distinguish between division of labour and specialization',
-                        'Classify types of production',
-                    ],
-                ],
-                [
-                    'name'      => 'Home and Foreign Trade',
-                    'order'     => 3,
-                    'subtopics' => [
-                        'Retail trade: types, functions, factors, trends and merits/demerits',
-                        'Wholesale trade: types, functions and merits/demerits',
-                        'Balance of trade, balance of payments and counter trade',
-                        'Procedures and documents in export, import and entrepot trade',
-                        'Barriers to international trade',
-                        'Role of Customs and Excise Authority and Ports Authority',
-                    ],
-                    'objectives' => [
-                        'Compare various types of retailers and wholesalers',
-                        'Outline merits and demerits of middlemen',
-                        'Analyse basic issues in foreign trade',
-                        'Explain procedures and documents used in foreign trade',
-                        'Identify barriers to international trade',
-                    ],
-                ],
-                [
-                    'name'      => 'Purchase, Sale of Goods and Terms of Trade',
-                    'order'     => 4,
-                    'subtopics' => [
-                        'Procedure and documentation: enquiry, quotation, order, invoice, bill of lading, certificate of origin',
-                        'Terms of trade: trade discount, cash discount, COD, CIF, FOB',
-                        'Cash payment and legal tender',
-                        'Credit: types, functions, merits and demerits',
-                    ],
-                    'objectives' => [
-                        'Examine procedures and documents in purchase and sale of goods',
-                        'Determine terms of trade',
-                        'Distinguish between cash and credit forms of payment',
-                        'Analyse merits and demerits of credit transactions',
-                    ],
-                ],
-                [
-                    'name'      => 'Aids to Trade',
-                    'order'     => 5,
-                    'subtopics' => [
-                        'Advertising: types, media, advantages and disadvantages',
-                        'Banking: types, services and challenges',
-                        'Communication: process, types, trends, merits, demerits and barriers',
-                        'Insurance: types, principles, terms and importance',
-                        'Tourism: importance, agencies and challenges in Nigeria',
-                        'Transportation: modes, importance, advantages and disadvantages',
-                        'Warehousing: importance, types, functions and siting factors',
-                    ],
-                    'objectives' => [
-                        'Identify types of advertising and its media',
-                        'Categorize types of banks and assess their services',
-                        'Analyse types of communication and their merits and demerits',
-                        'Describe types of insurance and apply principles to life situations',
-                        'Appraise relevance of various modes of transportation',
-                        'Highlight importance of warehousing',
-                    ],
-                ],
-                [
-                    'name'      => 'Business Units and Financing',
-                    'order'     => 6,
-                    'subtopics' => [
-                        'Forms and features: sole proprietorship, partnership, limited liability companies, public corporations, cooperatives',
-                        'Registration, mergers, dissolution and liquidation of businesses',
-                        'Sources of finance: savings, shares, bonds, loans, debentures, mortgage, bank overdraft',
-                        'Types of capital: share capital, authorized, issued, working capital',
-                        'Calculation of capital, profits (gross and net) and turnover',
-                        'Role of bureau de change',
-                    ],
-                    'objectives' => [
-                        'Identify forms and features of business units',
-                        'Differentiate between dissolution and liquidation',
-                        'Identify various ways of financing a business',
-                        'Compute different forms of capital, profits and turnover',
-                    ],
-                ],
-                [
-                    'name'      => 'Trade Associations, Stock Exchange and Money',
-                    'order'     => 7,
-                    'subtopics' => [
-                        'Objectives and functions of trade and manufacturers\' associations',
-                        'Objectives and functions of Chambers of Commerce',
-                        'Importance and functions of Stock Exchange',
-                        'Types of securities: stocks, shares, bonds, debentures',
-                        'Procedure of transactions and speculations',
-                        'Second-Tier Securities Market',
-                        'Evolution, forms, qualities and functions of money',
-                    ],
-                    'objectives' => [
-                        'Discuss objectives and functions of trade associations',
-                        'State importance and functions of Stock Exchange',
-                        'Identify different securities traded on Stock Exchange',
-                        'Discuss origin, forms and functions of money',
-                    ],
-                ],
-                [
-                    'name'      => 'Business Management and Marketing',
-                    'order'     => 8,
-                    'subtopics' => [
-                        'Functions of management: planning, organizing, staffing, coordinating, motivating, controlling',
-                        'Principles of management: span of control, unity of command, delegation',
-                        'Organizational structures: line, line and staff, functional, matrix, committee',
-                        'Functional areas: production, marketing, finance and personnel',
-                        'Marketing concept and marketing mix: product, price, place and promotion',
-                        'Market segmentation, public relations and customer service',
-                    ],
-                    'objectives' => [
-                        'Appraise functions and principles of management',
-                        'Identify organizational structures',
-                        'Highlight importance and functions of marketing',
-                        'Assess elements of marketing mix',
-                        'Explain market segmentation',
-                    ],
-                ],
-                [
-                    'name'      => 'Legal Aspects of Business and ICT',
-                    'order'     => 9,
-                    'subtopics' => [
-                        'Meaning and validity of a simple contract',
-                        'Agency, Sale of Goods Act and Hire Purchase Act',
-                        'Contract of employment',
-                        'Government regulations: registration, patents, trademarks, copyrights',
-                        'Consumer protection: NAFDAC, NDLEA, Consumer Protection Council',
-                        'Computer: appreciation, types, functions, merits and demerits',
-                        'ICT terms: internet, intranet, email, browsing, LAN',
-                        'E-commerce, e-banking and e-business',
-                        'Business environment: legal, political, economic, social, technological',
-                        'Social responsibility and types of pollution',
-                    ],
-                    'objectives' => [
-                        'Analyse elements and validity of a simple contract',
-                        'Assess rights and obligations of employers and employees',
-                        'Distinguish between patents, trademarks and copyrights',
-                        'Discuss computer appreciation and application',
-                        'Evaluate trends in ICT',
-                        'Discuss types of business environment and pollution implications',
-                    ],
-                ],
-            ],
-
+           // ================================================================
+// ACCOUNTING (subject_id: 14)
+// ================================================================
+14 => [
+    [
+        'name'      => 'Nature and Significance of Accounting',
+        'order'     => 1,
+        'subtopics' => [
+            'Development of accounting (including branches of accounting)',
+            'Objectives of bookkeeping and accounting',
+            'Users and characteristics of accounting information',
+            'Principles, concepts and conventions of accounting (nature, significance and application)',
+            'Role of accounting records and information',
+        ],
+        'objectives' => [
+            'Differentiate between bookkeeping and accounting',
+            'Use the historical background of bookkeeping and accounting for future development',
+            'Apply the right principles, concepts and conventions to solving accounting problems',
+            'Examine the role of accounting records and information in decision making',
+            'List branches of Accounting such as Cost Accounting, Management Accounting, Auditing, Financial Accounting and Taxation',
+        ],
+    ],
+    [
+        'name'      => 'Principles of Double Entry',
+        'order'     => 2,
+        'subtopics' => [
+            'Functions of source documents',
+            'Books of original entry',
+            'Accounting equation',
+            'The ledger and its classifications',
+            'Trial balance',
+            'Types and treatment of errors and uses of suspense account',
+        ],
+        'objectives' => [
+            'Relate the various source documents to their uses',
+            'Relate source documents to the various books of original entry',
+            'Determine the effect of changes in elements of accounting equation',
+            'Identify the role of double entry and use it to post transactions into various divisions of the ledger',
+            'Balance off ledger accounts',
+            'Extract a trial balance from balances and determine its uses',
+            'Identify various types of errors and their necessary corrections',
+            'Create a suspense account',
+        ],
+    ],
+    [
+        'name'      => 'Ethics in Accounting',
+        'order'     => 3,
+        'subtopics' => [
+            'Objectives',
+            'Qualities of an Accountant',
+        ],
+        'objectives' => [
+            'Use ethics in preparing and presenting Accounting Reports',
+            'List qualities of an Accountant such as honesty, integrity, transparency, accountability and fairness',
+        ],
+    ],
+    [
+        'name'      => 'Cashbook',
+        'order'     => 4,
+        'subtopics' => [
+            'Columnar cashbooks',
+            'Discounts',
+            'Petty cashbook and the imprest system',
+        ],
+        'objectives' => [
+            'Determine the cash float',
+            'Differentiate between two and three columnar cashbooks and how transactions are recorded in them',
+            'Differentiate between trade and cash discounts',
+            'Examine the effects of trade and cash discounts in the books of accounts',
+            'Identify various petty cash expenses',
+        ],
+    ],
+    [
+        'name'      => 'Bank Transactions and Reconciliation Statements',
+        'order'     => 5,
+        'subtopics' => [
+            'Instrument of bank transactions',
+            'E-banking system',
+            'Causes of discrepancies between cashbook and bank statement',
+            'Bank reconciliation statement',
+        ],
+        'objectives' => [
+            'Identify bank documents such as cheques, pay-in-slips, credit and debit cards and their uses',
+            'Assess the impact of automated credit system, credit transfers, interbank transfers and direct debit on cash balances',
+            'List factors that cause discrepancies between balances of cashbook and bank statements',
+            'Prepare adjusted cashbook balance',
+            'Prepare bank reconciliation statements',
+        ],
+    ],
+    [
+        'name'      => 'The Final Accounts of a Sole Trader',
+        'order'     => 6,
+        'subtopics' => [
+            'Income statement (Trading and profit and loss account)',
+            'Statement of financial position (Balance sheet)',
+            'Adjustments: provision for bad and doubtful debt',
+            'Adjustments: provision for discounts',
+            'Adjustments: depreciation (straight-line and reducing balance methods)',
+            'Adjustments: accruals and prepayments',
+        ],
+        'objectives' => [
+            'Determine the cost of sales, gross profit and net profit of a sole trader',
+            'Identify fixed assets, current assets, long-term liabilities, current liabilities and proprietor’s capital',
+            'Compute adjustable items on related expenditure and income in the profit and loss account',
+            'Relate adjustable items and their corresponding disclosure in the statement of financial position',
+            'Differentiate between bad debts and provision for bad and doubtful debts',
+        ],
+    ],
+    [
+        'name'      => 'Stock Valuation',
+        'order'     => 7,
+        'subtopics' => [
+            'Methods of cost determination using FIFO, LIFO and simple average',
+            'Advantages and disadvantages of the methods',
+            'Importance of stock valuation',
+        ],
+        'objectives' => [
+            'Determine cost of materials issued to production or cost of goods sold using FIFO, LIFO and simple average',
+            'Calculate closing stock of materials or finished goods using FIFO, LIFO and simple average',
+            'Compare advantages and disadvantages of each method of stock valuation',
+            'Determine effects of stock valuation on trading, profits and cost of goods sold',
+        ],
+    ],
+    [
+        'name'      => 'Control Accounts and Self-balancing Ledgers',
+        'order'     => 8,
+        'subtopics' => [
+            'Importance of control accounts',
+            'Purchases ledger control account',
+            'Sales ledger control account',
+        ],
+        'objectives' => [
+            'Determine the importance of control accounts in a business enterprise',
+            'Differentiate between sales ledger control account and purchases ledger control account',
+            'Identify the individual elements of control accounts',
+            'Prepare the control accounts',
+        ],
+    ],
+    [
+        'name'      => 'Incomplete Records and Single Entry',
+        'order'     => 9,
+        'subtopics' => [
+            'Conversion of single entry to double entry',
+            'Determination of missing figures',
+            'Preparation of final accounts from incomplete records',
+        ],
+        'objectives' => [
+            'Determine proprietor’s capital using statement of affairs',
+            'Determine the amount of sales, purchases, cash balances, debtors, creditors and expenses by converting single entry to double entry',
+            'Use accounting equations and gross profit percentage to determine gross profit or cost of sales',
+        ],
+    ],
+    [
+        'name'      => 'Manufacturing Accounts',
+        'order'     => 10,
+        'subtopics' => [
+            'Cost classification',
+            'Cost apportionment',
+            'Preparation of manufacturing account',
+        ],
+        'objectives' => [
+            'Calculate prime cost, production overhead, production cost and total cost',
+            'Determine the basis of apportionment into production, administration, selling and distribution',
+        ],
+    ],
+    [
+        'name'      => 'Accounts of Not-For-Profit-Making Organizations',
+        'order'     => 11,
+        'subtopics' => [
+            'Objectives of Not-For-Profit-Making organizations',
+            'Receipts and payments account',
+            'Income and expenditure account',
+            'Statement of financial position (Balance sheet)',
+        ],
+        'objectives' => [
+            'Distinguish between features of Not-for-profit-making organizations',
+            'Determine subscription income, subscription in arrears and in advance',
+            'Compute cash balances and accumulated funds, surplus and deficit for the period from all sources',
+            'Prepare receipts and payments account',
+            'Prepare income and expenditure account',
+            'Prepare statement of financial position',
+        ],
+    ],
+    [
+        'name'      => 'Departmental Accounts',
+        'order'     => 12,
+        'subtopics' => [
+            'Objectives',
+            'Apportionment of expenses',
+            'Departmental trading and profit and loss account',
+        ],
+        'objectives' => [
+            'Identify reasons for departmental accounts',
+            'Determine expenses associated with individual departments',
+            'Compute departmental profits or losses',
+        ],
+    ],
+    [
+        'name'      => 'Branch Accounts',
+        'order'     => 13,
+        'subtopics' => [
+            'Objectives',
+            'Branch accounts in the head office books',
+            'Head office account',
+            'Reconciliation of branch and head office books',
+        ],
+        'objectives' => [
+            'Determine the reasons for branch accounts',
+            'Calculate profits and losses from branches',
+            'Determine the sources of differences and reconcile them',
+        ],
+    ],
+    [
+        'name'      => 'Joint Venture Accounts',
+        'order'     => 14,
+        'subtopics' => [
+            'Objectives',
+            'Personal accounts of venturers',
+            'Memorandum joint venture accounts',
+        ],
+        'objectives' => [
+            'Identify the objectives of Joint Venture',
+            'Determine the profit or loss of the Joint Venture',
+            'Determine the profit or loss of each venture',
+        ],
+    ],
+    [
+        'name'      => 'Partnership Accounts',
+        'order'     => 15,
+        'subtopics' => [
+            'Formation of partnership',
+            'Profit and loss account',
+            'Appropriation account',
+            'Partners current and capital accounts',
+            'Treatment of goodwill',
+            'Admission/retirement of a partner',
+            'Dissolution of partnership',
+            'Conversion of a partnership to a company',
+        ],
+        'objectives' => [
+            'Determine instruments of partnership formation',
+            'Categorize all accounts necessary for partnership',
+            'Determine effects of admission and retirement of a partner',
+            'Prepare revaluation account',
+            'Identify accounts required for dissolution and conversion to a company',
+            'Determine partners share of profits or losses',
+        ],
+    ],
+    [
+        'name'      => 'Introduction to Company Accounts',
+        'order'     => 16,
+        'subtopics' => [
+            'Formation and classification of companies',
+            'Issue of shares and debentures',
+            'Final accounts of companies',
+            'Interpretation of accounts using ratios',
+            'Distinction between capital and revenue reserves',
+        ],
+        'objectives' => [
+            'Differentiate between types of companies',
+            'Identify processes and procedures of recording issue of shares and debentures',
+            'Compute elements of final accounts of companies',
+            'Interpret accounts for decision making using ratios such as current, acid test and stock turnover',
+        ],
+    ],
+    [
+        'name'      => 'Public Sector Accounting',
+        'order'     => 17,
+        'subtopics' => [
+            'Comparison of cash and accrual basis of accounting',
+            'Sources of government revenue',
+            'Capital and recurrent expenditure',
+            'Consolidated revenue fund',
+            'Statement of assets and liabilities',
+            'Responsibilities and powers of: Accountant General, Auditor General, Minister of Finance, Treasurer of local government',
+            'Instruments of financial regulation',
+        ],
+        'objectives' => [
+            'Differentiate between public sector accounting and private sector accounting',
+            'Identify sources of government revenue',
+            'Differentiate between capital and recurrent expenditure',
+            'Calculate consolidated revenue fund and determine values of assets and liabilities',
+            'Analyse duties of Accountant General, Auditor General, Minister of Finance and Treasurer of local government',
+            'Distinguish elements of control in government accounting procedures (virement, warrant, votes, authority to incur expenditure, budget, due process certificate)',
+        ],
+    ],
+    [
+        'name'      => 'Information Technology in Accounting',
+        'order'     => 18,
+        'subtopics' => [
+            'Manual and computerized accounting processing system',
+            'Processes involved in data processing',
+            'Computer hardware and software',
+            'Advantages and disadvantages of manual and computerized accounting processing system',
+        ],
+        'objectives' => [
+            'Relate and differentiate between manual and computerized accounting processing system',
+            'Identify processes involved in data processing',
+            'Relate different components of the computer',
+            'Identify advantages and disadvantages of manual and computerized accounting processing system',
+        ],
+    ],
+],
         ];
 
         foreach ($syllabus as $subjectId => $topics) {
-            // Clear existing topics for this subject before seeding
-            DB::table('topics')->where('subject_id', $subjectId)->delete();
 
-            foreach ($topics as $topic) {
-                DB::table('topics')->insert([
-                    'subject_id'  => $subjectId,
-                    'name'        => $topic['name'],
-                    'order'       => $topic['order'],
-                    'subtopics'   => json_encode($topic['subtopics']),
-                    'objectives'  => json_encode($topic['objectives']),
-                    'created_at'  => $now,
-                    'updated_at'  => $now,
-                ]);
+            if ($replaceMode) {
+                DB::table('topics')->where('subject_id', $subjectId)->delete();
             }
 
-            $count = count($topics);
-            echo "Seeded {$count} topics for subject_id {$subjectId}\n";
+            foreach ($topics as $topic) {
+                $payload = [
+                    'subject_id' => $subjectId,
+                    'name'       => $topic['name'],
+                    'order'      => $topic['order'],
+                    'subtopics'  => $j($topic['subtopics'] ?? []),
+                    'objectives' => $j($topic['objectives'] ?? []),
+                    'updated_at' => $now,
+                    'created_at' => $now,
+                ];
+
+                if ($replaceMode) {
+                    DB::table('topics')->insert($payload);
+                } else {
+                    DB::table('topics')->updateOrInsert(
+                        ['subject_id' => $subjectId, 'order' => $topic['order']],
+                        $payload
+                    );
+                }
+            }
+
+            echo "Seeded " . count($topics) . " topics for subject_id {$subjectId}\n";
         }
 
-        echo "\nDone! English, Economics, Government, Geography and Commerce topics seeded.\n";
+        echo "\nDone! Seeded Literature (7), History (10), Accounting (14).\n";
     }
 }

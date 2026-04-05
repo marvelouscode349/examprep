@@ -75,26 +75,23 @@
       <p class="text-m" style="font-size:.85rem;margin:0">The app tracks every topic and tells you exactly where to focus. No more guessing what to study.</p>
     </div>
     <div class="feat-card">
-      <div style="width:48px;height:48px;background:var(--green-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-wifi-off" style="color:var(--green);font-size:1.3rem"></i></div>
-      <h5 class="fd" style="font-size:1rem;margin-bottom:6px">Works Offline</h5>
-      <p class="text-m" style="font-size:.85rem;margin:0">No internet? No problem. Questions cached on your phone. Save your data.</p>
-    </div>
+  <div style="width:48px;height:48px;background:var(--green-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+    <i class="bi bi-journal-text" style="color:var(--green);font-size:1.3rem"></i>
+  </div>
+
+  <h5 class="fd" style="font-size:1rem;margin-bottom:6px">AI Topic Notes (JAMB Syllabus)</h5>
+
+  <p class="text-m" style="font-size:.85rem;margin:0">
+    Get AI-generated notes that follow JAMB topic objectives — with past question samples and smart hints to help you answer fast.
+  </p>
+</div>
     <div class="feat-card">
       <div style="width:48px;height:48px;background:var(--orange-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="bi bi-bar-chart-fill" style="color:var(--orange);font-size:1.3rem"></i></div>
       <h5 class="fd" style="font-size:1rem;margin-bottom:6px">Mock Exams</h5>
       <p class="text-m" style="font-size:.85rem;margin:0">Simulate real JAMB with timed full mock exams and get your estimated score out of 400.</p>
     </div>
     <div class="sec-title mt-4">Pricing</div>
-    <div class="price-card mb-3">
-      <div class="d-flex justify-content-between align-items-start mb-3">
-        <div><div class="price-amt">₦0</div><div style="color:var(--text2);font-size:.8rem">Forever Free</div></div>
-        <span class="bdg-plan">Free</span>
-      </div>
-      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>10 questions/day</div>
-      <div class="price-feat"><i class="bi bi-check-circle-fill"></i>3 AI explanations/day</div>
-      <div class="price-feat"><i class="bi bi-x-circle" style="color:var(--text2)"></i>Mock exams</div>
-      <button class="btn-o mt-2" onclick="go('s-reg')">Start Free</button>
-    </div>
+    
     <div class="price-card mb-3">
   <div class="d-flex justify-content-between align-items-start mb-3">
     <div><div class="price-amt">₦400</div><div style="color:var(--text2);font-size:.8rem">per week</div></div>
@@ -103,7 +100,7 @@
   <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Unlimited questions & AI</div>
   <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Full mock exams</div>
   <div class="price-feat"><i class="bi bi-check-circle-fill"></i>Perfect for intense weekly preparations</div>
-  <button class="btn-o mt-2" onclick="go('s-reg')">Get weekly Access</button>
+  <button class="btn-o mt-2" onclick="go('s-reg')">Get Weekly Access</button>
 </div>
     <div class="price-card popular mb-3">
       <div class="pop-badge">Most Popular</div>
@@ -148,20 +145,9 @@
       </div>
       <p style="font-size:.83rem;color:var(--text2);margin:0">"Weak area detection kept telling me to focus on Trig and I did. My Maths score jumped 30 marks!"</p>
     </div>
-    <div class="testi-card">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <div class="d-flex align-items-center gap-2">
-          <div style="width:36px;height:36px;background:var(--blue-dim);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center"><i class="bi bi-person-fill" style="color:var(--blue2);font-size:.9rem"></i></div>
-          <div><div style="font-weight:600;font-size:.9rem">Chidi Nwosu</div><div style="font-size:.72rem;color:var(--text2)">Anambra State</div></div>
-        </div>
-        <span class="score-bdg">165 → 251</span>
-      </div>
-      <p style="font-size:.83rem;color:var(--text2);margin:0">"Used it offline during power cuts. Practiced 2000+ questions in 6 weeks. Best ₦1,499 I ever spent."</p>
-    </div>
+   
     <div class="sec-title mt-4">FAQ</div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Is it really free to start?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes, completely free. No card needed. 10 questions/day and 3 AI explanations free forever.</div></div>
     <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>How does AI explanation work?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">When you answer wrong, our AI explains in simple English why you were wrong and what the right concept is.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Does it work without internet?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes. Questions are cached on your phone when you first open with internet. Practice offline anytime.</div></div>
     <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>How do I pay?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">We use Paystack — Nigeria's most trusted payment platform. Pay with debit card, bank transfer or USSD.</div></div>
     <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>Which exams are covered?</span><i class="bi bi-chevron-down"></i></div><div class="faq-a">JAMB UTME, WAEC. All major subjects covered.</div></div>
     <button class="btn-p mt-4 mb-4" onclick="go('s-reg')">Create Free Account</button>
@@ -686,7 +672,6 @@
   <div class="pp">
     <div class="card-d2 mb-4 text-center">
       <span class="bdg-plan">Current: Free Plan</span>
-      <p class="text-m mt-2 mb-0" style="font-size:.82rem">10 questions/day • 3 AI explanations/day</p>
     </div>
 
     <!-- Weekend Plan -->
