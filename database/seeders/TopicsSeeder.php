@@ -24,1023 +24,623 @@ class TopicsSeeder extends Seeder
 
         $syllabus = [
 
-            // ================================================================
-            // LITERATURE IN ENGLISH (subject_id: 7)
-            // ================================================================
-            7 => [
-                [
-                    'name'  => 'Drama',
-                    'order' => 1,
-                    'subtopics' => [
-                        'Types: Tragedy, Comedy, Tragicomedy, Melodrama, Farce, Opera, etc.',
-                        'Dramatic Techniques: Characterization, Dialogue, Flashback, Mime, Costume, Music/Dance, Décor/Scenery, Acts/Scenes, Soliloquy/Aside, Figures of Speech, etc.',
-                        'Interpretation of Prescribed Texts: Theme, Plot, Socio-political context, Setting',
-                    ],
-                    'objectives' => [
-                        'Identify the various types of drama',
-                        'Analyse the contents of the various types of drama',
-                        'Compare and contrast the features of different dramatic types',
-                        'Demonstrate adequate knowledge of dramatic techniques used in each prescribed text',
-                        'Differentiate between styles of selected playwrights',
-                        'Determine the theme of any prescribed text',
-                        'Identify the plot of the play',
-                        'Apply the lessons of the play to everyday living',
-                        'Identify the spatial and temporal setting of the play',
-                    ],
-                ],
-                [
-                    'name'  => 'Prose',
-                    'order' => 2,
-                    'subtopics' => [
-                        'Types: Fiction (Novel, Novella/Novelette, Short story); Non-fiction (Biography, Autobiography, Memoir); Faction (combination of fact and fiction)',
-                        'Narrative Techniques/Devices: Point of view (Omniscient/Third Person, First Person); Characterisation (Round, Flat, Foil, Hero, Antihero, etc.); Language',
-                        'Textual Analysis: Theme, Plot, Setting (Temporal/Spatial), Socio-political context',
-                    ],
-                    'objectives' => [
-                        'Differentiate between types of prose',
-                        'Identify the category that each prescribed text belongs to',
-                        'Analyse the components of each type of prose',
-                        'Identify the narrative techniques used in each prescribed text',
-                        'Determine an author’s narrative style',
-                        'Distinguish between one type of character from another',
-                        'Determine the thematic pre-occupation of the author of the prescribed text',
-                        'Indicate the plot of the novel',
-                        'Identify the temporal and spatial setting of the novel',
-                        'Relate the prescribed text to real-life situations',
-                    ],
-                ],
-                [
-                    'name'  => 'Poetry',
-                    'order' => 3,
-                    'subtopics' => [
-                        'Types: Sonnet, Ode, Lyrics, Elegy, Ballad, Panegyric, Epic, Blank Verse, etc.',
-                        'Poetic devices: Structure, Imagery, Sound (Rhyme/Rhythm, Repetition, Pun, Onomatopoeia, etc.), Diction, Persona',
-                        'Appreciation: Thematic preoccupation, Socio-political relevance, Style',
-                    ],
-                    'objectives' => [
-                        'Identify different types of poetry',
-                        'Compare and contrast the features of different poetic types',
-                        'Determine the devices used by various poets',
-                        'Show how poetic devices are used for aesthetic effect in each poem',
-                        'Deduce the poet’s preoccupation from the poem',
-                        'Appraise poetry as an art with moral values',
-                        'Apply the lessons from the poem to real-life situations',
-                    ],
-                ],
-                [
-                    'name'  => 'General Literary Principles',
-                    'order' => 4,
-                    'subtopics' => [
-                        'Literary terms: foreshadowing, suspense, theatre, monologue, dialogue, soliloquy, symbolism, protagonist, antagonist, figures of speech, satire, stream of consciousness, etc.',
-                        'Literary principles: Direct imitation in play; Versification in drama and poetry; Narration of people’s experiences; Achievement of aesthetic value, etc.',
-                        'Relationship between literary terms and principles',
-                    ],
-                    'objectives' => [
-                        'Identify literary terms in drama, prose, and poetry',
-                        'Identify the general principles of Literature',
-                        'Differentiate between literary terms and principles',
-                        'Use literary terms appropriately',
-                    ],
-                ],
-                [
-                    'name'  => 'Literary Appreciation',
-                    'order' => 5,
-                    'subtopics' => [
-                        'Unseen passages/extracts from Drama, Prose, and Poetry',
-                    ],
-                    'objectives' => [
-                        'Determine literary devices used in a given passage/extract',
-                        'Provide a meaningful interpretation of the given passage/extract',
-                        'Relate the extract to true life experiences',
-                    ],
-                ],
-            ],
-
-            // ================================================================
-            // HISTORY (subject_id: 10)
-            // NOTE: Includes topics across all sections/parts you pasted.
-            // ================================================================
-            10 => [
-                // SECTION A: Nigeria Area up to 1800
-                [
-                    'name'  => 'Land and Peoples of the Nigeria Area (Up to 1800)',
-                    'order' => 1,
-                    'subtopics' => [
-                        'Geographical zones and the people',
-                        'The people’s relationship with the environment',
-                        'Relations and integration among peoples of different zones',
-                    ],
-                    'objectives' => [
-                        'Identify the geographical zones and the people within them',
-                        'Establish the relationship between the people and the environment',
-                        'Comprehend the relationships among the various peoples of the Nigeria area',
-                    ],
-                ],
-                [
-                    'name'  => 'Early Centres of Civilization',
-                    'order' => 2,
-                    'subtopics' => [
-                        'Nok, Daima, Ife, Benin, Igbo Ukwu and Iwo Eleru',
-                        'Monuments and shelter systems (Kuyambana, Durbi-ta-Kusheyi, city walls and palaces)',
-                    ],
-                    'objectives' => [
-                        'Examine the significance of various centres',
-                        'Establish the historical significance of monuments such as caves and rocky formations',
-                    ],
-                ],
-                [
-                    'name'  => 'Origin and Formation of States in the Nigeria Area',
-                    'order' => 3,
-                    'subtopics' => [
-                        'Central Sudan: Kanuri and Hausa states',
-                        'Niger-Benue Valley: Nupe, Jukun, Igala, Idoma, Tiv and Ebira',
-                        'Eastern Forest Belt: Igbo and Ibibio',
-                        'Western Forest Belt: Yoruba and Edo',
-                        'Coastal and Niger-Delta: Efik, Ijo, Itsekiri and Urhobo',
-                        'Factors influencing origin and migration',
-                        'Social and political organizations',
-                        'Inter-state relations, religion, war and peace',
-                    ],
-                    'objectives' => [
-                        'Relate groups of people occupying the various zones to their traditions of origin',
-                        'Determine inter-state relations',
-                        'Account for social and political organizations',
-                    ],
-                ],
-                [
-                    'name'  => 'Economic Activities and Growth of States',
-                    'order' => 4,
-                    'subtopics' => [
-                        'Agriculture: hunting, farming, fishing, animal husbandry and horticulture',
-                        'Industries: pottery, salt-making, iron-smelting, blacksmithing, leather-working, wood-carving, cloth-making, dyeing and food processing',
-                        'Trade and trade routes: local, regional, long distance (including trans-Sahara trade)',
-                        'Expansion of states',
-                    ],
-                    'objectives' => [
-                        'Identify various economic activities of the people',
-                        'Differentiate economic activities and specialties of the people',
-                        'Relate trade and other economic activities to growth of states',
-                    ],
-                ],
-                [
-                    'name'  => 'External Influences (Up to 1800)',
-                    'order' => 5,
-                    'subtopics' => [
-                        'North Africans/Arabs: introduction, spread and impact of Islam; trans-Saharan trade',
-                        'Europeans: early European trade with coastal states; trans-Atlantic slave trade (origin, organization and impact)',
-                    ],
-                    'objectives' => [
-                        'Assess impact of contact with North Africa on people and states south of the Sahara',
-                        'Examine impact of early European contact with coastal people',
-                        'Trace origin, organization and impact of trans-Atlantic slave trade',
-                    ],
-                ],
-
-                // SECTION B: Nigeria Area 1800 - 1900
-                [
-                    'name'  => 'The Sokoto Caliphate and Sokoto Jihad (1800–1900)',
-                    'order' => 6,
-                    'subtopics' => [
-                        'Causes and process of the jihad',
-                        'Establishment and administration of the caliphate and relations with neighbours',
-                        'Achievements and impact of the caliphate',
-                        'Collapse of the caliphate',
-                    ],
-                    'objectives' => [
-                        'Examine causes and processes of the Jihad',
-                        'Determine factors that led to rise of the caliphate',
-                        'Examine administrative set-up and relations with neighbours',
-                        'Examine impact of the caliphate',
-                        'Trace internal and external factors that led to collapse of the caliphate',
-                    ],
-                ],
-                [
-                    'name'  => 'Kanem-Borno (1800–1900)',
-                    'order' => 7,
-                    'subtopics' => [
-                        'Collapse of the Saifawa dynasty',
-                        'Borno under the Shehus',
-                        'Borno under Rabeh',
-                    ],
-                    'objectives' => [
-                        'Determine factors that led to collapse of the Saifawa dynasty',
-                        'Examine Borno under the administration of the Shehus',
-                        'Assess the role of Rabeh in Borno’s history',
-                    ],
-                ],
-                [
-                    'name'  => 'Yorubaland (1800–1900)',
-                    'order' => 8,
-                    'subtopics' => [
-                        'Fall of the Old Oyo Empire',
-                        'Yoruba wars and their impact',
-                        'Peace treaty of 1886 and its aftermath',
-                    ],
-                    'objectives' => [
-                        'Examine causes of the fall of Old Oyo',
-                        'Examine causes and effects of Yoruba wars',
-                        'Assess impact of the 1886 peace treaty',
-                    ],
-                ],
-                [
-                    'name'  => 'Benin (1800–1900)',
-                    'order' => 9,
-                    'subtopics' => [
-                        'Internal political development',
-                        'Relations with neighbours',
-                        'Relations with Europeans',
-                    ],
-                    'objectives' => [
-                        'Examine internal political development',
-                        'Examine relations with neighbours',
-                        'Assess relationship with Europeans',
-                    ],
-                ],
-                [
-                    'name'  => 'Nupe (1800–1900)',
-                    'order' => 10,
-                    'subtopics' => [
-                        'Internal political development',
-                        'Relations with neighbours',
-                    ],
-                    'objectives' => [
-                        'Examine Nupe internal political development',
-                        'Assess relations with neighbours',
-                    ],
-                ],
-                [
-                    'name'  => 'Igbo (1800–1900)',
-                    'order' => 11,
-                    'subtopics' => [
-                        'Internal political development',
-                        'Relations with neighbours',
-                    ],
-                    'objectives' => [
-                        'Examine Igbo internal political development',
-                        'Assess relations with neighbours',
-                    ],
-                ],
-                [
-                    'name'  => 'Efik (1800–1900)',
-                    'order' => 12,
-                    'subtopics' => [
-                        'Internal political development',
-                        'Relations with neighbours',
-                    ],
-                    'objectives' => [
-                        'Examine Efik internal political development',
-                        'Assess relations with neighbours',
-                    ],
-                ],
-                [
-                    'name'  => 'European Penetration and Impact (1800–1900)',
-                    'order' => 13,
-                    'subtopics' => [
-                        'European exploration of the interior',
-                        'Suppression of the trans-Atlantic slave trade',
-                        'Development of commodity trade and rise of consular authority',
-                        'Christian missionary activities',
-                        'Activities of trading companies',
-                        'Impact of European activities on coast and hinterland',
-                    ],
-                    'objectives' => [
-                        'Examine motive for exploration of the interior',
-                        'Give reasons for suppression of the trans-Atlantic slave trade',
-                        'Trace development of commodity trade',
-                        'Examine missionary and European activities in the area',
-                        'Assess activities of European trading companies',
-                        'Account for the rise of consular authority',
-                    ],
-                ],
-                [
-                    'name'  => 'British Conquest of the Nigeria Area (1800–1900)',
-                    'order' => 14,
-                    'subtopics' => [
-                        'Motives for the conquest',
-                        'Methods of the conquest and its result',
-                        'Resistance to and aftermath of the conquest',
-                    ],
-                    'objectives' => [
-                        'Determine reasons for the conquest and methods used',
-                        'Examine various resistance to the conquest',
-                        'Evaluate results and aftermath of the conquest',
-                    ],
-                ],
-
-                // SECTION C: Nigeria 1900 - 1960
-                [
-                    'name'  => 'Establishment of Colonial Rule up to 1914',
-                    'order' => 15,
-                    'subtopics' => [
-                        'Administration of the protectorates',
-                    ],
-                    'objectives' => [
-                        'Examine the administrative set-up of the protectorates',
-                    ],
-                ],
-                [
-                    'name'  => 'Amalgamation of 1914',
-                    'order' => 16,
-                    'subtopics' => [
-                        'Reasons',
-                        'Effects',
-                    ],
-                    'objectives' => [
-                        'Examine reasons for the 1914 Amalgamation and its effects',
-                    ],
-                ],
-                [
-                    'name'  => 'Colonial Administration After Amalgamation',
-                    'order' => 17,
-                    'subtopics' => [
-                        'Central administration: Legislative and Executive Councils',
-                        'Indirect Rule: reasons, working and effects',
-                        'Local administrative institutions: Native Authorities, Native Courts, Native Treasuries',
-                        'Resistance to colonial rule: Ekumeku Movement (1898–1911), Satiru uprising (1906), Egba Anti-tax agitation (1918), Aba Women Movement (1929)',
-                    ],
-                    'objectives' => [
-                        'Relate composition of the central administrative set-up to its consequences',
-                        'Identify reasons for introduction and workings of indirect rule system',
-                        'Assess effects of indirect rule',
-                        'Examine local administrative units',
-                        'Account for anti-colonial movements and their significance',
-                    ],
-                ],
-                [
-                    'name'  => 'The Colonial Economy',
-                    'order' => 18,
-                    'subtopics' => [
-                        'Currency, taxation and forced labour',
-                        'Infrastructure (transportation, post and telecommunication)',
-                        'Agriculture',
-                        'Mining',
-                        'Industry',
-                        'Commerce',
-                        'Banking',
-                    ],
-                    'objectives' => [
-                        'Examine nature of the economy as it affects taxation, currency, infrastructure, agriculture, mining, industry, commerce and banking',
-                    ],
-                ],
-                [
-                    'name'  => 'Social Development under Colonial Rule',
-                    'order' => 19,
-                    'subtopics' => [
-                        'Western education',
-                        'Urbanization/social integration',
-                        'Improvement unions',
-                        'Health institutions',
-                    ],
-                    'objectives' => [
-                        'Identify areas of social development under colonial rule',
-                        'Examine impact of urbanization on the people',
-                        'Examine level of social integration among the people',
-                    ],
-                ],
-                [
-                    'name'  => 'Nationalism, Constitutional Developments and Independence',
-                    'order' => 20,
-                    'subtopics' => [
-                        'Rise of nationalist movements',
-                        '1922 Clifford Constitution and rise of Nigeria’s first political party',
-                        'World War II and agitation for independence',
-                        'Richards Constitution of 1946',
-                        'Macpherson Constitution of 1951',
-                        'Party politics: regionalism, federalism and minorities agitations',
-                        'Lyttleton Constitution of 1954',
-                        'Constitutional conferences (Lagos 1957, London 1958)',
-                        'General elections of 1959 and independence in 1960',
-                    ],
-                    'objectives' => [
-                        'Trace emergence of nationalist movement',
-                        'Assess roles of different constitutions in constitutional development',
-                        'Examine effect of World War II on agitation for independence and constitutional developments',
-                        'Trace development of party politics and its impact on regionalism and minority question',
-                        'Examine impact of constitutional conferences',
-                        'Determine factors that aided attainment of independence',
-                    ],
-                ],
-
-                // SECTION D: Nigeria since Independence
-                [
-                    'name'  => 'Politics of the First Republic and Military Intervention',
-                    'order' => 21,
-                    'subtopics' => [
-                        'Struggle for control of the centre',
-                        'Issue of revenue allocation',
-                        'Minority question',
-                        '1962/63 census controversies',
-                        'Action Group crisis and General Elections of 1964/65',
-                        'Coup d’etat of January 1966 and Ironsi Regime',
-                    ],
-                    'objectives' => [
-                        'Give reasons behind struggle for control of the centre',
-                        'Account for controversies in revenue allocation',
-                        'Account for controversies generated by minority question and creation of states',
-                        'Account for controversies generated by 1962/63 census',
-                        'Examine problems created by Action Group crisis and General Elections of 1964/65',
-                        'Assess significance of military intervention and the Ironsi Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'The Civil War',
-                    'order' => 22,
-                    'subtopics' => [
-                        'Causes (remote and immediate)',
-                        'Course',
-                        'Effects',
-                    ],
-                    'objectives' => [
-                        'Examine remote and immediate causes of the war',
-                        'Examine the course',
-                        'Assess the effects of the war',
-                    ],
-                ],
-                [
-                    'name'  => 'The Gowon Regime',
-                    'order' => 23,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Assess the challenges and achievements of the Gowon Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'Murtala/Obasanjo Regime',
-                    'order' => 24,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Assess the challenges and achievements of the Murtala/Obasanjo Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'The Second Republic',
-                    'order' => 25,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Evaluate the challenges and achievements of the Second Republic',
-                    ],
-                ],
-                [
-                    'name'  => 'The Buhari Regime',
-                    'order' => 26,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Assess the challenges and achievements of the Buhari Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'The Babangida Regime',
-                    'order' => 27,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Assess the challenges and achievements of the Babangida Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'The Interim National Government (ING)',
-                    'order' => 28,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Examine the role and challenges of the Interim National Government',
-                    ],
-                ],
-                [
-                    'name'  => 'The Abacha Regime',
-                    'order' => 29,
-                    'subtopics' => [],
-                    'objectives' => [
-                        'Assess the challenges and achievements of the Abacha Regime',
-                    ],
-                ],
-                [
-                    'name'  => 'Nigeria in International Organizations',
-                    'order' => 30,
-                    'subtopics' => [
-                        'Economic Community of West African States (ECOWAS)',
-                        'African Union (AU)',
-                        'Commonwealth of Nations',
-                        'Organization of Petroleum Exporting Countries (OPEC)',
-                        'United Nations Organization',
-                        'Role of Nigeria in conflict resolution',
-                    ],
-                    'objectives' => [
-                        'Examine role of Nigeria in ECOWAS',
-                        'Assess role of Nigeria in the AU',
-                        'Evaluate role of Nigeria in the Commonwealth of Nations',
-                        'Assess role of Nigeria in OPEC',
-                        'Examine role of Nigeria in the UN',
-                        'Examine role of Nigeria in conflict resolutions in Congo, Chad, Liberia, Sierra Leone, Guinea and Sudan',
-                    ],
-                ],
-
-                // PART II: Africa and the Wider World since 1800
-                [
-                    'name'  => 'Islamic Reform Movements and State Building in West Africa',
-                    'order' => 31,
-                    'subtopics' => [
-                        'Relationship between Sokoto and other Jihads',
-                        'Jihads of Seku Ahmadu and Al-Hajj Umar',
-                        'Activities of Samori Toure',
-                    ],
-                    'objectives' => [
-                        'Establish relationship between Sokoto Jihad and other Jihads in West Africa',
-                        'Compare achievements of the Jihads of Seku Ahmadu and Al-Hajj Umar',
-                        'Examine activities of Samori Toure of the Madinka Empire',
-                    ],
-                ],
-                [
-                    'name'  => 'Sierra Leone, Liberia and Christian Missionary Activities in West Africa',
-                    'order' => 32,
-                    'subtopics' => [
-                        'Foundation of Sierra Leone and Liberia and spread of Christianity',
-                        'Activities and impact of Christian missionaries',
-                    ],
-                    'objectives' => [
-                        'Determine factors that led to founding of Sierra Leone and Liberia',
-                        'Examine importance of Sierra Leone and Liberia in the spread and impact of Christianity in West Africa',
-                        'Assess impact of Christian missionary activities in West Africa',
-                    ],
-                ],
-                [
-                    'name'  => 'Egypt under Mohammed Ali and Khedive Ismail',
-                    'order' => 33,
-                    'subtopics' => [
-                        'Rise of Mohammad Ali and his reforms',
-                        'Mohammad Ali’s relations with the Europeans',
-                        'Ismail’s fiscal policies',
-                        'British occupation of Egypt',
-                    ],
-                    'objectives' => [
-                        'Determine factors that aided Mohammad Ali’s rise and reforms',
-                        'Establish relationship between Mohammad Ali’s empire and Europeans',
-                        'Account for fiscal policies of Ismail',
-                        'Examine reasons for British occupation of Egypt',
-                    ],
-                ],
-                [
-                    'name'  => 'Mahdi and Mahdiyya Movement in Sudan',
-                    'order' => 34,
-                    'subtopics' => [
-                        'Causes',
-                        'Course',
-                        'Consequences',
-                    ],
-                    'objectives' => [
-                        'Examine causes, course and consequences of the Mahdiyya Movement in Sudan',
-                    ],
-                ],
-                [
-                    'name'  => 'Omani Empire',
-                    'order' => 35,
-                    'subtopics' => [
-                        'Rise of the Omani Empire',
-                        'Commercial and political relations with the coast and hinterland',
-                        'Relations with Europeans',
-                    ],
-                    'objectives' => [
-                        'Determine factors that led to rise of the Omani Empire',
-                        'Assess establishment of commercial and political relations between the Omani Empire, coast and hinterland',
-                        'Examine relationship between the Omani Empire and Europeans',
-                    ],
-                ],
-                [
-                    'name'  => 'Ethiopia in the 19th Century',
-                    'order' => 36,
-                    'subtopics' => [
-                        'Rise of Theodore II and attempt at unification of Ethiopia',
-                        'Menelik II and Ethiopian independence',
-                    ],
-                    'objectives' => [
-                        'Examine factors that led to rise of Theodore II',
-                        'Analyse strategies adopted to achieve Ethiopian unification',
-                        'Assess role of Menelik II in maintenance of Ethiopian independence',
-                    ],
-                ],
-                [
-                    'name'  => 'The Mfecane',
-                    'order' => 37,
-                    'subtopics' => [
-                        'Rise of the Zulu Nation',
-                        'Causes, course and consequences of the Mfecane',
-                    ],
-                    'objectives' => [
-                        'Trace events in Nguniland before the Mfecane',
-                        'Determine factors that led to rapid rise of Shaka',
-                        'Examine causes, course and consequences of the Mfecane',
-                    ],
-                ],
-                [
-                    'name'  => 'The Great Trek',
-                    'order' => 38,
-                    'subtopics' => [
-                        'Frontier wars',
-                        'British intervention in Boer-African relations',
-                        'Great Trek and its consequences',
-                    ],
-                    'objectives' => [
-                        'Determine factors that led to the frontier wars',
-                        'Account for British intervention in Boer-African relations',
-                        'Describe nature of the Great Trek',
-                        'Examine consequences of the Great Trek',
-                    ],
-                ],
-                [
-                    'name'  => 'New Imperialism and European Occupation of Africa',
-                    'order' => 39,
-                    'subtopics' => [
-                        'New Imperialism in Africa',
-                        'European scramble for Africa',
-                        'Berlin Conference',
-                        'Occupation and resistance by Africans',
-                    ],
-                    'objectives' => [
-                        'Assess causes of the New Imperialism',
-                        'Examine causes of the scramble',
-                        'Account for significance of the Berlin Conference',
-                        'Examine African resistance to occupation',
-                    ],
-                ],
-                [
-                    'name'  => 'Patterns of Colonial Rule in Africa',
-                    'order' => 40,
-                    'subtopics' => [
-                        'The British',
-                        'The French',
-                        'The Portuguese',
-                        'The Belgians',
-                    ],
-                    'objectives' => [
-                        'Examine and compare patterns of colonial rule by various European powers',
-                    ],
-                ],
-                [
-                    'name'  => 'Politics of Decolonization',
-                    'order' => 41,
-                    'subtopics' => [
-                        'Colonial policies and African discontent',
-                        'Impact of the two World Wars',
-                        'Nationalist activities and emergence of political parties and associations',
-                        'Strategies for attaining independence',
-                    ],
-                    'objectives' => [
-                        'Examine policies employed by colonial masters and magnitude of African discontent',
-                        'Assess impact of First and Second World Wars on African nationalism',
-                        'Determine strategies used in attainment of independence',
-                    ],
-                ],
-                [
-                    'name'  => 'Apartheid in South Africa',
-                    'order' => 42,
-                    'subtopics' => [
-                        'Origin of apartheid',
-                        'Rise of Afrikaner nationalism',
-                        'Enactment of apartheid laws',
-                        'Internal reaction and suppression of African nationalist movements',
-                        'External reaction: Frontline States, Commonwealth, OAU and UN',
-                        'Dismantling of apartheid',
-                        'Post-apartheid development',
-                    ],
-                    'objectives' => [
-                        'Trace origin of apartheid in South Africa',
-                        'Give reasons for rise of Afrikaner nationalism',
-                        'Evaluate apartheid laws',
-                        'Relate internal reactions to apartheid to African struggle for majority rule',
-                        'Relate contributions of African states and international organizations to fight against apartheid',
-                        'Identify steps taken towards dismantling apartheid',
-                        'Assess post-apartheid development in South Africa',
-                    ],
-                ],
-                [
-                    'name'  => 'Problems of Nation-building in Africa',
-                    'order' => 43,
-                    'subtopics' => [
-                        'Political and economic challenges and constraints',
-                        'Physical and environmental challenges',
-                        'Ethnic and religious pluralism',
-                        'Military intervention and political instability',
-                        'Neo-colonialism and under-development',
-                        'Boundary disputes and threat to African unity',
-                        'Civil wars and refugee problem',
-                    ],
-                    'objectives' => [
-                        'Examine political and economic problems faced in Africa',
-                        'Assess effects of natural disasters on Africa',
-                        'Determine role of ethnic and religious problems in Africa',
-                        'Examine role of the military in African politics',
-                        'Examine role of neo-colonialism in Africa',
-                        'Assess problems of boundary disputes',
-                        'Establish relationship between civil wars and refugee problems in Africa',
-                    ],
-                ],
-            ],
-
-            // ================================================================
-            // ACCOUNTING (subject_id: 14)
-            // ================================================================
-           // ================================================================
-// ACCOUNTING (subject_id: 14)
+        // ================================================================
+// CRK (subject_id: 9)
 // ================================================================
-14 => [
+9 => [
+
+    // =========================
+    // SECTION A (1–8)
+    // =========================
     [
-        'name'      => 'Nature and Significance of Accounting',
-        'order'     => 1,
+        'name'  => 'The Sovereignty of God',
+        'order' => 1,
         'subtopics' => [
-            'Development of accounting (including branches of accounting)',
-            'Objectives of bookkeeping and accounting',
-            'Users and characteristics of accounting information',
-            'Principles, concepts and conventions of accounting (nature, significance and application)',
-            'Role of accounting records and information',
+            'God as Creator and Controller of the Universe (Gen. 1–2; cf. Amos 9:5–6; Isa. 45:5–12; Ps. 19:1–6)',
         ],
         'objectives' => [
-            'Differentiate between bookkeeping and accounting',
-            'Use the historical background of bookkeeping and accounting for future development',
-            'Apply the right principles, concepts and conventions to solving accounting problems',
-            'Examine the role of accounting records and information in decision making',
-            'List branches of Accounting such as Cost Accounting, Management Accounting, Auditing, Financial Accounting and Taxation',
+            'Define the term “sovereignty”',
+            "Analyse God's process of creation",
+            'Interpret the sequence of creation',
+            "Identify man's role in advancing God's purpose in creation",
         ],
     ],
     [
-        'name'      => 'Principles of Double Entry',
-        'order'     => 2,
+        'name'  => 'The Covenant',
+        'order' => 2,
         'subtopics' => [
-            'Functions of source documents',
-            'Books of original entry',
-            'Accounting equation',
-            'The ledger and its classifications',
-            'Trial balance',
-            'Types and treatment of errors and uses of suspense account',
+            "The flood and God's covenant with Noah (Gen. 6:1–22; 7:1–24; 9:1–17)",
+            "God's covenant with Abraham (Gen. 11:31–32; 12:1–9; 17:1–21; 21:1–13; 25:19–26)",
+            "God's covenant with Israel (Ex. 19–20; 24:1–11; cf. Deut. 28:1–19)",
+            "The New Covenant (Jer. 31:31–34; Ezek. 36:25–28)",
         ],
         'objectives' => [
-            'Relate the various source documents to their uses',
-            'Relate source documents to the various books of original entry',
-            'Determine the effect of changes in elements of accounting equation',
-            'Identify the role of double entry and use it to post transactions into various divisions of the ledger',
-            'Balance off ledger accounts',
-            'Extract a trial balance from balances and determine its uses',
-            'Identify various types of errors and their necessary corrections',
-            'Create a suspense account',
+            'Explain the concept of covenant',
+            'Examine the importance and implication of the covenants',
+            "Distinguish between God's covenants with Noah, Abraham and Israel",
+            'Distinguish between the old and the new covenants',
         ],
     ],
     [
-        'name'      => 'Ethics in Accounting',
-        'order'     => 3,
+        'name'  => 'Leadership Qualities',
+        'order' => 3,
         'subtopics' => [
-            'Objectives',
-            'Qualities of an Accountant',
+            'Joseph (Gen. 37:1–28; 41:1–57; 45:1–15)',
+            'Moses (Ex. 1–5; 12; Num. 13:1–20; 14:1–19)',
+            'Joshua (Num. 13:21–33; 27:15–23; Josh. 1:1–15; 6; 7; 24:1–31)',
+            'Judges: Deborah (Judg. 4:1–24), Gideon (Judg. 6:11–40), Samson (Judg. 13:1–7, 21–25; 16:4–31)',
         ],
         'objectives' => [
-            'Use ethics in preparing and presenting Accounting Reports',
-            'List qualities of an Accountant such as honesty, integrity, transparency, accountability and fairness',
+            'Examine the circumstances that gave rise to the leadership of Joseph, Moses, Joshua and the Judges',
+            'Identify the major talents of these leaders',
+            "Assess God's role in the works of these leaders",
+            'Analyse the achievements of these leaders',
         ],
     ],
     [
-        'name'      => 'Cashbook',
-        'order'     => 4,
+        'name'  => 'Divine Providence, Guidance and Protection',
+        'order' => 4,
         'subtopics' => [
-            'Columnar cashbooks',
-            'Discounts',
-            'Petty cashbook and the imprest system',
+            'Guidance and protection (Gen. 24:1–61; 28:10–22; 46:1–7; Ex. 13:17–22; 14:1–4, 10–31)',
+            'Provision (Gen. 21:14–18; 22:1–14; Ex. 16:1–21; 17:1–7; Num. 20:1–13; 1 Kings 17:1–16)',
         ],
         'objectives' => [
-            'Determine the cash float',
-            'Differentiate between two and three columnar cashbooks and how transactions are recorded in them',
-            'Differentiate between trade and cash discounts',
-            'Examine the effects of trade and cash discounts in the books of accounts',
-            'Identify various petty cash expenses',
+            'Identify different ways by which God guided and protected Israel',
+            'Specify how God provided for His people',
+            'Identify different occasions when God provided for Israel',
         ],
     ],
     [
-        'name'      => 'Bank Transactions and Reconciliation Statements',
-        'order'     => 5,
+        'name'  => 'Parental Responsibility',
+        'order' => 5,
         'subtopics' => [
-            'Instrument of bank transactions',
-            'E-banking system',
-            'Causes of discrepancies between cashbook and bank statement',
-            'Bank reconciliation statement',
+            'Eli and Samuel (1 Sam. 2:11–36; 3:2–18; 4:10–22; 8:1–5)',
+            'David (2 Sam. 13; 15:1–29; 18; 19:1–8)',
+            'Asa (1 Kings 15:9–15; 22:41–44; cf. Deut. 6:4–9; Prov. 4:1–10; 13:1,24; 22:6; 23:13–14; 31:10–31)',
         ],
         'objectives' => [
-            'Identify bank documents such as cheques, pay-in-slips, credit and debit cards and their uses',
-            'Assess the impact of automated credit system, credit transfers, interbank transfers and direct debit on cash balances',
-            'List factors that cause discrepancies between balances of cashbook and bank statements',
-            'Prepare adjusted cashbook balance',
-            'Prepare bank reconciliation statements',
+            'Determine the extent to which Eli, Samuel and David were responsible for the shortcomings of their children',
+            'Describe how Asa pleased God',
         ],
     ],
     [
-        'name'      => 'The Final Accounts of a Sole Trader',
-        'order'     => 6,
+        'name'  => 'Obedience and Disobedience',
+        'order' => 6,
         'subtopics' => [
-            'Income statement (Trading and profit and loss account)',
-            'Statement of financial position (Balance sheet)',
-            'Adjustments: provision for bad and doubtful debt',
-            'Adjustments: provision for discounts',
-            'Adjustments: depreciation (straight-line and reducing balance methods)',
-            'Adjustments: accruals and prepayments',
+            'Obedience and rewards: Abraham (Gen. 22:1–19), Hebrew midwives (Ex. 1:8–22), David (1 Sam. 30:1–20)',
+            'Disobedience and consequences: Adam (Gen. 2:15–25; 3), collection of manna (Ex. 16:22–30), golden calf (Ex. 32), Moses (Num. 20:7–12; Deut. 34:1–6), Saul (1 Sam. 10:1–16; 15:1–25; 16:14–23; 31:1–13)',
         ],
         'objectives' => [
-            'Determine the cost of sales, gross profit and net profit of a sole trader',
-            'Identify fixed assets, current assets, long-term liabilities, current liabilities and proprietor’s capital',
-            'Compute adjustable items on related expenditure and income in the profit and loss account',
-            'Relate adjustable items and their corresponding disclosure in the statement of financial position',
-            'Differentiate between bad debts and provision for bad and doubtful debts',
+            'Determine why Abraham, the Hebrew midwives and David obeyed God',
+            'Identify the rewards for obedience',
+            'Compare the disobedience of Adam, the people of Israel, Moses and Saul',
+            'Indicate the reasons for their disobedience',
+            'Identify the consequences of disobedience',
         ],
     ],
     [
-        'name'      => 'Stock Valuation',
-        'order'     => 7,
+        'name'  => "A Man After God's Own Heart",
+        'order' => 7,
         'subtopics' => [
-            'Methods of cost determination using FIFO, LIFO and simple average',
-            'Advantages and disadvantages of the methods',
-            'Importance of stock valuation',
+            "Early life of David (1 Sam. 16:1–13; 17; 18:17–30; 22:1–5; 24:1–23; 2 Sam. 2:1–7; 3:1–39)",
+            "David's submission to the will of God (1 Sam. 26:1–25; 2 Sam. 12:15–25)",
+            "David's repentance and forgiveness (2 Sam. 11; 12:1–15; cf. Ps. 51)",
         ],
         'objectives' => [
-            'Determine cost of materials issued to production or cost of goods sold using FIFO, LIFO and simple average',
-            'Calculate closing stock of materials or finished goods using FIFO, LIFO and simple average',
-            'Compare advantages and disadvantages of each method of stock valuation',
-            'Determine effects of stock valuation on trading, profits and cost of goods sold',
+            "Identify David's childhood experiences",
+            "Specify how David submitted to the will of God",
+            "Examine situations that led to David's sin and repentance",
+            'Identify why God forgave David',
         ],
     ],
     [
-        'name'      => 'Control Accounts and Self-balancing Ledgers',
-        'order'     => 8,
+        'name'  => 'Decision-Making',
+        'order' => 8,
         'subtopics' => [
-            'Importance of control accounts',
-            'Purchases ledger control account',
-            'Sales ledger control account',
+            'Reliance on a medium (1 Sam. 28:3–25)',
+            'Wisdom of Solomon (1 Kings 3:3–28; 4:29–34; 5:1–12; 8:1–53)',
+            "Unwise policies of Solomon and Rehoboam (1 Kings 9:15–23; 11:1–40; 12:1–20)",
         ],
         'objectives' => [
-            'Determine the importance of control accounts in a business enterprise',
-            'Differentiate between sales ledger control account and purchases ledger control account',
-            'Identify the individual elements of control accounts',
-            'Prepare the control accounts',
+            "Identify the source of Solomon's wisdom",
+            'Compare ways used by Saul and Solomon in making decisions',
+            "Analyse decisions made by Saul, Solomon and Rehoboam",
+            "Assess consequences of Solomon and Rehoboam's unwise decisions",
+        ],
+    ],
+
+    // =========================
+    // SECTION B (9–17)
+    // =========================
+    [
+        'name'  => 'Greed and Its Effects',
+        'order' => 9,
+        'subtopics' => [
+            'Ahab (1 Kings 21:1–29; 22:1–40; 2 Kings 9:30–37)',
+            'Gehazi (2 Kings 5:1–27; cf. Josh. 7)',
+        ],
+        'objectives' => [
+            'Deduce the meaning of greed',
+            "Distinguish between Ahab and Gehazi's greed",
+            "Analyse consequences of Ahab and Gehazi's greed",
         ],
     ],
     [
-        'name'      => 'Incomplete Records and Single Entry',
-        'order'     => 9,
+        'name'  => 'The Supremacy of God (Mount Carmel)',
+        'order' => 10,
         'subtopics' => [
-            'Conversion of single entry to double entry',
-            'Determination of missing figures',
-            'Preparation of final accounts from incomplete records',
+            'Religious tension and the power of God on Mount Carmel (1 Kings 16:29–34; 17:1–7; 18; 19:1–18)',
         ],
         'objectives' => [
-            'Determine proprietor’s capital using statement of affairs',
-            'Determine the amount of sales, purchases, cash balances, debtors, creditors and expenses by converting single entry to double entry',
-            'Use accounting equations and gross profit percentage to determine gross profit or cost of sales',
+            'Assess religious situation in Israel at the time of Elijah and Ahab',
+            'Identify the characters involved in the contest on Mount Carmel',
+            "Differentiate between God's power and that of Baal",
         ],
     ],
     [
-        'name'      => 'Manufacturing Accounts',
-        'order'     => 10,
+        'name'  => 'Religious Reforms in Judah',
+        'order' => 11,
         'subtopics' => [
-            'Cost classification',
-            'Cost apportionment',
-            'Preparation of manufacturing account',
+            'Cleansing of the Temple (2 Kings 22)',
+            'Renewal of the Covenant (2 Kings 23:1–30)',
         ],
         'objectives' => [
-            'Calculate prime cost, production overhead, production cost and total cost',
-            'Determine the basis of apportionment into production, administration, selling and distribution',
+            "Analyse Josiah's religious reforms",
+            'Determine reasons for renewal of the covenant',
+            'Assess significance of the reforms',
         ],
     ],
     [
-        'name'      => 'Accounts of Not-For-Profit-Making Organizations',
-        'order'     => 11,
+        'name'  => 'Concern for Judah',
+        'order' => 12,
         'subtopics' => [
-            'Objectives of Not-For-Profit-Making organizations',
-            'Receipts and payments account',
-            'Income and expenditure account',
-            'Statement of financial position (Balance sheet)',
+            'Fall of Jerusalem (2 Kings 24; 25:1–17)',
+            'Condition of Judah (Neh. 1:1–11; Ezra 1:1–11)',
+            'Response to the state of Judah (Neh. 2; 4:1–23; Ezra 3:4; 5; 6; 7)',
         ],
         'objectives' => [
-            'Distinguish between features of Not-for-profit-making organizations',
-            'Determine subscription income, subscription in arrears and in advance',
-            'Compute cash balances and accumulated funds, surplus and deficit for the period from all sources',
-            'Prepare receipts and payments account',
-            'Prepare income and expenditure account',
-            'Prepare statement of financial position',
+            'Identify reasons for the fall of Jerusalem',
+            'Examine condition of Judah during the exile',
+            "Analyse people's response to Nehemiah and Ezra to rebuild Jerusalem",
+            "Distinguish between Nehemiah and Ezra's responses to opposition",
         ],
     ],
     [
-        'name'      => 'Departmental Accounts',
-        'order'     => 12,
+        'name'  => 'Faith, Courage and Protection',
+        'order' => 13,
         'subtopics' => [
-            'Objectives',
-            'Apportionment of expenses',
-            'Departmental trading and profit and loss account',
+            'Daniel, Shadrach, Meshach and Abednego (Dan. 1; 3:1–30; 6:1–28)',
         ],
         'objectives' => [
-            'Identify reasons for departmental accounts',
-            'Determine expenses associated with individual departments',
-            'Compute departmental profits or losses',
+            'Analyse the stories of Shadrach, Meshach, Abednego and Daniel',
+            'Determine occasions in which the four men demonstrated faith',
+            'Analyse effects of their faith on the Babylonians',
         ],
     ],
     [
-        'name'      => 'Branch Accounts',
-        'order'     => 13,
+        'name'  => "God's Message to Nineveh",
+        'order' => 14,
         'subtopics' => [
-            'Objectives',
-            'Branch accounts in the head office books',
-            'Head office account',
-            'Reconciliation of branch and head office books',
+            "Jonah and his message (Jonah 1–4)",
         ],
         'objectives' => [
-            'Determine the reasons for branch accounts',
-            'Calculate profits and losses from branches',
-            'Determine the sources of differences and reconcile them',
+            "Analyse the story of Jonah's call",
+            "Describe consequences of Jonah's disobedience",
+            "Assess effect of Jonah's message on the Ninevites",
+            'Emulate the example of the Ninevites',
         ],
     ],
     [
-        'name'      => 'Joint Venture Accounts',
-        'order'     => 14,
+        'name'  => 'Social Justice, True Religion and Divine Love',
+        'order' => 15,
         'subtopics' => [
-            'Objectives',
-            'Personal accounts of venturers',
-            'Memorandum joint venture accounts',
+            'Social justice and true religion (Amos 2:6–8; 4; 5:1–25; 6:1–14; 7:10–17; 8:4–14; cf. James 1:19–27)',
+            'Divine love and human response (Hosea 1–4; 6:1–11; 14)',
         ],
         'objectives' => [
-            'Identify the objectives of Joint Venture',
-            'Determine the profit or loss of the Joint Venture',
-            'Determine the profit or loss of each venture',
+            'Determine what true religion is',
+            "Identify the ills that led to the call for social justice in Amos' time",
+            "Examine the condition in Israel during Hosea's time",
+            "Analyse Hosea's portrayal of divine love and human response",
         ],
     ],
     [
-        'name'      => 'Partnership Accounts',
-        'order'     => 15,
+        'name'  => 'Holiness and Divine Call',
+        'order' => 16,
         'subtopics' => [
-            'Formation of partnership',
-            'Profit and loss account',
-            'Appropriation account',
-            'Partners current and capital accounts',
-            'Treatment of goodwill',
-            'Admission/retirement of a partner',
-            'Dissolution of partnership',
-            'Conversion of a partnership to a company',
+            'Calls of Isaiah, Ezekiel and Jeremiah (Isa. 6:1–13; Ezek. 2; 3:1–11; Jer. 1:4–10)',
         ],
         'objectives' => [
-            'Determine instruments of partnership formation',
-            'Categorize all accounts necessary for partnership',
-            'Determine effects of admission and retirement of a partner',
-            'Prepare revaluation account',
-            'Identify accounts required for dissolution and conversion to a company',
-            'Determine partners share of profits or losses',
+            'Distinguish the calls of Isaiah, Ezekiel and Jeremiah',
+            'Compare assignments given to these prophets',
+            'Determine the need for God’s people to be holy',
         ],
     ],
     [
-        'name'      => 'Introduction to Company Accounts',
-        'order'     => 16,
+        'name'  => 'Punishment and Hope',
+        'order' => 17,
         'subtopics' => [
-            'Formation and classification of companies',
-            'Issue of shares and debentures',
-            'Final accounts of companies',
-            'Interpretation of accounts using ratios',
-            'Distinction between capital and revenue reserves',
+            'Punishment and hope (Jer. 3:11–18; 32:26–35; Ezek. 18; 37:1–14; Isa. 61)',
         ],
         'objectives' => [
-            'Differentiate between types of companies',
-            'Identify processes and procedures of recording issue of shares and debentures',
-            'Compute elements of final accounts of companies',
-            'Interpret accounts for decision making using ratios such as current, acid test and stock turnover',
+            'Describe situations that led to the punishment of Israel',
+            'Identify conditions for hope',
+            'Determine the benefits of restoration',
+        ],
+    ],
+
+    // =========================
+    // SECTION C (18–36)
+    // =========================
+    [
+        'name'  => 'The Birth and Early Life of Jesus',
+        'order' => 18,
+        'subtopics' => [
+            'John, the forerunner of Jesus (Luke 1:5–25, 57–66; 3:1–20; 7:18–35; Mark 1:1–8; 6:14–29; Matt. 3:1–12; 11:2–19; John 1:6–8, 19–37; 3:22–36)',
+            'Birth and boyhood of Jesus (Matt. 1:18–25; 2; Luke 1:26–45; 2)',
+        ],
+        'objectives' => [
+            'Compare stories of the births of John and Jesus',
+            'Assess importance of John as the forerunner of Jesus',
+            'Describe the boyhood of Jesus',
         ],
     ],
     [
-        'name'      => 'Public Sector Accounting',
-        'order'     => 17,
+        'name'  => 'The Baptism and Temptation of Jesus',
+        'order' => 19,
         'subtopics' => [
-            'Comparison of cash and accrual basis of accounting',
-            'Sources of government revenue',
-            'Capital and recurrent expenditure',
-            'Consolidated revenue fund',
-            'Statement of assets and liabilities',
-            'Responsibilities and powers of: Accountant General, Auditor General, Minister of Finance, Treasurer of local government',
-            'Instruments of financial regulation',
+            'Baptism and temptation (Matt. 3:13–17; 4:1–11; Mark 1:9–13; Luke 3:21–22; 4:1–13)',
         ],
         'objectives' => [
-            'Differentiate between public sector accounting and private sector accounting',
-            'Identify sources of government revenue',
-            'Differentiate between capital and recurrent expenditure',
-            'Calculate consolidated revenue fund and determine values of assets and liabilities',
-            'Analyse duties of Accountant General, Auditor General, Minister of Finance and Treasurer of local government',
-            'Distinguish elements of control in government accounting procedures (virement, warrant, votes, authority to incur expenditure, budget, due process certificate)',
+            'Determine meaning and purpose of the baptism of Jesus',
+            'Enumerate the temptations of Jesus',
+            'Examine significance of the temptations of Jesus',
         ],
     ],
     [
-        'name'      => 'Information Technology in Accounting',
-        'order'     => 18,
+        'name'  => 'Discipleship',
+        'order' => 20,
         'subtopics' => [
-            'Manual and computerized accounting processing system',
-            'Processes involved in data processing',
-            'Computer hardware and software',
-            'Advantages and disadvantages of manual and computerized accounting processing system',
+            'Call of the first disciples (Matt. 4:18–22; 9:9–13; Mark 1:16–20; 2:13–17; Luke 5:1–11, 27–32)',
+            'Demands of discipleship (Matt. 8:19–22; Luke 9:57–63; 14:25–33)',
         ],
         'objectives' => [
-            'Relate and differentiate between manual and computerized accounting processing system',
-            'Identify processes involved in data processing',
-            'Relate different components of the computer',
-            'Identify advantages and disadvantages of manual and computerized accounting processing system',
+            'Identify the first disciples called by Jesus',
+            'Determine the demands of discipleship',
         ],
     ],
-],
-        ];
+    [
+        'name'  => 'Miracles of Jesus',
+        'order' => 21,
+        'subtopics' => [
+            'Nature miracles: stilling the storm; feeding the five thousand; walking on the sea; changing water to wine',
+            'Resuscitation: Lazarus; Jairus’ daughter; widow’s son at Nain',
+            'Healing: lepers; paralytic at the pool; centurion’s servant; the blind',
+            'Exorcism: Gerasene demoniac; epileptic boy',
+        ],
+        'objectives' => [
+            'Classify different miracles of Jesus',
+            'Indicate the occasion of each miracle',
+            'Examine significance of each miracle',
+        ],
+    ],
+    [
+        'name'  => 'Parables of Jesus',
+        'order' => 22,
+        'subtopics' => [
+            'Parables of the Kingdom: sower; weeds; drag-net; wedding garment',
+            'Parables about love of God',
+            'Parables about love for one another',
+            'Parable about wealth: rich fool',
+            'Parables on prayer',
+        ],
+        'objectives' => [
+            'Classify different parables of Jesus',
+            'Identify the occasion of each parable',
+            'Interpret meaning of each parable',
+            'Give reasons why Jesus taught in parables',
+        ],
+    ],
+    [
+        'name'  => 'Sermon on the Mount',
+        'order' => 23,
+        'subtopics' => [
+            'Teachings on the Mount (Matt. 5–6; Luke 6:17–26)',
+        ],
+        'objectives' => [
+            'Analyse the teachings on the Mount',
+            'Identify the demands of the Kingdom',
+            'Determine consequences of worldly possessions',
+            'Associate rewards for obedience with the Sermon on the Mount',
+        ],
+    ],
+    [
+        'name'  => 'Mission of the Disciples',
+        'order' => 24,
+        'subtopics' => [
+            'Mission of the twelve (Matt. 10:5–15; Mark 6:7–13; Luke 9:1–16)',
+            'Mission of the seventy (Luke 10:1–24)',
+        ],
+        'objectives' => [
+            'Distinguish between the mission of the twelve and the seventy',
+            'Specify instructions to the disciples',
+            'Assess outcomes of the missions',
+        ],
+    ],
+    [
+        'name'  => 'The Great Confession',
+        'order' => 25,
+        'subtopics' => [
+            'Peter’s confession (Matt. 16:13–20; Mark 8:27–30; Luke 9:18–22)',
+        ],
+        'objectives' => [
+            'Analyse the confession by Peter',
+            'Identify the occasion of the Great Confession',
+            'Examine significance of the Great Confession',
+        ],
+    ],
+    [
+        'name'  => 'The Transfiguration',
+        'order' => 26,
+        'subtopics' => [
+            'Transfiguration (Matt. 17:1–13; Mark 9:2–13; Luke 9:28–36)',
+        ],
+        'objectives' => [
+            'Trace events leading to the Transfiguration',
+            'Determine significance of the Transfiguration to the disciples',
+            'Identify personalities involved in the Transfiguration',
+        ],
+    ],
+    [
+        'name'  => 'Triumphal Entry and Cleansing of the Temple',
+        'order' => 27,
+        'subtopics' => [
+            'Triumphal entry and temple cleansing (Matt. 21:1–17; Mark 11:1–19; Luke 19:29–48)',
+        ],
+        'objectives' => [
+            'Recount the Triumphal Entry and cleansing of the Temple',
+            'Determine significance of both events',
+            'Examine how temple cleansing caused hostility towards Jesus',
+        ],
+    ],
+    [
+        'name'  => 'The Last Supper',
+        'order' => 28,
+        'subtopics' => [
+            'The Last Supper (Matt. 26:17–30; Mark 14:10–26; Luke 22:7–23; John 13:2–38)',
+        ],
+        'objectives' => [
+            'Trace the story of the Last Supper',
+            'Evaluate significance of the Last Supper',
+        ],
+    ],
+    [
+        'name'  => 'Trials, Crucifixion and Burial of Jesus',
+        'order' => 29,
+        'subtopics' => [
+            'Trials before the High Priest; Pilate; Herod',
+            'Crucifixion and burial (Matt. 27:32–66; Luke 23:26–56; Mark 15:16–47; John 19:17–42)',
+        ],
+        'objectives' => [
+            'Analyse different trials of Jesus',
+            'Describe crucifixion and burial of Jesus',
+            'Deduce lessons of the death of Jesus',
+        ],
+    ],
+    [
+        'name'  => 'Resurrection, Appearances and Ascension of Jesus',
+        'order' => 30,
+        'subtopics' => [
+            'Resurrection and ascension (Matt. 28:1–20; Mark 16:1–20; Luke 24:1–53; John 20:1–31; Acts 1:1–11)',
+        ],
+        'objectives' => [
+            'Trace stories of resurrection, appearances and ascension',
+            'Compare personalities involved',
+            'Analyse relevance of resurrection and ascension',
+        ],
+    ],
+    [
+        'name'  => "Jesus' Teachings about Himself",
+        'order' => 31,
+        'subtopics' => [
+            'Bread of Life and Living Water',
+            'Light of the World',
+            'Door, Lamb and Good Shepherd',
+            'True Vine',
+            'Resurrection',
+        ],
+        'objectives' => [
+            "Analyse Jesus' different teachings about Himself",
+            "Deduce reasons for Jesus' teachings about Himself",
+            'Interpret meanings of the symbols used by Jesus',
+        ],
+    ],
+    [
+        'name'  => 'Love',
+        'order' => 32,
+        'subtopics' => [
+            "God's love for man (John 3:16–18)",
+            'Love for one another (John 13:34–35; 15:12–13; cf. 1 John 4:7–21)',
+        ],
+        'objectives' => [
+            "Describe God's love for man",
+            'Specify ways to love one another',
+            'Evaluate significance of love',
+        ],
+    ],
+    [
+        'name'  => 'Fellowship in the Early Church',
+        'order' => 33,
+        'subtopics' => [
+            'Communal living (Acts 1:15–26; 2:41–47; 4:32–37)',
+            'Problems and solutions (Acts 5:1–11; 6:1–6)',
+        ],
+        'objectives' => [
+            'Identify reasons for communal living',
+            'Identify problems of communal living and solutions',
+            'Examine how communal living helped the growth of the Early Church',
+        ],
+    ],
+    [
+        'name'  => 'The Holy Spirit and the Mission of the Church',
+        'order' => 34,
+        'subtopics' => [
+            'Pentecost (Acts 1:8; 2:1–41)',
+            'Mission of the Church (Acts 8:4–40)',
+        ],
+        'objectives' => [
+            'Trace the story of Pentecost',
+            'Examine significance of the Pentecost experience',
+            'Analyse the mission of the Church',
+        ],
+    ],
+    [
+        'name'  => 'Opposition to the Gospel Message',
+        'order' => 35,
+        'subtopics' => [
+            'Arrest and imprisonment of Peter and John (Acts 3; 4:1–22; 5:17–42; 12:1–24)',
+            'Martyrdom of Stephen (Acts 6:8–15; 7)',
+            'Persecution by Saul (Acts 8:1–3; 9:1–2; cf. Gal. 1:11–17)',
+            'Persecution of Paul (Acts 16:11–40; 19:23–41; 21:27–36; cf. 2 Cor. 11:23–33)',
+        ],
+        'objectives' => [
+            'Trace story of arrest and imprisonment of Peter and John',
+            'Trace events leading to martyrdom of Stephen',
+            'Describe role of Saul in persecution of the Church',
+            'Evaluate importance of persecution to growth of the Church',
+            'Account for persecution of Paul',
+        ],
+    ],
+    [
+        'name'  => 'Mission to the Gentiles',
+        'order' => 36,
+        'subtopics' => [
+            'Conversion of Saul (Acts 9:1–30; 22:4–21; 26:9–18)',
+            'Conversion of Cornelius (Acts 10:1–48)',
+            'Commissioning and mission of Paul (Acts 13; 14:1–20)',
+            'Council of Jerusalem (Acts 15:1–35; Gal. 2:1–21)',
+        ],
+        'objectives' => [
+            'Compare conversions of Saul and Cornelius',
+            'Analyse commissioning and mission of Paul',
+            'Examine main decisions at the Council of Jerusalem',
+            'Identify personalities involved at the Council of Jerusalem',
+            'Examine relevance of the main decisions at the Council of Jerusalem',
+            "Assess Paul's role in the mission to the Gentiles",
+        ],
+    ],
+
+    // =========================
+    // SECTION D (37–52)
+    // =========================
+    [
+        'name'  => 'Justification by Faith',
+        'order' => 37,
+        'subtopics' => [
+            'Justification by faith (Rom. 3:21–24; 5:1–11; 10:1–13)',
+        ],
+        'objectives' => [
+            'Interpret the phrase “justification by faith”',
+            'Identify the basic conditions for justification',
+            'Determine the fruits of justification',
+        ],
+    ],
+    [
+        'name'  => 'The Law and Grace',
+        'order' => 38,
+        'subtopics' => [
+            'Law and grace (Rom. 4:13–25; 5:18–21; Gal. 3:10–14, 19–29)',
+        ],
+        'objectives' => [
+            'Examine purpose and significance of law and grace',
+            'Identify the place of the Law among the Jews',
+        ],
+    ],
+    [
+        'name'  => 'New Life in Christ',
+        'order' => 39,
+        'subtopics' => [
+            'New life in Christ (Rom. 6:1–4, 12–14; Col. 3:1–17; Gal. 5:16–26; 2 Cor. 5:16–19; 1 Thess. 4:1–8; Rom. 12)',
+        ],
+        'objectives' => [
+            'Describe characteristics of the old life',
+            'Analyse the new life in Christ',
+            'Identify conditions of the new life',
+            'Examine benefits of the new life',
+        ],
+    ],
+    [
+        'name'  => 'Christians as Joint Heirs with Christ',
+        'order' => 40,
+        'subtopics' => [
+            'Joint heirs with Christ (Gal. 3:23–29; 4:1–7)',
+        ],
+        'objectives' => [
+            'Describe how Christians are joint heirs with Christ',
+            'Indicate benefits of being joint heirs with Christ',
+        ],
+    ],
+    [
+        'name'  => 'Humility',
+        'order' => 41,
+        'subtopics' => [
+            'Humility (Phil. 2:1–11; 1 Pet. 5:5–11)',
+        ],
+        'objectives' => [
+            'Determine the meaning of humility',
+            'Identify requirements of humility',
+            'Identify rewards of humility',
+        ],
+    ],
+    [
+        'name'  => 'Forgiveness',
+        'order' => 42,
+        'subtopics' => [
+            'Forgiveness (Philemon; 2 Cor. 2:5–11)',
+        ],
+        'objectives' => [
+            "Analyse Paul's teaching on forgiveness",
+            'Assess benefits of forgiveness',
+        ],
+    ],
+    [
+        'name'  => 'Spiritual Gifts',
+        'order' => 43,
+        'subtopics' => [
+            'Spiritual gifts (1 Cor. 12; Rom. 12:3–18; 1 Cor. 14)',
+        ],
+        'objectives' => [
+            'Identify different spiritual gifts',
+            'Analyse benefits of spiritual gifts to the individual and the church',
+        ],
+    ],
+    [
+        'name'  => 'Christian Giving',
+        'order' => 44,
+        'subtopics' => [
+            'Christian giving (Phil. 4:14–20; 2 Cor. 8:1–5; 9; cf. Matt. 6:2–4)',
+        ],
+        'objectives' => [
+            'Interpret the concept of Christian giving',
+            'Relate teachings of Paul on Christian giving',
+            'Identify importance of Christian giving',
+        ],
+    ],
+    [
+        'name'  => 'Civic Responsibility',
+        'order' => 45,
+        'subtopics' => [
+            'Civic responsibility (Rom. 13; 1 Tim. 2:1–4)',
+        ],
+        'objectives' => [
+            'Identify need for obedience to authority',
+            'Specify requirements of good'
+         
+
+        ]
+    ]
+]
+];
 
         foreach ($syllabus as $subjectId => $topics) {
 
