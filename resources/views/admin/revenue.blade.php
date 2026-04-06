@@ -14,9 +14,9 @@
         <div class="info-box bg-primary">
             <span class="info-box-icon"><i class="fas fa-calendar-alt"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">Monthly Plans</span>
-                <span class="info-box-number">{{ $planStats['monthly'] }}</span>
-                <span class="progress-description">₦{{ number_format($planStats['monthly'] * 1499) }} total</span>
+                <span class="info-box-text">weekly Plans</span>
+                <span class="info-box-number">{{ $planStats['weekly'] }}</span>
+                <span class="progress-description">₦{{ number_format($planStats['weekly'] * 1499) }} total</span>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
         <div class="info-box bg-success">
             <span class="info-box-icon"><i class="fas fa-calendar-check"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">Quarterly Plans</span>
-                <span class="info-box-number">{{ $planStats['quarterly'] }}</span>
-                <span class="progress-description">₦{{ number_format($planStats['quarterly'] * 3999) }} total</span>
+                <span class="info-box-text">monthly Plans</span>
+                <span class="info-box-number">{{ $planStats['monthly'] }}</span>
+                <span class="progress-description">₦{{ number_format($planStats['monthly'] * 3999) }} total</span>
             </div>
         </div>
     </div>
