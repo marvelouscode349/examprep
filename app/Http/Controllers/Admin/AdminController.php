@@ -18,22 +18,48 @@ class AdminController extends Controller
     // ============================================================
    public function dashboard()
 {
-    $stats = [
-        'total_users'     => User::count(),
-        'premium_users'   => User::where('subscription_status', 'active')->count(),
-        'free_users'      => User::where(function($q) {
+   // ===============================
+// REVENUE CALCULATIONS
+// ===============================
+
+// Total revenue (sum of all successful subscriptions)
+$totalRevenue = Subscription::where('status', 'active')
+    ->sum('amount');
+
+// Revenue for the current month
+$revenueThisMonth = Subscription::where('status', 'active')
+    ->whereMonth('created_at', now()->month)
+    ->whereYear('created_at', now()->year)
+    ->sum('amount');
+
+// (Optional) Revenue today
+$revenueToday = Subscription::where('status', 'active')
+    ->whereDate('created_at', today())
+    ->sum('amount');
+
+// Add to stats array:
+$stats = [
+    'total_users'     => User::count(),
+    'premium_users'   => User::where('subscription_status', 'active')->count(),
+
+    'free_users'      => User::where(function($q) {
                                 $q->where('subscription_status', '!=', 'active')
                                   ->orWhereNull('subscription_status');
                             })->count(),
-        'total_questions' => Question::count(),
-        'total_sessions'  => QuizSession::where('status', 'completed')->count(),
-        'sessions_today'  => QuizSession::where('status', 'completed')
-                                ->whereDate('completed_at', today())->count(),
-        'new_users_today' => User::whereDate('created_at', today())->count(),
-        'new_users_week'  => User::where('created_at', '>=', now()->subDays(7))->count(),
-        'total_revenue'   => 0, // wire up when Paystack is done
-        'revenue_month'   => 0, // wire up when Paystack is done
-    ];
+
+    'total_questions' => Question::count(),
+    'total_sessions'  => QuizSession::where('status', 'completed')->count(),
+    'sessions_today'  => QuizSession::where('status', 'completed')
+                                    ->whereDate('completed_at', today())->count(),
+
+    'new_users_today' => User::whereDate('created_at', today())->count(),
+    'new_users_week'  => User::where('created_at', '>=', now()->subDays(7))->count(),
+
+    // ✅ REVENUE WIRED HERE
+    'total_revenue'   => $totalRevenue,
+    'revenue_month'   => $revenueThisMonth,
+    'revenue_today'   => $revenueToday,
+];
 
     $planBreakdown = collect([]);
 
