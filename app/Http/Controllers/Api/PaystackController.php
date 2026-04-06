@@ -40,35 +40,44 @@ class PaystackController extends Controller
     // VALIDATE DISCOUNT CODE
     // POST /api/subscription/validate-code
     // ============================================================
-    public function validateCode(Request $request)
-    {
-        $request->validate([
-            'code' => 'required|string',
-            'plan' => 'required|in:weekly,monthly,yearly',        ]);
+  public function validateCode(Request $request)
+{
+    $request->validate([
+        'code' => 'required|string',
+        'plan' => 'required|in:weekly,monthly,yearly',
+    ]);
 
-        $code = DiscountCode::where('code', strtoupper($request->code))->first();
-
-        if (!$code || !$code->isValid()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid or expired discount code.',
-            ], 422);
-        }
-
-        $originalPrice  = $this->naira[$request->plan];
-        $discountAmount = round($originalPrice * $code->percent / 100);
-        $finalPrice     = $originalPrice - $discountAmount;
-
+    // 🚫 Block discount for weekly plan
+    if ($request->plan === 'weekly') {
         return response()->json([
-            'success'         => true,
-            'code'            => $code->code,
-            'percent'         => $code->percent,
-            'original_price'  => $originalPrice,
-            'discount_amount' => $discountAmount,
-            'final_price'     => $finalPrice,
-            'message'         => "🎉 {$code->percent}% discount applied! You save ₦" . number_format($discountAmount),
-        ]);
+            'success' => false,
+            'message' => 'Discount codes are only valid for monthly and yearly plans.',
+        ], 422);
     }
+
+    $code = DiscountCode::where('code', strtoupper($request->code))->first();
+
+    if (!$code || !$code->isValid()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid or expired discount code.',
+        ], 422);
+    }
+
+    $originalPrice  = $this->naira[$request->plan];
+    $discountAmount = round($originalPrice * $code->percent / 100);
+    $finalPrice     = $originalPrice - $discountAmount;
+
+    return response()->json([
+        'success'         => true,
+        'code'            => $code->code,
+        'percent'         => $code->percent,
+        'original_price'  => $originalPrice,
+        'discount_amount' => $discountAmount,
+        'final_price'     => $finalPrice,
+        'message'         => "🎉 {$code->percent}% discount applied! You save ₦" . number_format($discountAmount),
+    ]);
+}
 
     // ============================================================
     // INITIALIZE PAYMENT
