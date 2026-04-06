@@ -85,7 +85,7 @@ $stats = [
 
 public function revenue()
 {
-    // ✅ 1. All subscription records (paginated for table display)
+    // ✅ 1. Paginated subscription list for the revenue table
     $subscriptions = Subscription::with('user')
         ->latest()
         ->paginate(20);
@@ -105,10 +105,20 @@ public function revenue()
         ];
     });
 
-    // ✅ 3. Revenue by plan type
-    $planStats = Subscription::selectRaw('plan, SUM(amount) as total')
+    // ✅ 3. Revenue by plan type (ensure all keys exist)
+    $planStatsRaw = Subscription::selectRaw('plan, SUM(amount) as total')
         ->groupBy('plan')
         ->pluck('total', 'plan');
+
+    // ✅ Plans you support
+    $planDefaults = [
+        'weekend' => 0,
+        'monthly' => 0,
+        'yearly'  => 0,
+    ];
+
+    // ✅ Merge so missing indexes never break the Blade view
+    $planStats = collect($planDefaults)->merge($planStatsRaw);
 
     return view('admin.revenue', compact('subscriptions', 'monthlyRevenue', 'planStats'));
 }
