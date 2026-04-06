@@ -76,8 +76,8 @@
                     <td><span class="badge badge-primary">{{ ucfirst($sub->plan) }}</span></td>
                     <td>
                         ₦{{ number_format(match($sub->plan) {
-                            'monthly'   => 1499,
-                            'quarterly' => 3999,
+                            'weekly'   => 400,
+                            'monthly' => 1499,
                             'yearly'    => 14999,
                             default     => 0
                         }) }}
