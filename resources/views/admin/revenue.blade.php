@@ -95,7 +95,6 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer">{{ $subscriptions->links() }}</div>
 </div>
 
 @stop
