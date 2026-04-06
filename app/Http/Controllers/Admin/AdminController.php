@@ -112,7 +112,7 @@ public function revenue()
 
     // ✅ Plans you support
     $planDefaults = [
-        'weekend' => 0,
+        'weekly' => 0,
         'monthly' => 0,
         'yearly'  => 0,
     ];
