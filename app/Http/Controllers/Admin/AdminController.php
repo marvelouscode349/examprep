@@ -85,14 +85,30 @@ $stats = [
 
 public function revenue()
 {
-    // Placeholder until Paystack subscriptions table is built
-    $subscriptions  = collect([]);
-    $monthlyRevenue = collect(range(5, 0))->map(fn($i) => [
-        'month'   => now()->subMonths($i)->format('M Y'),
-        'revenue' => 0,
-        'subs'    => 0,
-    ]);
-    $planStats = ['monthly' => 0, 'quarterly' => 0, 'yearly' => 0];
+    // ✅ 1. All subscription records (paginated for table display)
+    $subscriptions = Subscription::with('user')
+        ->latest()
+        ->paginate(20);
+
+    // ✅ 2. Monthly revenue chart (last 6 months)
+    $monthlyRevenue = collect(range(5, 0))->map(function ($i) {
+        $date = now()->subMonths($i);
+
+        return [
+            'month'   => $date->format('M Y'),
+            'revenue' => Subscription::whereYear('created_at', $date->year)
+                                     ->whereMonth('created_at', $date->month)
+                                     ->sum('amount'),
+            'subs'    => Subscription::whereYear('created_at', $date->year)
+                                     ->whereMonth('created_at', $date->month)
+                                     ->count(),
+        ];
+    });
+
+    // ✅ 3. Revenue by plan type
+    $planStats = Subscription::selectRaw('plan, SUM(amount) as total')
+        ->groupBy('plan')
+        ->pluck('total', 'plan');
 
     return view('admin.revenue', compact('subscriptions', 'monthlyRevenue', 'planStats'));
 }
