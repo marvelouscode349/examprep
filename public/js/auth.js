@@ -38,6 +38,7 @@ async function handleRegister() {
   const year     = document.getElementById('reg-year').value;
   const state    = document.getElementById('reg-state').value;
   const btn      = document.getElementById('reg-btn');
+  const referral = document.getElementById('reg-referral')?.value?.trim() || null;
 
   document.getElementById('reg-error').style.display = 'none';
 
@@ -55,7 +56,7 @@ async function handleRegister() {
     const res = await fetch(`${API.BASE_URL}/auth/register`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body:    JSON.stringify({ name, email, phone: phone || null, password, target_exam: exam, stream, exam_year: year, state })
+      body:    JSON.stringify({ name, email, phone: phone || null, password, target_exam: exam, stream, exam_year: year, state, referral_code: referral })
     });
 
     const data = await res.json();
