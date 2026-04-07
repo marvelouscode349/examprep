@@ -231,7 +231,7 @@ public function revenue()
     // ============================================================
     public function marketers()
     {
-        $marketers = Marketer::all();
+        $marketers = Marketer::latest()->get();
         return view('admin.marketers', compact('marketers'));
     }
 
