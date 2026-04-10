@@ -176,8 +176,6 @@ async function initializePayment() {
       throw new Error(data.message || `Initialize failed (${res.status})`);
     }
 
-    localStorage.setItem('pending_payment_ref', data.reference);
-
     if (payBtn) payBtn.textContent = 'Awaiting payment...';
 
     // ✅ Paystack popup
@@ -260,10 +258,6 @@ async function verifyPayment(reference) {
     }
 
  if (data.success) {
-  localStorage.removeItem('pending_payment_ref');
-const wrap = document.getElementById('verify-payment-wrap');
-if (wrap) wrap.style.display = 'none';
-
   const localUser = API.user() || {};
   const mergedUser = {
     ...localUser,
@@ -323,75 +317,4 @@ function handleFreeLimit(limit) {
     toast('AI explanation limit reached — upgrade for unlimited AI', 'error');
   }
   setTimeout(() => go('s-sub'), 1500);
-}
-
-
-async function manualVerify() {
-  const ref = localStorage.getItem('pending_payment_ref');
-  if (!ref) {
-    toast('No pending payment found. Contact support on WhatsApp.', 'error');
-    return;
-  }
-
-  const btn = document.querySelector('#verify-payment-wrap button');
-  if (btn) {
-    btn.disabled    = true;
-    btn.textContent = 'Checking...';
-  }
-
-  try {
-    const res = await fetch(`${API.BASE_URL}/subscription/verify`, {
-      method:  'POST',
-      headers: API.headers(),
-      body:    JSON.stringify({ reference: ref }),
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      // Update session
-      const existingToken = API.token();
-      const localUser     = API.user() || {};
-      const mergedUser    = {
-        ...localUser,
-        ...(data.user || {}),
-        subscription_status:     'active',
-        subscription_expires_at: data.expires_at,
-      };
-
-      API.saveSession(existingToken, mergedUser);
-      updateProfileUI(mergedUser);
-
-      // Hide banner
-      const wrap = document.getElementById('verify-payment-wrap');
-      if (wrap) wrap.style.display = 'none';
-
-      // Clear pending ref
-      localStorage.removeItem('pending_payment_ref');
-
-      // Show success
-      const planActiveEl = document.getElementById('paysuc-plan-name');
-      const planExpiryEl = document.getElementById('paysuc-expiry');
-      if (planActiveEl) planActiveEl.textContent = `${data.plan_label} Active`;
-      if (planExpiryEl) planExpiryEl.textContent = `Expires ${data.expires_at}`;
-
-      modal('m-paysuc');
-      confetti();
-      await loadDashboard();
-
-    } else {
-      toast(data.message || 'Payment not confirmed yet. If you paid, contact support.', 'error');
-      if (btn) {
-        btn.disabled    = false;
-        btn.textContent = 'Verify Now';
-      }
-    }
-
-  } catch (err) {
-    toast('Network error. Try again.', 'error');
-    if (btn) {
-      btn.disabled    = false;
-      btn.textContent = 'Verify Now';
-    }
-  }
 }

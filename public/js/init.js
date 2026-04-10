@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Show dashboard immediately with loading state
   updateProfileUI(savedUser);
   go('s-dash');
-  checkPendingPayment();
 
   // Validate token with server
   try {
@@ -59,16 +58,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([loadSubjects(), loadDashboard()]);
   }
 });
-
-function checkPendingPayment() {
-  const user = API.user();
-  const ref = localStorage.getItem('pending_payment_ref');
-
-  if (
-    user?.subscription_status !== 'active' &&
-    ref
-  ) {
-    const el = document.getElementById('verify-payment-wrap');
-    if (el) el.style.display = 'block';
-  }
-}
