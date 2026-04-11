@@ -85,6 +85,12 @@ class PaystackController extends Controller
         }
     }
 
+    \Log::info('Activating from Paystack data', [
+    'reference' => $reference,
+    'user_id' => $userId,
+    'plan' => $plan,
+]);
+
     return true;
 }
 
@@ -339,6 +345,11 @@ class PaystackController extends Controller
 
         $event = $request->input('event');
         $data  = $request->input('data');
+
+        \Log::info('Paystack webhook received', [
+    'event' => $event,
+    'reference' => $data['reference'] ?? null,
+]);
 
         // Handle charge success from webhook too
       if ($event === 'charge.success') {
