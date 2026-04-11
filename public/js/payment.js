@@ -190,7 +190,7 @@ try {
     ref: data.reference,
     currency: 'NGN',
     label: data.plan_label,
-    channels: ['card', 'bank', 'ussd', 'qr', 'bank_transfer'],
+    channels: ['card', 'bank', 'bank_transfer'],
 
     callback: function (response) {
       toast('Payment received! Activating your plan...', 'info');

@@ -18,6 +18,76 @@ class PaystackController extends Controller
         $this->secretKey = config('services.paystack.secret_key');
     }
 
+    private function activateFromPaystackData(array $data): bool
+{
+    $reference = $data['reference'] ?? null;
+    if (!$reference) {
+        return false;
+    }
+
+    // Prevent double activation
+    if (Subscription::where('paystack_reference', $reference)->exists()) {
+        return true;
+    }
+
+    $meta = $data['metadata'] ?? [];
+
+    $userId          = $meta['user_id'] ?? null;
+    $plan            = $meta['plan'] ?? 'monthly';
+    $discountCode    = $meta['discount_code'] ?? null;
+    $discountPercent = $meta['discount_percent'] ?? 0;
+    $finalAmount     = $meta['final_amount'] ?? $this->naira[$plan];
+
+    if (!$userId) {
+        return false;
+    }
+
+    $user = \App\Models\User::find($userId);
+    if (!$user) {
+        return false;
+    }
+
+    $expiresAt = match ($plan) {
+        'weekly' => now()->addWeek(),
+        'yearly' => now()->addYear(),
+        default  => now()->addMonth(),
+    };
+
+    Subscription::create([
+        'user_id'            => $user->id,
+        'plan'               => $plan,
+        'paystack_reference' => $reference,
+        'status'             => 'active',
+        'amount'             => $finalAmount,
+        'discount_percent'   => $discountPercent,
+        'discount_code'      => $discountCode,
+        'referral_code'      => $user->referred_by,
+        'starts_at'          => now(),
+        'expires_at'         => $expiresAt,
+    ]);
+
+    $user->update([
+        'subscription_status'     => 'active',
+        'subscription_expires_at' => $expiresAt,
+    ]);
+
+    if ($discountCode) {
+        DiscountCode::where('code', $discountCode)->increment('used_count');
+    }
+
+    if ($user->referred_by) {
+        $marketer = Marketer::where('referral_code', $user->referred_by)->first();
+        if ($marketer) {
+            $commission = round($finalAmount * 0.20);
+            $marketer->increment('total_referrals');
+            $marketer->increment('total_commission', $commission);
+            $marketer->increment('pending_commission', $commission);
+        }
+    }
+
+    return true;
+}
+
     private array $prices = [
         'weekly'   => 40000,    // ₦400
         'monthly'   => 149900,   // ₦1,499
@@ -161,109 +231,71 @@ class PaystackController extends Controller
     // VERIFY PAYMENT
     // POST /api/subscription/verify
     // ============================================================
-    public function verify(Request $request)
-    {
-        $request->validate([
-            'reference' => 'required|string',
-        ]);
+  public function verify(Request $request)
+{
+    $request->validate([
+        'reference' => 'required|string',
+    ]);
 
-        $user      = $request->user();
-        $reference = $request->reference;
+    $reference = $request->reference;
 
-        // Check not already processed
-        $already = Subscription::where('paystack_reference', $reference)->first();
-        if ($already) {
-            return response()->json([
-                'success'    => true,
-                'message'    => 'Already activated!',
-                'plan'       => $already->plan,
-                'expires_at' => $already->expires_at->toDateString(),
-            ]);
-        }
-
-        // Verify with Paystack
-        $response = Http::withToken($this->secretKey)
-            ->get("https://api.paystack.co/transaction/verify/{$reference}");
-
-        if (!$response->successful()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Payment verification failed. Contact support.',
-            ], 400);
-        }
-
-        $data   = $response->json('data');
-        $status = $data['status'] ?? '';
-
-        if ($status !== 'success') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Payment was not completed. If you paid, contact support.',
-            ], 400);
-        }
-
-        // Extract metadata
-        $meta            = $data['metadata']  ?? [];
-        $plan            = $meta['plan']             ?? 'monthly';
-        $discountCode    = $meta['discount_code']    ?? null;
-        $discountPercent = $meta['discount_percent'] ?? 0;
-        $finalAmount     = $meta['final_amount']     ?? $this->naira[$plan];
-
-        // Calculate expiry based on plan
-        $expiresAt = match($plan) {
-            'weekly' => now()->addWeek(), // weekly
-            'yearly'  => now()->addYear(),
-            default   => now()->addMonth(),                   // monthly
-        };
-
-        // Save subscription
-        Subscription::create([
-            'user_id'            => $user->id,
-            'plan'               => $plan,
-            'paystack_reference' => $reference,
-            'status'             => 'active',
-            'amount'             => $finalAmount,
-            'discount_percent'   => $discountPercent,
-            'discount_code'      => $discountCode,
-            'referral_code'      => $user->referred_by,
-            'starts_at'          => now(),
-            'expires_at'         => $expiresAt,
-        ]);
-
-        // Activate user subscription
-        $user->update([
-            'subscription_status'     => 'active',
-            'subscription_expires_at' => $expiresAt,
-        ]);
-
-        // Increment discount code usage
-        if ($discountCode) {
-            DiscountCode::where('code', $discountCode)->increment('used_count');
-        }
-
-        // Credit marketer commission
-        if ($user->referred_by) {
-            $marketer = Marketer::where('referral_code', $user->referred_by)->first();
-            if ($marketer) {
-                $commission = round($finalAmount * 0.20);
-                $marketer->increment('total_referrals');
-                $marketer->increment('total_commission', $commission);
-                $marketer->increment('pending_commission', $commission);
-            }
-        }
-
+    // ✅ Idempotency guard
+    $already = Subscription::where('paystack_reference', $reference)->first();
+    if ($already) {
         return response()->json([
             'success'    => true,
-            'message'    => 'Subscription activated!',
-            'plan'       => $plan,
-            'plan_label' => $this->planLabels[$plan],
-            'expires_at' => $expiresAt->toDateString(),
-            'user'       => [
-                'subscription_status'     => 'active',
-                'subscription_expires_at' => $expiresAt->toDateString(),
-            ],
+            'message'    => 'Already activated!',
+            'plan'       => $already->plan,
+            'expires_at' => $already->expires_at->toDateString(),
         ]);
     }
+
+    // ✅ Verify with Paystack
+    $response = Http::withToken($this->secretKey)
+        ->get("https://api.paystack.co/transaction/verify/{$reference}");
+
+    if (!$response->successful()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Payment verification failed. Contact support.',
+        ], 400);
+    }
+
+    $data   = $response->json('data');
+    $status = $data['status'] ?? '';
+
+    if ($status !== 'success') {
+        return response()->json([
+            'success' => false,
+            'message' => 'Payment was not completed. If you paid, contact support.',
+        ], 400);
+    }
+
+    //  ONE LINE does the activation
+    $activated = $this->activateFromPaystackData($data);
+
+    if (!$activated) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Could not activate subscription.',
+        ], 400);
+    }
+
+    // ✅ Get fresh subscription to respond with
+    $subscription = Subscription::where('paystack_reference', $reference)->first();
+
+    return response()->json([
+        'success'    => true,
+        'message'    => 'Subscription activated!',
+        'plan'       => $subscription->plan,
+        'plan_label' => $this->planLabels[$subscription->plan],
+        'expires_at' => $subscription->expires_at->toDateString(),
+        'user'       => [
+            'subscription_status'     => 'active',
+            'subscription_expires_at' => $subscription->expires_at->toDateString(),
+        ],
+    ]);
+}
 
     // ============================================================
     // SUBSCRIPTION STATUS
@@ -309,13 +341,9 @@ class PaystackController extends Controller
         $data  = $request->input('data');
 
         // Handle charge success from webhook too
-        if ($event === 'charge.success') {
-            $reference = $data['reference'] ?? null;
-            if ($reference) {
-                // Already handled by verify() — just log it
-                \Log::info("Paystack webhook: charge.success for {$reference}");
-            }
-        }
+      if ($event === 'charge.success') {
+          $this->activateFromPaystackData($data);
+}
 
         return response()->json(['message' => 'ok']);
     }
