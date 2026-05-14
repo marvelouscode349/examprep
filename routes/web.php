@@ -34,6 +34,10 @@ Route::get('/', function () {
     return file_get_contents(public_path('index.html'));
 });
 
+Route::get('/marvelous', function () {
+    return view('portfolio.index');
+});
+
 // Route::get('/{any}', function () {
 //     return file_get_contents(public_path('index.html'));
 // })->where('any', '^(?!api).*$');
