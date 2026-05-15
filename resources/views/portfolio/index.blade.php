@@ -1318,7 +1318,7 @@
     </section>
 
     <footer>
-        <div class="foot-l">© 2026 Marvelous Peter · Benin City, Nigeria · Available worldwide</div>
+        <div class="foot-l">© 2026 Marvelous Peter · Nigeria · Available worldwide</div>
         <div class="foot-r">
             <a href="https://rsjobhub.com" target="_blank">RSJobHub</a>
             <a href="https://myexamprep.online" target="_blank">ExamPrep</a>
