@@ -211,7 +211,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify
     <p class="hero-sub">Backend engineer who ships. I build <strong>AI-powered platforms</strong> that scale — from zero to 60K users, 15K question banks, and <strong>paying customers in 24 hours.</strong></p>
     <div class="hero-actions">
       <a href="#projects" class="btn-main">View my work</a>
-      <a href="mailto:marvelouxpeter90@gmail.com" class="btn-out">Get in touch</a>
+      <a href="mailto:marvelouspeter90@gmail.com" class="btn-out">Get in touch</a>
       <a href="/marvelous-cv.pdf" download class="btn-out">↓ Download CV</a>
     </div>
   </div>
@@ -250,6 +250,15 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify
     <h2>I build things that<br><em>actually work</em></h2>
     <div class="about-grid">
       <div class="about-text reveal">
+         <!-- YOUR PHOTO — replace your-photo.jpg with your actual filename -->
+  <img 
+    src="/images/peter-black-white.jpeg" 
+    alt="Marvelous Peter"
+    style="width:100%;max-width:280px;height:340px;object-fit:cover;object-position:top;border:1px solid var(--border2);filter:grayscale(15%);margin-bottom:2rem;display:block;transition:filter .3s"
+    onmouseover="this.style.filter='grayscale(0%)'"
+    onmouseout="this.style.filter='grayscale(25%)'"
+  >
+  <!-- END PHOTO -->
         <p>I'm a <strong>backend-heavy full stack developer</strong> based in Nigeria with 4 years of experience turning real problems into scalable web systems people actually use.</p>
         <p>At RSJobHub I grew from full stack developer into the engineer responsible for <strong>all backend infrastructure and AI integrations</strong> — scaling to 60,000+ active users while shipping 8+ AI-powered features built on OpenAI GPT-4.</p>
         <p>I independently built and launched <strong>ExamPrep NG</strong> — a full SaaS platform I designed, coded, deployed, and grew entirely alone. Zero funding. Paying users within 24 hours of going live.</p>
@@ -335,7 +344,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify
         <div class="feat-item">Subscription Payments</div>
       </div>
       <div class="stack">
-        <span class="stk">Laravel 11</span><span class="stk">OpenAI GPT-4</span><span class="stk">Vanilla JS PWA</span><span class="stk">Paystack</span><span class="stk">MySQL</span><span class="stk">PHP 8.2-FPM</span>
+        <span class="stk">Laravel 11</span><span class="stk">OpenAI GPT-4</span><span class="stk">Vanilla JS PWA</span><span class="stk">Paystack</span>  <span class="stk">MySQL</span><span class="stk">PHP 8.2-FPM</span>
       </div>
     </div>
 
@@ -399,13 +408,13 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify
       <div class="contact-heading">Let's build<br>something <em>great.</em></div>
       <p class="contact-sub">Open to remote roles, freelance projects, and founding engineer opportunities. I respond fast — usually within a few hours.</p>
       <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="mailto:marvelouxpeter90@gmail.com" class="btn-main">Send an email</a>
+        <a href="mailto:marvelouspeter90@gmail.com" class="btn-main">Send an email</a>
         <a href="https://wa.me/2347012337556" target="_blank" class="btn-out">WhatsApp me</a>
       </div>
     </div>
     <div class="contact-right reveal reveal-d1">
-      <a href="mailto:marvelouxpeter90@gmail.com" class="clink">
-        <div class="cicon">✉</div><span class="clink-text">marvelouxpeter90@gmail.com</span><span class="carr">→</span>
+      <a href="mailto:marvelouspeter90@gmail.com" class="clink">
+        <div class="cicon">✉</div><span class="clink-text">marvelouspeter90@gmail.com</span><span class="carr">→</span>
       </a>
       <a href="https://wa.me/2347012337556" target="_blank" class="clink">
         <div class="cicon">💬</div><span class="clink-text">+234 701 233 7556</span><span class="carr">→</span>
@@ -425,7 +434,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify
   <div class="foot-r">
     <a href="https://rsjobhub.com" target="_blank">RSJobHub</a>
     <a href="https://myexamprep.online" target="_blank">ExamPrep</a>
-    <a href="mailto:marvelouxpeter90@gmail.com">Email</a>
+    <a href="mailto:marvelouspeter90@gmail.com">Email</a>
   </div>
 </footer>
 
