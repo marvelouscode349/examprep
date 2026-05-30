@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\QuestionCsvExportController;
 
 Route::prefix('admin')->middleware([
     'admin'])->group(function () {
@@ -22,6 +23,14 @@ Route::prefix('admin')->middleware([
     Route::get('/questions',                     [AdminController::class, 'questions'])->name('admin.questions');
 Route::post('/questions/delete',             [AdminController::class, 'deleteSubjectQuestions'])->name('admin.questions.delete');
 Route::post('/questions/import-csv',         [AdminController::class, 'importCsv'])->name('admin.questions.import');
+
+
+
+Route::get('/question-csv-export', [QuestionCsvExportController::class, 'index'])
+    ->name('admin.question-csv-export.index');
+
+Route::post('/admin/question-csv-export', [QuestionCsvExportController::class, 'export'])
+    ->name('admin.question-csv-export.export');
 });
 
 // Admin login — outside middleware group
