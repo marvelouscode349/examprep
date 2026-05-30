@@ -119,24 +119,46 @@ class QuestionCsvExportController extends Controller
             foreach ($questions as $question) {
                 $subjectCode = strtoupper(substr(preg_replace('/\s+/', '', $question->subject), 0, 3));
 
+                $extractedImageUrl = $this->extractFirstImageUrl($question->question_text);
+
+                // Use image extracted from question HTML first.
+                // If no image exists inside question_text, fallback to q.image_url.
+                $questionImage = $extractedImageUrl ?: ($question->image_url ?? '');
+
                 fputcsv($file, [
                     strtoupper($question->exam_type) . '-' . $subjectCode . '-' . str_pad($question->id, 4, '0', STR_PAD_LEFT),
                     $question->exam_type,
                     $question->subject,
                     $question->topic ?? '',
-                    $question->question_text,
+                    $question->question_text, // leave HTML exactly as it is
                     $question->option_a,
                     $question->option_b,
                     $question->option_c,
                     $question->option_d,
                     $question->correct_answer ?? '',
                     $question->explanation ?? '',
-                    $question->image_url ?? '',
+                    $questionImage,
                     $question->year ?? '',
                 ]);
             }
 
             fclose($file);
         }, $filename, $headers);
+    }
+
+    private function extractFirstImageUrl(?string $html): string
+    {
+        if (!$html) {
+            return '';
+        }
+
+        // Decode in case HTML is stored as escaped entities like:
+        // &lt;img src=&quot;https://example.com/image.jpg&quot;&gt;
+        $decodedHtml = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Match first img src with double quote, single quote, or no quote
+        preg_match('/<img[^>]+src=["\']?([^"\'>\s]+)["\']?/i', $decodedHtml, $matches);
+
+        return $matches[1] ?? '';
     }
 }
