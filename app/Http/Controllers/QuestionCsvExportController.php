@@ -119,18 +119,22 @@ class QuestionCsvExportController extends Controller
             foreach ($questions as $question) {
                 $subjectCode = strtoupper(substr(preg_replace('/\s+/', '', $question->subject), 0, 3));
 
+                // Extract image URL from question HTML
                 $extractedImageUrl = $this->extractFirstImageUrl($question->question_text);
 
                 // Use image extracted from question HTML first.
                 // If no image exists inside question_text, fallback to q.image_url.
                 $questionImage = $extractedImageUrl ?: ($question->image_url ?? '');
 
+                // Keep question HTML, but remove image tag and its wrapper div
+                $questionTextWithoutImage = $this->removeImageBlockFromQuestion($question->question_text);
+
                 fputcsv($file, [
                     strtoupper($question->exam_type) . '-' . $subjectCode . '-' . str_pad($question->id, 4, '0', STR_PAD_LEFT),
                     $question->exam_type,
                     $question->subject,
                     $question->topic ?? '',
-                    $question->question_text, // leave HTML exactly as it is
+                    $questionTextWithoutImage,
                     $question->option_a,
                     $question->option_b,
                     $question->option_c,
@@ -160,5 +164,53 @@ class QuestionCsvExportController extends Controller
         preg_match('/<img[^>]+src=["\']?([^"\'>\s]+)["\']?/i', $decodedHtml, $matches);
 
         return $matches[1] ?? '';
+    }
+
+    private function removeImageBlockFromQuestion(?string $html): string
+    {
+        if (!$html) {
+            return '';
+        }
+
+        // Decode in case the HTML is stored escaped as &lt;div&gt;...&lt;/div&gt;
+        $decodedHtml = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        /*
+         * Remove a full div block if the div contains an image.
+         *
+         * Example removed:
+         * <div class="mb-4">
+         *     <img src="https://example.com/image.jpeg" class="img-fluid">
+         * </div>
+         */
+        $decodedHtml = preg_replace(
+            '/<div\b[^>]*>\s*<img\b[^>]*>\s*<\/div>/is',
+            '',
+            $decodedHtml
+        );
+
+        /*
+         * Remove standalone image tags too.
+         *
+         * Example removed:
+         * <img src="https://example.com/image.jpeg" class="img-fluid">
+         */
+        $decodedHtml = preg_replace(
+            '/<img\b[^>]*>/is',
+            '',
+            $decodedHtml
+        );
+
+        // Remove empty divs that may remain after image removal
+        $decodedHtml = preg_replace(
+            '/<div\b[^>]*>\s*<\/div>/is',
+            '',
+            $decodedHtml
+        );
+
+        // Clean excess spaces/new lines but keep HTML tags like <p>, <strong>, etc.
+        $decodedHtml = trim($decodedHtml);
+
+        return $decodedHtml;
     }
 }
